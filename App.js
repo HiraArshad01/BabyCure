@@ -26,6 +26,7 @@ export default function App() {
   return (
     <NavigationContainer>
     <Stack.Navigator>
+    <Stack.Screen name = "customizeDietPlan" component={customizeDietPlan}/> 
     <Stack.Screen name = "AddBaby" component={AddBaby}/>
     <Stack.Screen name = "mainPage" component={mainPage}/>
     <Stack.Screen name = "LoginScreen" component={LoginScreen}/>
@@ -42,7 +43,7 @@ export default function App() {
     <Stack.Screen name = "DIYRemandRec" component={DIYRemandRec}/>
     <Stack.Screen name = "mainPageChoose" component={mainPageChoose}/>    
     <Stack.Screen name = "forgetPassword" component={forgetPassword}/> 
-    <Stack.Screen name = "customizeDietPlan" component={customizeDietPlan}/> 
+  
  
     </Stack.Navigator>
 

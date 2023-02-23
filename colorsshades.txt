@@ -1,0 +1,6 @@
+dark turquiose '#388087'
+
+'#6FB3B8'
+'#BADFE7'
+'#C2EDCE'
+'#F6F6F2'
