@@ -6,6 +6,7 @@ import Modal from "react-native-modal";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import BottomNavBar from "../component/BottomNavBar";
 
 
 const customizeDietPlan = ({ navigation }) => {
@@ -47,16 +48,13 @@ const customizeDietPlan = ({ navigation }) => {
                     <Modal isVisible={isModalVisible}>
                         <View style={{ flex: 1, alignItems: 'center' }}>
                             <TouchableOpacity onPress={toggleModal}><Text style={{ fontSize: 50, color: 'white' }}>X</Text></TouchableOpacity>
-                            <Text style={{ fontSize: 20, color: 'white', justifyContent: "center", marginTop: 20 }}>Request has been sent!</Text>
+                            <Text style={{ fontSize: 40, color: 'white', justifyContent: "center", marginTop: 20 }}>Request has been sent!</Text>
                         </View>
                     </Modal>
 
 
                 </View>
-
-
-
-                <View style={{ flex: 0.12, width: '100%', height: 100, backgroundColor: '#388087' , shadowColor: "#000",
+               <View style={{ flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087' , shadowColor: "#000",
                         shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                          elevation: 8, flexDirection:'row',marginTop:30, alignItems:'center',justifyContent:'center'}}>
 
@@ -73,7 +71,7 @@ const customizeDietPlan = ({ navigation }) => {
                         <MaterialIcons name="more" size={30} style={{padding: 10, marginLeft: 140, marginRight: 140}}/>
                     </TouchableOpacity>
 
-                </View>
+                </View> 
 
 
             </View>
