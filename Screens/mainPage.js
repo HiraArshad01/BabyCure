@@ -1,7 +1,4 @@
-import React, { useState , useEffect} from "react";
 import {ImageBackground, View, Text, StyleSheet, TouchableOpacity} from "react-native";
-import {Button, Input} from "react-native-elements";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 
 const image = {uri: "https://images.unsplash.com/photo-1470116945706-e6bf5d5a53ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"};

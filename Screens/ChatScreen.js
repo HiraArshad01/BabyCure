@@ -59,17 +59,18 @@ const ChatScreen = ({navigation}) =>{
           // An error happened.
         });
     } 
+    
     return(
-                        <GiftedChat
-                        showAvatarForEveryMessage={true}
-                messages={messages}
-                onSend={messages => onSend(messages)}
-                user={{
+        <GiftedChat
+           showAvatarForEveryMessage={true}
+           messages={messages}
+           onSend={messages => onSend(messages)}
+           user={{
                     _id: auth?.user?.email,
                     name: auth?.currentUser?.displayName, 
                     avatar: auth?.currentUser?.photoURL, 
                 }}
-                />
+          />
 
     )
 }

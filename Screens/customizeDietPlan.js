@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import { Button, Input } from "react-native-elements";
 import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import BottomNavBar from "../component/BottomNavBar";
-
 
 const customizeDietPlan = ({ navigation }) => {
     const [name, setName] = useState('');
@@ -52,7 +48,6 @@ const customizeDietPlan = ({ navigation }) => {
                         </View>
                     </Modal>
 
-
                 </View>
                <View style={{ flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087' , shadowColor: "#000",
                         shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
@@ -72,14 +67,7 @@ const customizeDietPlan = ({ navigation }) => {
                     </TouchableOpacity>
 
                 </View> 
-
-
             </View>
-
-
-
-
-
         </>
     )
 }
