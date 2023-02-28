@@ -50,7 +50,7 @@ const LoginScreen = ({navigation, props}) => {
          </View>
      
             <View style={{flexDirection:'row', marginTop: 20, justifyContent:'center', alignItems:'center'}}>
-                <Text style={{fontWeight:'800'}}>Not a Member?  </Text>
+                <Text style={{fontWeight:'800'}}>Not a Member?</Text>
                 <TouchableOpacity style={{color:'red', fontWeight:'800'}} onPress={()=>navigation.navigate('RegisterScreen')}>  Signup</TouchableOpacity>
             </View>
 

@@ -11,11 +11,36 @@ const AddBaby = ({ navigation }) => {
 
     const [name, setName] = useState('');
     const [weight, setWeight] = useState('');
+    const [height, setHeight] = useState('');
 
     const [showDate, setshowDate] = useState(false);
     const [date, setDate] = useState([]);
 
     console.log(date);
+
+    const checkTextInput = () => {
+        //Check for the Name TextInput
+        if (!name.trim()) {
+          alert('Please Enter Name');
+          return;
+        }
+        //Check for the Email TextInput
+        if (!date.trim()) {
+          alert('Please Enter Age');
+          return;
+        }
+        if (!weight.trim()) {
+          alert('Please Enter Weight');
+          return;
+        }
+        if (!height.trim()) {
+          alert('Please Enter Height');
+          return;
+        }
+        //Checked Successfully
+        //Do whatever you want
+        navigation.navigate('homeScreen')
+      };
 
 
 
@@ -77,12 +102,13 @@ const AddBaby = ({ navigation }) => {
         <View style={styles.container}>
 
 
-            <Text style={{ fontFamily: "Tahoma", fontSize: '32px' }}>Let's Add a Baby</Text>
+            <Text style={{ fontFamily: "Tahoma", fontSize: 32 }}>Let's Add a Baby</Text>
             <View style={{
                 flex: 0.95, background: '#C2EDCE', width: '50%', height: '100%', marginTop: 10,
                 shadowColor: "#000", shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30,
                 shadowRadius: 4.65, elevation: 8
             }}>
+                <View style={{flex: 0.16, marginTop: 20}}>
 
                 <Input color={"white"} style={{
                     marginTop: 10, marginLeft: 20
@@ -91,6 +117,11 @@ const AddBaby = ({ navigation }) => {
                     placeholderTextColor="#6FB3B8" labelColor="black" value={name}
                     onChangeText={text => setName(text)} />
 
+                    
+                </View>
+                <View style={{flex: 0.16, marginTop: 20}}>
+
+                    
                 <TouchableOpacity onPress={() => setshowDate(true)}>
                     <Input style={{
                         marginTop: 10, marginLeft: 20
@@ -99,6 +130,10 @@ const AddBaby = ({ navigation }) => {
                         placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
                 </TouchableOpacity>
 
+
+                    
+                </View>
+                <View style={{flex: 0.16, marginTop: 20}}>
                 <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: 'bold', color: '#5f9ea0' }}>Gender</Text>
                 <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}> <RadioGroup
                     layout='row'
@@ -107,31 +142,54 @@ const AddBaby = ({ navigation }) => {
                     onPress={onPressRadioButton}
                 /></View>
 
+                    
+                </View>
+  
 
+                <View style={{flex: 0.16, flexDirection:'row', width: 400, marginTop: 20}}>
 
-                <Input style={{
-                    marginTop: 10, marginLeft: 20,
-                }}
-                    keyboardType={'numbers-and-punctuation'}
-                    placeholder="enter Weight" label="weight of baby"
-                    leftIcon={{ type: "material", name: "weight" }}
-                    placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
-                    onChangeText={text => setWeight(text)} />
+                    
+                    <Input style={{
+                        marginTop: 10, marginLeft: 20,
+                    }}
+                        keyboardType={'numbers-and-punctuation'}
+                        placeholder="enter Weight" label="Weight of baby"
+                        leftIcon={{ type: "material", name: "weight" }}
+                        placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
+                        onChangeText={text => setWeight(text)} />
+                        <Text style={{marginTop: 40, fontSize: 30}}>Kg</Text>
+                  
+                </View>
                 
-                <Input style={{
-                    marginTop: 10, marginLeft: 20,
-                }}
-                    keyboardType={'numbers-and-punctuation'}
-                    placeholder="enter Height" label="Height of baby"
-                    leftIcon={{ type: "material", name: "height" }} size={40}
-                    placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
-                    onChangeText={text => setWeight(text)} />
 
+                <View style={{flex: 0.16, flexDirection:'row', width: 400, marginTop: 20}}>
+
+                    <Input style={{
+                        marginTop: 10, marginLeft: 20
+                    }}
+                        keyboardType={'numbers-and-punctuation'}
+                        placeholder="enter Height" label="Height of baby"
+                        leftIcon={{ type: "material", name: "height" }} size={40}
+                        placeholderTextColor="#6FB3B8" labelColor="black" value={height}
+                        onChangeText={text => setHeight(text)} />
+                        <Text style={{marginTop: 40, fontSize: 30}}>Cm</Text>
+                  
+                    
+                </View>
+
+
+
+                <View style={{flex:0.16, marginTop: 20}}>
                 <Button title={'Add Baby'} style={{
                     alignItems: 'center', justifyContent: 'center', marginTop: 10
-                }} onPress={() => navigation.navigate('homeScreen')}></Button>
+                }}  onPress={checkTextInput}></Button>
 
 
+
+                </View>
+               
+
+              
             </View>
 
             <Modal visible={showDate} animationType='fade'>

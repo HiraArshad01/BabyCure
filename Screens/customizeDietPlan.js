@@ -12,6 +12,32 @@ const customizeDietPlan = ({ navigation }) => {
     const [cause, setCause] = useState('');
     const [isModalVisible, setModalVisible] = useState(false);
 
+    const checkTextInput = () => {
+        //Check for the Name TextInput
+        if (!name.trim()) {
+          alert('Please Enter Name');
+          return;
+        }
+        //Check for the Email TextInput
+        if (!age.trim()) {
+          alert('Please Enter Age');
+          return;
+        }
+        if (!weight.trim()) {
+          alert('Please Enter Weight');
+          return;
+        }
+        if (!cause.trim()) {
+          alert('Please Enter Cause');
+          return;
+        }
+        //Checked Successfully
+        //Do whatever you want
+        toggleModal()
+      };
+
+
+
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
@@ -37,7 +63,7 @@ const customizeDietPlan = ({ navigation }) => {
                         alignItems: 'center', height: 50, shadowColor: "#000",
                         shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8,
                     }}
-                        onPress={toggleModal}><Text style={{ color: 'white', fontSize: 24 }}>Request</Text></TouchableOpacity>
+                        onPress={checkTextInput}><Text style={{ color: 'white', fontSize: 24 }}>Request</Text></TouchableOpacity>
 
 
 

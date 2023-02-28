@@ -53,7 +53,7 @@ const RegisterScreen = ({navigation}) => {
            onChangeText={text=> setImageURL(text)}/> */}
 
            <View style={{flexDirection:'row'}}>
-            <Text style={{fontWeight:'800'}}>Already a Member?  </Text>
+            <Text style={{fontWeight:'800'}}>Already a Member?</Text>
            <TouchableOpacity style={{color:'red',fontWeight:'800'}} onPress={()=>navigation.navigate('LoginScreen')}>Login</TouchableOpacity>
            </View>
 
