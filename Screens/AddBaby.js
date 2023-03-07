@@ -7,6 +7,7 @@ import { Calendar } from "react-native-calendars";
 import { RadioGroup, FormControlLabel } from 'react-native-radio-buttons-group';
 
 
+
 const AddBaby = ({ navigation }) => {
 
     const [name, setName] = useState('');
@@ -21,26 +22,26 @@ const AddBaby = ({ navigation }) => {
     const checkTextInput = () => {
         //Check for the Name TextInput
         if (!name.trim()) {
-          alert('Please Enter Name');
-          return;
+            alert('Please Enter Name');
+            return;
         }
         //Check for the Email TextInput
         if (!date.trim()) {
-          alert('Please Enter Age');
-          return;
+            alert('Please Enter Age');
+            return;
         }
         if (!weight.trim()) {
-          alert('Please Enter Weight');
-          return;
+            alert('Please Enter Weight');
+            return;
         }
         if (!height.trim()) {
-          alert('Please Enter Height');
-          return;
+            alert('Please Enter Height');
+            return;
         }
         //Checked Successfully
         //Do whatever you want
         navigation.navigate('homeScreen')
-      };
+    };
 
 
 
@@ -108,47 +109,47 @@ const AddBaby = ({ navigation }) => {
                 shadowColor: "#000", shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30,
                 shadowRadius: 4.65, elevation: 8
             }}>
-                <View style={{flex: 0.16, marginTop: 20}}>
+                <View style={{ flex: 0.16, marginTop: 20 }}>
 
-                <Input color={"white"} style={{
-                    marginTop: 10, marginLeft: 20
-                }} placeholder="enter name" label="Name"
-                    leftIcon={{ type: "font-awesome", name: "user", marginLeft: 20, alignItems: 'center', justifyContent: 'center', }}
-                    placeholderTextColor="#6FB3B8" labelColor="black" value={name}
-                    onChangeText={text => setName(text)} />
-
-                    
-                </View>
-                <View style={{flex: 0.16, marginTop: 20}}>
-
-                    
-                <TouchableOpacity onPress={() => setshowDate(true)}>
-                    <Input style={{
+                    <Input color={"white"} style={{
                         marginTop: 10, marginLeft: 20
-                    }} placeholder="add Date" label="Date"
-                        leftIcon={{ type: "font-awesome", name: "calendar" }}
-                        placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
-                </TouchableOpacity>
+                    }} placeholder="enter name" label="Name"
+                        leftIcon={{ type: "font-awesome", name: "user", marginLeft: 20, alignItems: 'center', justifyContent: 'center', }}
+                        placeholderTextColor="#6FB3B8" labelColor="black" value={name}
+                        onChangeText={text => setName(text)} />
 
 
-                    
                 </View>
-                <View style={{flex: 0.16, marginTop: 20}}>
-                <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: 'bold', color: '#5f9ea0' }}>Gender</Text>
-                <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}> <RadioGroup
-                    layout='row'
-                    label="Gender"
-                    radioButtons={radioButtons}
-                    onPress={onPressRadioButton}
-                /></View>
+                <View style={{ flex: 0.16, marginTop: 20 }}>
 
-                    
+
+                    <TouchableOpacity onPress={() => setshowDate(true)}>
+                        <Input style={{
+                            marginTop: 10, marginLeft: 20
+                        }} placeholder="add Date" label="Date"
+                            leftIcon={{ type: "font-awesome", name: "calendar" }}
+                            placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
+                    </TouchableOpacity>
+
+
+
                 </View>
-  
+                <View style={{ flex: 0.16, marginTop: 20 }}>
+                    <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: 'bold', color: '#5f9ea0' }}>Gender</Text>
+                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}> <RadioGroup
+                        layout='row'
+                        label="Gender"
+                        radioButtons={radioButtons}
+                        onPress={onPressRadioButton}
+                    /></View>
 
-                <View style={{flex: 0.16, flexDirection:'row', width: 400, marginTop: 20}}>
 
-                    
+                </View>
+
+
+                <View style={{ flex: 0.16, flexDirection: 'row', width: 400, marginTop: 20 }}>
+
+
                     <Input style={{
                         marginTop: 10, marginLeft: 20,
                     }}
@@ -157,12 +158,12 @@ const AddBaby = ({ navigation }) => {
                         leftIcon={{ type: "material", name: "weight" }}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
                         onChangeText={text => setWeight(text)} />
-                        <Text style={{marginTop: 40, fontSize: 30}}>Kg</Text>
-                  
-                </View>
-                
+                    <Text style={{ marginTop: 40, fontSize: 30 }}>Kg</Text>
 
-                <View style={{flex: 0.16, flexDirection:'row', width: 400, marginTop: 20}}>
+                </View>
+
+
+                <View style={{ flex: 0.16, flexDirection: 'row', width: 400, marginTop: 20 }}>
 
                     <Input style={{
                         marginTop: 10, marginLeft: 20
@@ -172,24 +173,24 @@ const AddBaby = ({ navigation }) => {
                         leftIcon={{ type: "material", name: "height" }} size={40}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={height}
                         onChangeText={text => setHeight(text)} />
-                        <Text style={{marginTop: 40, fontSize: 30}}>Cm</Text>
-                  
-                    
+                    <Text style={{ marginTop: 40, fontSize: 30 }}>Cm</Text>
+
+
+                </View>
+
+
+
+                <View style={{ flex: 0.16, marginTop: 20 }}>
+                    <Button title={'Add Baby'} style={{
+                        alignItems: 'center', justifyContent: 'center', marginTop: 10
+                    }} onPress={checkTextInput}></Button>
+
+
+
                 </View>
 
 
 
-                <View style={{flex:0.16, marginTop: 20}}>
-                <Button title={'Add Baby'} style={{
-                    alignItems: 'center', justifyContent: 'center', marginTop: 10
-                }}  onPress={checkTextInput}></Button>
-
-
-
-                </View>
-               
-
-              
             </View>
 
             <Modal visible={showDate} animationType='fade'>

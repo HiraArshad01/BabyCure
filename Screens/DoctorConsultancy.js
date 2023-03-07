@@ -7,7 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SearchComp from "../component/SearchComp";
 import {SelectMultiple} from 'react-native-select-multiple'
 
-const CommonProblems = ({ navigation }) => {
+const DoctorConsultancy = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [selected, setSelected] = React.useState([]);
@@ -116,7 +116,7 @@ const CommonProblems = ({ navigation }) => {
     )
 }
 
-export default CommonProblems;
+export default DoctorConsultancy;
 const styles = StyleSheet.create({
     button: {
         width: 200,

@@ -1,31 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from "react-native";
-import { MultipleSelectList } from "react-native-dropdown-select-list";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image} from "react-native";
+import { Button, Input } from "react-native-elements";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SearchComp from "../component/SearchComp";
-import {SelectMultiple} from 'react-native-select-multiple'
 
-const CommonProblems = ({ navigation }) => {
+const Milestones = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [selected, setSelected] = React.useState([]);
-    console.log(data);
 
-    const list = [
 
-        { key: '2', value: '1-3 Months' },
-        { key: '3', value: 'Liquids' },
-        { key: '5', value: 'Solids' },
-        { key: '6', value: '4-6 Months' },
-        { key: '7', value: '7-9 Months' },
-        { key: '8', value: '10-12 Months' },
-        { key: '9', value: '13-15 Months' },
-        { key: '10', value: '16-18 Months' },
-        { key: '11', value: '19-21 Months' },
-        { key: '12', value: '22-24 Months' },
-    ]
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
             .then((response) => response.json())
@@ -35,41 +20,24 @@ const CommonProblems = ({ navigation }) => {
     }, []);
 
 
+
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.20, flexDirection: 'row' }}>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }}>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Milestones')}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Chat')}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
-
-            <View style={{ flex: 0.10, marginBottom: 30}}>
-                <SearchComp></SearchComp>
-            </View>
-
-            <View style={{ flex: 0.30, marginBottom: 10, marginTop: 10, width: 200, padding: 20}}>
-                <MultipleSelectList
-                   
-                    setSelected={(val) => setSelected(val)}
-                    data={list}
-                    save="value"
-                    onSelect={() => alert(selected)}
-                    label="Filter"
-                    
-                />
-            </View>
-
-
-            <View style={{ flex: 0.50, marginTop: -40 }}>
+            <View style={{ flex: 0.60, marginTop: -40 }}>
                 <FlatList
                     data={data}
                     renderItem={({ item }) =>
@@ -92,6 +60,12 @@ const CommonProblems = ({ navigation }) => {
                 />
 
             </View>
+            <View style={{flex: 0.10, paddingLeft: 1300}}>
+            <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }}>
+                <Ionicons name='ios-add-circle-outline' size={50} color='black' style={{ margin: 5 }} />
+            </TouchableOpacity>
+            </View>
+
             <View style={{
                 flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
@@ -112,11 +86,12 @@ const CommonProblems = ({ navigation }) => {
                 </TouchableOpacity>
 
             </View>
+
         </View>
     )
 }
 
-export default CommonProblems;
+export default Milestones;
 const styles = StyleSheet.create({
     button: {
         width: 200,
@@ -125,7 +100,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         backgroundColor: '#C2EDCE'
     }
 })
