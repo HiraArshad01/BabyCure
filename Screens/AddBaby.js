@@ -105,27 +105,27 @@ const AddBaby = ({ navigation }) => {
 
             <Text style={{ fontFamily: "Tahoma", fontSize: 32 }}>Let's Add a Baby</Text>
             <View style={{
-                flex: 0.95, background: '#C2EDCE', width: '50%', height: '100%', marginTop: 10,
+                flex: 0.95, background: '#C2EDCE', width: '50%', height: '100%', marginTop: '2%',
                 shadowColor: "#000", shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30,
                 shadowRadius: 4.65, elevation: 8
             }}>
-                <View style={{ flex: 0.16, marginTop: 20 }}>
+                <View style={{ flex: 0.16, marginTop: '2%' }}>
 
                     <Input color={"white"} style={{
-                        marginTop: 10, marginLeft: 20
+                        marginTop: 10, marginLeft: '5%'
                     }} placeholder="enter name" label="Name"
-                        leftIcon={{ type: "font-awesome", name: "user", marginLeft: 20, alignItems: 'center', justifyContent: 'center', }}
+                        leftIcon={{ type: "font-awesome", name: "user", marginLeft: '5%', alignItems: 'center', justifyContent: 'center', }}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={name}
                         onChangeText={text => setName(text)} />
 
 
                 </View>
-                <View style={{ flex: 0.16, marginTop: 20 }}>
+                <View style={{ flex: 0.16, marginTop: '5%' }}>
 
 
                     <TouchableOpacity onPress={() => setshowDate(true)}>
                         <Input style={{
-                            marginTop: 10, marginLeft: 20
+                            marginTop: '2%', marginLeft: '1.5%'
                         }} placeholder="add Date" label="Date"
                             leftIcon={{ type: "font-awesome", name: "calendar" }}
                             placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
@@ -134,55 +134,53 @@ const AddBaby = ({ navigation }) => {
 
 
                 </View>
-                <View style={{ flex: 0.16, marginTop: 20 }}>
-                    <Text style={{ marginLeft: 10, fontSize: 16, fontWeight: 'bold', color: '#5f9ea0' }}>Gender</Text>
-                    <View style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}> <RadioGroup
+                <View style={{ flex: 0.16, marginTop: '5%' }}>
+                    <Text style={{ marginLeft: '1.5%', fontSize: 16, fontWeight: 'bold', color: '#5f9ea0' }}>Gender</Text>
+                    <View style={{ flexDirection: 'row', marginTop: '2%', marginBottom: '5%' }}> <RadioGroup
                         layout='row'
                         label="Gender"
                         radioButtons={radioButtons}
                         onPress={onPressRadioButton}
                     /></View>
-
-
                 </View>
 
 
-                <View style={{ flex: 0.16, flexDirection: 'row', width: 400, marginTop: 20 }}>
+                <View style={{ flex: 0.16, flexDirection: 'row', width: '60%', marginTop: '5%' }}>
 
 
                     <Input style={{
-                        marginTop: 10, marginLeft: 20,
+                        marginTop: '1.5%', marginLeft: '5%',
                     }}
                         keyboardType={'numbers-and-punctuation'}
                         placeholder="enter Weight" label="Weight of baby"
                         leftIcon={{ type: "material", name: "weight" }}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
                         onChangeText={text => setWeight(text)} />
-                    <Text style={{ marginTop: 40, fontSize: 30 }}>Kg</Text>
+                    <Text style={{ marginTop: '12%', fontSize: 30 }}>Kg</Text>
 
                 </View>
 
 
-                <View style={{ flex: 0.16, flexDirection: 'row', width: 400, marginTop: 20 }}>
+                <View style={{ flex: 0.16, flexDirection: 'row', width: '60%', marginTop: '5%' }}>
 
                     <Input style={{
-                        marginTop: 10, marginLeft: 20
+                        marginTop: '1.5%', marginLeft: '5%'
                     }}
                         keyboardType={'numbers-and-punctuation'}
                         placeholder="enter Height" label="Height of baby"
                         leftIcon={{ type: "material", name: "height" }} size={40}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={height}
                         onChangeText={text => setHeight(text)} />
-                    <Text style={{ marginTop: 40, fontSize: 30 }}>Cm</Text>
+                    <Text style={{ marginTop: '12%', fontSize: 30 }}>Cm</Text>
 
 
                 </View>
 
 
 
-                <View style={{ flex: 0.16, marginTop: 20 }}>
+                <View style={{ flex: 0.16, marginTop: '5%' }}>
                     <Button title={'Add Baby'} style={{
-                        alignItems: 'center', justifyContent: 'center', marginTop: 10
+                        alignItems: 'center', justifyContent: 'center', marginTop: '1.5%'
                     }} onPress={checkTextInput}></Button>
 
 

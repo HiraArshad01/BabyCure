@@ -24,18 +24,18 @@ const Milestones = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.20, flexDirection: 'row' }}>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }}>
-                    <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
-                    <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Milestones')}>
-                    <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Chat')}>
-                    <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
+            <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('BabyDetails')}> 
+                    <Ionicons name='ios-medkit-outline' size={32} color='black' style={{margin: 5}} />
+                    </TouchableOpacity>
+                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('DietPlanWaterIntake')}> 
+                    <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{margin: 5}} />
+                    </TouchableOpacity>
+                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('Milestones')}> 
+                    <Ionicons name='ios-trophy-outline' size={32} color='black' style={{margin: 5}} />
+                    </TouchableOpacity>
+                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('DoctorConsultancy')}> 
+                    <Ionicons name='md-pulse' size={32} color='black' style={{margin: 5}} />
+                    </TouchableOpacity>
             </View>
             <View style={{ flex: 0.60, marginTop: -40 }}>
                 <FlatList

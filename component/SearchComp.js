@@ -79,13 +79,13 @@ const SearchComp = () => {
         <SearchBar
           round
           searchIcon={{ size: 24 }}
-          cancelIcon={{size: 24}}
+          cancelIcon={{ size: 24 }}
           onChangeText={(text) => searchFilterFunction(text)}
           onClear={(text) => searchFilterFunction('')}
           placeholder="Type Here..."
           value={search}
           lightTheme
-          style={{width: 800}}
+          style={{ width: 800 }}
         />
       {/*   <FlatList
           data={filteredDataSource}

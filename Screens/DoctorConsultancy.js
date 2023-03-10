@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SearchComp from "../component/SearchComp";
-import {SelectMultiple} from 'react-native-select-multiple'
+import { SelectMultiple } from 'react-native-select-multiple'
 
 const DoctorConsultancy = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
@@ -44,27 +44,27 @@ const DoctorConsultancy = ({ navigation }) => {
                 <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }}>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Milestones')}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Chat')}>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
 
-            <View style={{ flex: 0.10, marginBottom: 30}}>
+            <View style={{ flex: 0.10, marginBottom: 30 }}>
                 <SearchComp></SearchComp>
             </View>
 
-            <View style={{ flex: 0.30, marginBottom: 10, marginTop: 10, width: 200, padding: 20}}>
+            <View style={{ flex: 0.30, marginBottom: 10, marginTop: 10, width: 200, padding: 20 }}>
                 <MultipleSelectList
-                   
+
                     setSelected={(val) => setSelected(val)}
                     data={list}
                     save="value"
                     onSelect={() => alert(selected)}
                     label="Filter"
-                    
+
                 />
             </View>
 
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        alignItems:'center',
+        alignItems: 'center',
         backgroundColor: '#C2EDCE'
     }
 })
