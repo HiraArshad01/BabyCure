@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, CheckBox } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -10,12 +10,13 @@ import { Button, ButtonGroup, Input } from "react-native-elements";
 
 const BabyDetails = ({ navigation }) => {
 
-    const [vacc, setVacc] = useState('');
+    const [vacc, setVacc] = useState([]);
     const [showDate, setshowDate] = useState(false);
     const [date, setDate] = useState([]);
     const [data1, setData1] = useState([]);
+    const [doneVacc, setdoneVacc] = useState([]);
     const [storeKey, setStoreKey] = useState([]);
-
+    const [isSelected, setSelection] = useState(false);
 
     let generateRandomNum = () => Math.floor(Math.random() * 1001);
 
@@ -43,18 +44,27 @@ const BabyDetails = ({ navigation }) => {
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
-
-        console.log(date);
-        console.log(vacc);
     };
+
 
     const setSelect = () => {
-    
-       const yesSelected =[
-            { 'key': '1' , 'vaccname': vacc, 'date': date },
-        ];
+
+        const yesSelected = [{ 'vaccine': vacc, 'date1': date }];
+
         setData1(yesSelected);
-    };
+
+        console.log(data1);
+
+    }
+    const moveDone = () => {
+
+        const yesSelected = [{ 'vaccine': vaccine, 'date1': date1 }];
+
+        setdoneVacc(yesSelected);
+
+        console.log(doneVacc);
+
+    }
 
     return (
         <View style={styles.container}>
@@ -74,22 +84,41 @@ const BabyDetails = ({ navigation }) => {
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
+
             <View style={{
                 flex: 0.70, marginTop: 10, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, borderRadius: 20
+                elevation: 8, borderRadius: 20, alignItems: 'center'
             }}>
 
+
+                <View style={{
+                    flex: 0.50, marginTop: 10, background: '#6FB3B8', width: '90%', height: '100%', shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                    elevation: 8
+                }}>
+                    <Text style={{ fontSize: 18, color: 'black', fontFamily: 'Tahoma', fontWeight: 'normal', marginTop: '1%', marginLeft: 20 }}>Upcoming Vaccination</Text>
                     <FlatList
-                        data = {data1}
-                        keyExtractor = {item => item.key}
+                        data={data1}
+                        keyExtractor={item => item.key}
                         renderItem={({ item }) =>
                         (
 
-                            <View style={{flex: 1, flexDirection: 'row' }}>
-                                <View style={{flex:0.50}}>
-                                <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Name: {item.vaccname}</Text>
-                                <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Date: {item.date}</Text>
+                            <View style={{ flex: 1, flexDirection: 'row', marginLeft: 20, marginTop: '1%', flexDirection: 'row' }}>
+                                <View style={{ flex: 0.50 }}>
+                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Name: {item.vaccine}</Text>
+                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Date: {item.date1}</Text>
+                                </View>
+
+                                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Text>Mark as done?</Text>
+                                    <CheckBox
+                                        value={isSelected}
+                                        onValueChange={setSelection}
+                                        style={{ marginLeft: '2%' }}
+                                    />
+                                    <Text>{isSelected ? '👍': '👎'}</Text>
+
                                 </View>
 
                             </View>
@@ -97,32 +126,60 @@ const BabyDetails = ({ navigation }) => {
                         )
                         }
                     />
+                </View>
 
-              
 
+                <View style={{
+                    flex: 0.50, marginTop: 10, background: '#6FB3B8', width: '90%', height: '100%', shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                    elevation: 8,
+                }}>
+                    <Text style={{ fontSize: 18, color: 'black', fontFamily: 'Tahoma', fontWeight: 'normal', marginTop: '1%', marginLeft: 20 }}>Done Vaccination</Text>
+                    <FlatList
+                        data={doneVacc}
+                        keyExtractor={item => item.key}
+                        renderItem={({ item }) =>
+                        (
 
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={toggleModal}>
-                    <Ionicons name='ios-add-circle-outline' size={70} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
+                            <View style={{ flex: 1, flexDirection: 'row', marginLeft: 20, marginTop: '1%' }}>
+                                <View style={{ flex: 0.50 }}>
+
+                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Name: {item.vaccine}</Text>
+                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Date: {item.date1}</Text>
+                                </View>
+
+                            </View>
+
+                        )
+                        }
+                    />
+                </View>
+                <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '1%' }}>
+
+                    <TouchableOpacity onPress={toggleModal}>
+                        <Ionicons name='ios-add-circle-outline' size={70} color='black' style={{ margin: 5 }} />
+                    </TouchableOpacity>
+                </View>
+
             </View>
 
             <Modal isVisible={isModalVisible}>
 
-                <View style={{ flex: 0.50, marginTop: -40}}>
+                <View style={{ flex: 0.50, marginTop: -40 }}>
                     <FlatList
                         data={data}
                         renderItem={({ item }) =>
                         (
 
-                            <View style={{flex: 1, flexDirection: 'row' }}>
-                                <View style={{flex:0.50}}>
-                                <Text style={{ fontSize: 14, color: 'white', marginTop: 10 }}>{item.vaccname}</Text>
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                <View style={{ flex: 0.50 }}>
+                                    <Text style={{ fontSize: 14, color: 'white', marginTop: 10 }}>{item.vaccname}</Text>
                                 </View>
 
-                                <View style={{flex:0.50}}>
-                                <TouchableOpacity onPress={() =>{ setshowDate(true); setVacc(item.vaccname); setStoreKey(item.key)}} >
-                                   <Text style={{ fontSize: 14, color: 'yellow', marginTop: 10, marginLeft: '40%' }}>Date</Text>
-                                </TouchableOpacity>
+                                <View style={{ flex: 0.50 }}>
+                                    <TouchableOpacity onPress={() => { setshowDate(true); setVacc(item.vaccname); setStoreKey(item.key) }} >
+                                        <Text style={{ fontSize: 14, color: 'yellow', marginTop: 10, marginLeft: '40%' }}>Date</Text>
+                                    </TouchableOpacity>
                                 </View>
                             </View>
 
@@ -131,11 +188,13 @@ const BabyDetails = ({ navigation }) => {
                     />
 
                 </View>
-                        <View style={{alignItems:'center', justifyContent:'center'}}>
-                        <TouchableOpacity  onPress={()=>{toggleModal(); setSelect()}} style={{backgroundColor:'#C2EDCE', height:40, width: 150,
-                 alignItems: 'center', justifyContent:'center', borderRadius: 10}}>Add Vaccnation</TouchableOpacity>
-                        </View>
-             
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={() => { toggleModal(); setSelect() }} style={{
+                        backgroundColor: '#C2EDCE', height: 40, width: 150,
+                        alignItems: 'center', justifyContent: 'center', borderRadius: 10
+                    }}>Add Vaccnation</TouchableOpacity>
+                </View>
+
             </Modal>
 
             <Modal visible={showDate} animationType='fade'>
