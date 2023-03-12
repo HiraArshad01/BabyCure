@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, SafeAreaView, TextInput} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList,Alert } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -12,30 +12,54 @@ const Milestones = ({ navigation }) => {
     const [data, setData] = useState([]);
     const [newData, setNewData] = useState([]);
     const [oldData, setOldData] = useState([]);
-    const [search, setSearch] = useState('');
+    const [newtitle, setNewtitle] = useState("");
     const [isModalVisible, setModalVisible] = useState(false);
-    const searchRef = useRef();
+
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
 
     };
+    console.log(newData)
+    console.log(newtitle)
 
-const onSearch = (text)=> {
-
-    if(text=='')
-    {
-            setData(oldData);
-    }
-    else
-    {
-        let tempList = data.filter(item=>{
-            return item.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
-        })
-        setData(tempList);
-
+    const onAddMilestone = () => {
+        var newDataObject = {
+            id: new Date(),
+            title: newtitle,
+            details: "demo details"
+        }
+        setNewData([...newData, newDataObject])
+        console.log("in onadd milestone")
     }
 
-}
+    const onDeleteItem=(title)=>{
+
+        const filterData = newData.filter(item => item.title !== title)
+        setNewData(filterData)
+    }
+
+    const renderItemList = ({ item }) => {
+
+        return (
+            <View style={{
+                padding: 40, borderWidth: 1, backgroundColor: '#6FB3B8', height: -20, borderColor: 'grey', flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                elevation: 8, height: "20%", width: '100%', flexDirection: 'row'}}>
+                <View style={{flex:0.90, flexDirection: 'row' }}>
+                    <Text>{item.title}</Text>
+                    </View>
+                <View style={{flex:0.10, flexDirection: 'row', marginLeft: '20%' }}>
+
+                    <TouchableOpacity onPress={()=>{onDeleteItem(item.title)}}>
+                    <Text>X</Text>
+                    </TouchableOpacity>
+                    </View>
+            
+            </View>
+        )
+
+    }
+
 
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
@@ -66,26 +90,13 @@ const onSearch = (text)=> {
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
-       <View style={{flex: 0.20}}>
-       <TextInput
-           ref={searchRef}
-           placeholder="search item here...."
-           style={{width:'76%', height: '30%'}}
-           value={search}
-           onChangeText={text => {
-            onSearch(text)
-            setSearch(text)
-           }}
-           >
 
-           </TextInput>
-       </View>
 
             <Modal isVisible={isModalVisible}>
 
-                <View style={{ flex: 1 , marginTop: -40 }}>
+                <View style={{ flex: 1, marginTop: -40 }}>
                     <FlatList
-                        data={data}
+                        data={oldData}
                         renderItem={({ item }) =>
                         (
 
@@ -98,7 +109,7 @@ const onSearch = (text)=> {
                                     <TouchableOpacity style={{
                                         backgroundColor: '#C2EDCE', width: 150,
                                         alignItems: 'center', justifyContent: 'center'
-                                    }} onPress={() => { toggleModal(); setNewData(item) }}>Add Milestone</TouchableOpacity>
+                                    }} onPress={() => { toggleModal(); setNewtitle(item.title); onAddMilestone() }}>Add Milestone</TouchableOpacity>
                                 </View>
                             </View>
 
@@ -109,25 +120,10 @@ const onSearch = (text)=> {
                 </View>
             </Modal>
 
-            <View style={{ flex: 0.50, marginTop: -40 }}>
+            <View style={{ flex: 0.70, marginTop: -40 }}>
                 <FlatList
-                    data={data}
-                    renderItem={({ item }) =>
-                    (
-                        <View style={{
-                            padding: 40, borderWidth: 1, backgroundColor: '#6FB3B8', height: -20, borderColor: 'grey', flex: 0.60, flexDirection: 'row', shadowColor: "#000",
-                            shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                            elevation: 8,
-                        }}>
-
-                            <View style={{ alignItems: 'left', justifyContent: 'center' }}> <Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
-                            <View>
-                                <Text style={{ fontSize: 18, color: 'black', margin: 10, fontWeight: 'bold' }}>{item.title}</Text>
-                                <Text style={{ fontSize: 14, color: 'black', margin: 10 }}>{item.description}</Text>
-                            </View>
-                        </View>
-                    )
-                    }
+                    data={newData}
+                    renderItem={renderItemList}
                 />
 
 

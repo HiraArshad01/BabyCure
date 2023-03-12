@@ -29,12 +29,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="CommonProblems" component={CommonProblems} />
+      
         <Stack.Screen name="Milestones" component={Milestones} />
 
         <Stack.Screen name="mainPage" component={mainPage} />
         <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
-
+        <Stack.Screen name="CommonProblems" component={CommonProblems} />
 
         <Stack.Screen name="DietPlanWaterIntake" component={DietPlanWaterIntake} />
         <Stack.Screen name="BabyDetails" component={BabyDetails} />
