@@ -5,7 +5,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from "react-native-modal";
 import { Calendar } from "react-native-calendars";
-import { Button, ButtonGroup, Input } from "react-native-elements";
+
 
 
 const BabyDetails = ({ navigation }) => {
@@ -56,15 +56,7 @@ const BabyDetails = ({ navigation }) => {
         console.log(data1);
 
     }
-    const moveDone = () => {
-
-        const yesSelected = [{ 'vaccine': vaccine, 'date1': date1 }];
-
-        setdoneVacc(yesSelected);
-
-        console.log(doneVacc);
-
-    }
+ 
 
     return (
         <View style={styles.container}>

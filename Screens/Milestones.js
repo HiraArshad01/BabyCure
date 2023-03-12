@@ -1,20 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image} from "react-native";
-import { Button, Input } from "react-native-elements";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState, useEffect, useRef } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, SafeAreaView, TextInput} from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Modal from "react-native-modal";
+import { SearchBar } from 'react-native-elements';
+
 
 const Milestones = ({ navigation }) => {
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [newData, setNewData] = useState([]);
+    const [oldData, setOldData] = useState([]);
+    const [search, setSearch] = useState('');
+    const [isModalVisible, setModalVisible] = useState(false);
+    const searchRef = useRef();
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
 
+    };
+
+const onSearch = (text)=> {
+
+    if(text=='')
+    {
+            setData(oldData);
+    }
+    else
+    {
+        let tempList = data.filter(item=>{
+            return item.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
+        })
+        setData(tempList);
+
+    }
+
+}
 
     useEffect(() => {
         fetch('https://fakestoreapi.com/products')
             .then((response) => response.json())
-            .then((json) => setData(json))
+            .then(response => {
+                setData(response);
+                setOldData(response)
+            })
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
     }, []);
@@ -24,20 +53,63 @@ const Milestones = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.20, flexDirection: 'row' }}>
-            <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('BabyDetails')}> 
-                    <Ionicons name='ios-medkit-outline' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('DietPlanWaterIntake')}> 
-                    <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('Milestones')}> 
-                    <Ionicons name='ios-trophy-outline' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('DoctorConsultancy')}> 
-                    <Ionicons name='md-pulse' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('BabyDetails')}>
+                    <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                    <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Milestones')}>
+                    <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
+                    <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
             </View>
-            <View style={{ flex: 0.60, marginTop: -40 }}>
+       <View style={{flex: 0.20}}>
+       <TextInput
+           ref={searchRef}
+           placeholder="search item here...."
+           style={{width:'76%', height: '30%'}}
+           value={search}
+           onChangeText={text => {
+            onSearch(text)
+            setSearch(text)
+           }}
+           >
+
+           </TextInput>
+       </View>
+
+            <Modal isVisible={isModalVisible}>
+
+                <View style={{ flex: 1 , marginTop: -40 }}>
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) =>
+                        (
+
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                <View style={{ flex: 0.50, flexDirection: 'row' }}>
+                                    <Text style={{ fontSize: 14, color: 'white', marginTop: 10 }}>{item.title}</Text>
+                                </View>
+
+                                <View style={{ flex: 0.50, alignItems: 'center', justifyContent: 'center' }}>
+                                    <TouchableOpacity style={{
+                                        backgroundColor: '#C2EDCE', width: 150,
+                                        alignItems: 'center', justifyContent: 'center'
+                                    }} onPress={() => { toggleModal(); setNewData(item) }}>Add Milestone</TouchableOpacity>
+                                </View>
+                            </View>
+
+                        )
+                        }
+                    />
+
+                </View>
+            </Modal>
+
+            <View style={{ flex: 0.50, marginTop: -40 }}>
                 <FlatList
                     data={data}
                     renderItem={({ item }) =>
@@ -52,18 +124,20 @@ const Milestones = ({ navigation }) => {
                             <View>
                                 <Text style={{ fontSize: 18, color: 'black', margin: 10, fontWeight: 'bold' }}>{item.title}</Text>
                                 <Text style={{ fontSize: 14, color: 'black', margin: 10 }}>{item.description}</Text>
-                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }}>continue Reading</TouchableOpacity>
                             </View>
                         </View>
                     )
                     }
                 />
 
+
+
+
             </View>
-            <View style={{flex: 0.10, paddingLeft: 1300}}>
-            <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }}>
-                <Ionicons name='ios-add-circle-outline' size={50} color='black' style={{ margin: 5 }} />
-            </TouchableOpacity>
+            <View style={{ flex: 0.10, paddingLeft: 1300 }}>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={toggleModal}>
+                    <Ionicons name='ios-add-circle-outline' size={50} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
             </View>
 
             <View style={{
@@ -84,7 +158,6 @@ const Milestones = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
                     <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
                 </TouchableOpacity>
-
             </View>
 
         </View>
@@ -92,12 +165,14 @@ const Milestones = ({ navigation }) => {
 }
 
 export default Milestones;
+
 const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10,
 
     },
+
     container: {
         flex: 1,
         alignItems: 'center',
