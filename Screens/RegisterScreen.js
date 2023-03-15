@@ -52,9 +52,9 @@ const RegisterScreen = ({navigation}) => {
            leftIcon={{type:"material", name:"face"}} value={imageURL} 
            onChangeText={text=> setImageURL(text)}/> */}
 
-           <View style={{flexDirection:'row'}}>
+           <View style={{flexDirection:'row', marginBottom: "5%"}}>
             <Text style={{fontWeight:'800'}}>Already a Member?</Text>
-           <TouchableOpacity style={{color:'red',fontWeight:'800'}} onPress={()=>navigation.navigate('LoginScreen')}>Login</TouchableOpacity>
+           <TouchableOpacity style={{color:'red',fontWeight:'800'}} onPress={()=>navigation.navigate('LoginScreen')}><Text>Login</Text></TouchableOpacity>
            </View>
 
            <Button title = 'Register' style = {styles.button} onPress={register}/>
@@ -66,7 +66,7 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
     button: {
         width: 200,
-        marginTop: 10,
+        marginTop: 30,
 
     },
     container:{

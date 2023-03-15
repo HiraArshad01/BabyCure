@@ -41,7 +41,7 @@ const LoginScreen = ({navigation, props}) => {
            <Input placeholder="enter Password" label="Password" leftIcon={{type:"material", name:"lock"}} value={password} 
            onChangeText={text=> setPassword(text)} secureTextEntry/>
 
-          <TouchableOpacity style={{color:'red', fontWeight:'light', fontStyle: 'italic', textDecorationLine: 'underline', alignItems:'flex-end'}} onPress={()=>navigation.navigate('forgetPassword')}>  Forget Password?</TouchableOpacity>
+          <TouchableOpacity style={{color:'red', fontWeight:'light', fontStyle: 'italic', textDecorationLine: 'underline', alignItems:'flex-end'}} onPress={()=>navigation.navigate('forgetPassword')}><Text>Forget Password?</Text></TouchableOpacity>
         
          <View style={{alignItems:'center', justifyContent:'center'}}>
          <TouchableOpacity  style = {{ width: 200, marginTop: 10, backgroundColor:'#F841CE', borderRadius: 20, justifyContent: 'center',
@@ -50,8 +50,8 @@ const LoginScreen = ({navigation, props}) => {
          </View>
      
             <View style={{flexDirection:'row', marginTop: 20, justifyContent:'center', alignItems:'center'}}>
-                <Text style={{fontWeight:'800'}}>Not a Member?</Text>
-                <TouchableOpacity style={{color:'red', fontWeight:'800'}} onPress={()=>navigation.navigate('RegisterScreen')}>  Signup</TouchableOpacity>
+                <Text style={{fontWeight:'800'}}>Not a Member?    </Text>
+                <TouchableOpacity style={{color:'red', fontWeight:'800'}} onPress={()=>navigation.navigate('RegisterScreen')}><Text>Signup</Text></TouchableOpacity>
             </View>
 
 {/* 

@@ -34,7 +34,7 @@ const DietPlanWaterIntake = ({ navigation }) => {
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 20, alignItems: 'center', marginTop: 10, background: '#BADFE7', width: '80%', height: '100%',
             }} >
-                <h3 style={{ fontSize: 24, fontFamily: "Tahoma" }}>Recommended Diet Plan</h3>
+                <Text style={{ fontSize: 24}}></Text>
                 <ScrollView>
                     <Text style={{ fontSize: 20, padding: 30 }}>
                         An infant needs 18 – 32 ounces of breast milk in his first 3 months.
