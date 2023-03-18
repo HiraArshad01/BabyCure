@@ -62,23 +62,24 @@ const Milestones = ({ navigation }) => {
 
         return (
             <View style={{
-                padding: 40, borderRadius: '1', backgroundColor: '#6FB3B8', height: -20, flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                padding: 40, borderRadius: 1, backgroundColor: '#6FB3B8', flex: 0.60, flexDirection: 'row', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, height: "5%", width: '100%', flexDirection: 'row'
+                elevation: 8, height: 100, width: 500, flexDirection: 'row'
             }}>
 
                 <View style={{ flex: 0.90, flexDirection: 'row' }}>
                     <Text>{item.title}</Text>
                     <Text style={{ paddingLeft: '10%' }}>{item.date}</Text>
+                    
+                <TouchableOpacity onPress={() => { onDeleteItem(item.title) }}>
+                    <Text style={{ fontWeight: '900', fontSize: 20 }}> X</Text>
+                </TouchableOpacity>
                 </View>
 
 
 
                 {/* <Text style={{ marginLeft: '2%' }}>{isSelected ? onDoneVaccination : '👎'}</Text> */}
 
-                <TouchableOpacity onPress={() => { onDeleteItem(item.title) }}>
-                    <Text style={{ fontWeight: '900', fontSize: '20px', marginTop: '10%' }}> X</Text>
-                </TouchableOpacity>
 
             </View>
 
@@ -92,21 +93,21 @@ const Milestones = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.20, flexDirection: 'row' }}>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Milestones')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones')}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
 
-            <View style={{ flex: 0.70, marginTop: -40 }}>
+            <View style={{ flex: 0.70 }}>
                 <FlatList
                     data={newData}
                     renderItem={renderItemList}
@@ -129,7 +130,7 @@ const Milestones = ({ navigation }) => {
                                     <TouchableOpacity style={{
                                         backgroundColor: '#C2EDCE', width: 150,
                                         alignItems: 'center', justifyContent: 'center'
-                                    }} onPress={() => { setNewtitle(item.title) }}>Select</TouchableOpacity>
+                                    }} onPress={() => { setNewtitle(item.title) }}><Text>Select</Text></TouchableOpacity>
                                 </View>
                             </View>
 
@@ -145,12 +146,12 @@ const Milestones = ({ navigation }) => {
                     <TouchableOpacity onPress={() => { toggleModal(); onAddMilestone() }} style={{
                         backgroundColor: '#C2EDCE', height: 40, width: 150,
                         alignItems: 'center', justifyContent: 'center', borderRadius: 10
-                    }}>Add Vaccnation</TouchableOpacity>
+                    }}><Text>Add Vaccnation</Text></TouchableOpacity>
                 </View>
             </Modal>
 
-            <View style={{ flex: 0.10, paddingLeft: 1300 }}>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={toggleModal}>
+            <View style={{ flex: 0.10, paddingLeft: 50 }}>
+                <TouchableOpacity style={{ marginLeft: 250, marginRight: 10 }} onPress={toggleModal}>
                     <Ionicons name='ios-add-circle-outline' size={50} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
@@ -160,19 +161,19 @@ const Milestones = ({ navigation }) => {
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
             }}>
-
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} ></FontAwesomeIcon>
+                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Activities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
+
             </View>
 
         </View>

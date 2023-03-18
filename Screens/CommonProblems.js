@@ -122,19 +122,20 @@ const CommonProblems = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.20, flexDirection: 'row' }}>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones')}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Chat')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
+
 
             <View style={{ flex: 0.10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
                 <Ionicons name='ios-search' size={25} color='black' style={{ margin: 5 }} />
@@ -158,9 +159,7 @@ const CommonProblems = ({ navigation }) => {
                             setSearch('')
 
                         }}>
-
                             <Ionicons name='ios-close' size={25} color='black' style={{ margin: 5 }} />
-
                         </TouchableOpacity>
                     )
                 }
@@ -200,10 +199,7 @@ const CommonProblems = ({ navigation }) => {
                                 setData(tempList);
                                 setNewFilter('Sort By Month')
                                 listRef.current.scrollToIndex({ animated: true, index: 0 })
-                            }}
-                        >
-                            <Text>Sort By Month</Text>
-                        </TouchableOpacity>
+                            }}><Text>Sort By Month</Text></TouchableOpacity>
 
 
                         <TouchableOpacity style={{
@@ -217,10 +213,7 @@ const CommonProblems = ({ navigation }) => {
                                 setNewFilter('Sort By Name')
                                 listRef.current.scrollToIndex({ animated: true, index: 0 })
 
-                            }}
-                        >
-                            <Text>Sort By Name</Text>
-                        </TouchableOpacity>
+                            }}><Text>Sort By Name</Text></TouchableOpacity>
 
                     </View>
                 </View>
@@ -229,7 +222,7 @@ const CommonProblems = ({ navigation }) => {
                     <TouchableOpacity onPress={() => { toggleModal(); onAddFilter() }} style={{
                         backgroundColor: '#C2EDCE', height: 40, width: 150,
                         alignItems: 'center', justifyContent: 'center', borderRadius: 10
-                    }}>Add Filter</TouchableOpacity>
+                    }}><Text>Add Filter</Text></TouchableOpacity>
                 </View>
             </Modal>
 
@@ -254,7 +247,7 @@ const CommonProblems = ({ navigation }) => {
                             <View>
                                 <Text style={{ fontSize: 18, color: 'black', margin: 10, fontWeight: 'bold' }}>{item.title}</Text>
                                 <Text style={{ fontSize: 14, color: 'black', margin: 10 }}>{item.description}</Text>
-                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }}>continue Reading</TouchableOpacity>
+                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }}><Text>continue Reading</Text></TouchableOpacity>
                             </View>
                         </View>
                     )
@@ -269,17 +262,18 @@ const CommonProblems = ({ navigation }) => {
             }}>
 
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} ></FontAwesomeIcon>
+                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Activities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
+
 
             </View>
         </View>

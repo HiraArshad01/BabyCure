@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, CheckBox } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList} from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from "react-native-modal";
 import { Calendar } from "react-native-calendars";
-
-
+// import CheckBox from '@react-native-community/checkbox';
+import CheckBox from 'expo-checkbox';
 
 const BabyDetails = ({ navigation }) => {
 
@@ -51,14 +51,22 @@ const BabyDetails = ({ navigation }) => {
         setModalVisible(!isModalVisible);
     };
 
-    const onAddMilestone = () => {
-        var newDataObject = {
-            key: generateRandomNum(),
-            vaccname: vacc,
-            date: date
+    const onAddVacc = () => {
+
+        if(vacc=="")
+        {
+            alert("cant add")
         }
-        setNewData([...newData, newDataObject])
-        console.log(newDataObject.key);
+        else
+        {
+            var newDataObject = {
+                key: generateRandomNum(),
+                vaccname: vacc,
+                date: date
+            }
+            setNewData([...newData, newDataObject])
+        }
+    
     }
 
     const onDoneVaccination = () => {
@@ -86,31 +94,36 @@ const BabyDetails = ({ navigation }) => {
 
         return (
             <View style={{
-                padding: 40, borderRadius: '1', backgroundColor: '#6FB3B8', height: -20, flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                padding: 40, borderRadius: 1, backgroundColor: '#6FB3B8', height: -20, flex: 0.60, flexDirection: 'row', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, height: "5%", width: '100%', flexDirection: 'row'
             }}>
 
                 <View style={{flex: 0.90, flexDirection: 'row'}}>
-                    <Text >{item.vaccname}</Text>
+                    <Text style={{marginLeft: -30}}>{item.vaccname}</Text>
                     <Text style={{ paddingLeft: '10%' }}>{item.date}</Text>
-                </View>
 
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Mark as done?</Text>
                     <TouchableOpacity onPress={()=>{setStoreKey(item.key); onDoneVaccination()}}>
                     <CheckBox
                         value={isSelected}
                         onValueChange={setSelection}
-                        style={{ marginLeft: '2%' }}
+                        style={{ marginLeft: 5 }}
                     />
                     </TouchableOpacity>
+
+                    <Text  style={{marginLeft: 10}}>Mark as done?</Text>
+                    <TouchableOpacity onPress={() => { onDeleteItem(item.vaccname) }}>
+                        <Text style={{ fontWeight: '900', fontSize: 20, marginLeft: 5}}> X</Text>
+                    </TouchableOpacity>
+                </View>
+
+
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginLeft: 10 }}>
+ 
+                  
                     {/* <Text style={{ marginLeft: '2%' }}>{isSelected ? onDoneVaccination : '👎'}</Text> */}
 
-                    <TouchableOpacity onPress={() => { onDeleteItem(item.vaccname) }}>
-                        <Text style={{ fontWeight: '900', fontSize: '20px', marginTop: '10%' }}> X</Text>
-                    </TouchableOpacity>
+
 
                 </View>
             </View>
@@ -122,7 +135,7 @@ const BabyDetails = ({ navigation }) => {
 
         return (
             <View style={{
-                padding: 40, borderRadius: '1', backgroundColor: '#6FB3B8', height: -20, flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                padding: 40, borderRadius: 1, backgroundColor: '#6FB3B8', height: -20, flex: 0.60, flexDirection: 'row', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, height: "5%", width: '100%', flexDirection: 'row'
             }}>
@@ -135,7 +148,7 @@ const BabyDetails = ({ navigation }) => {
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity onPress={() => { onDeleteItem(item.vaccname) }}>
-                        <Text style={{ fontWeight: '900', fontSize: '20px', marginTop: '10%' }}> X</Text>
+                        <Text style={{ fontWeight: '900', fontSize: 20, marginTop: '10%' }}> X</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -150,33 +163,34 @@ const BabyDetails = ({ navigation }) => {
 
 
             <View style={{ flex: 0.20, flexDirection: 'row' }}>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Milestones')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones')}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
 
             <View style={{
-                flex: 0.70, marginTop: 10, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                flex: 0.70, marginTop: 5, background: '#BADFE7', width: '100%', height: '100%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 20, alignItems: 'center'
             }}>
 
 
                 <View style={{
-                    flex: 0.50, marginTop: 10, background: '#6FB3B8', width: '90%', height: '100%', shadowColor: "#000",
+                    flex: 0.40, marginTop: 10, background: '#6FB3B8', width: '90%', height: '100%', shadowColor: "#000",
                     shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                     elevation: 8
                 }}>
-                    <Text style={{ fontSize: 18, color: 'black', fontFamily: 'Tahoma', fontWeight: 'normal', marginTop: '1%', marginLeft: 20 }}>Upcoming Vaccination</Text>
+                    <Text style={{ fontSize: 18, color: 'black', fontWeight: 'normal', 
+                    marginTop: 30 , marginLeft: 20 }}>Upcoming Vaccination</Text>
                     <FlatList
                         data={newData}
                         renderItem={renderItemList}
@@ -185,17 +199,19 @@ const BabyDetails = ({ navigation }) => {
 
 
                 <View style={{
-                    flex: 0.50, marginTop: 10, background: '#6FB3B8', width: '90%', height: '100%', shadowColor: "#000",
+                    flex: 0.40, marginTop: 10, background: '#6FB3B8', width: '90%', height: '100%', 
+                    shadowColor: "#000",
                     shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                     elevation: 8,
                 }}>
-                    <Text style={{ fontSize: 18, color: 'black', fontWeight: 'normal', marginTop: '1%', marginLeft: 20 }}>Done Vaccination</Text>
+                    <Text style={{ fontSize: 18, color: 'black', fontWeight: 'normal', 
+                    marginTop: 3, marginLeft: 20 }}>Done Vaccination</Text>
                     <FlatList
                         data={doneVacc}
                         renderItem={renderItemListDone}
                     />
                 </View>
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '1%' }}>
+                <View style={{flex: 0.30, alignItems: 'center', justifyContent: 'center' }}>
 
                     <TouchableOpacity onPress={toggleModal}>
                         <Ionicons name='ios-add-circle-outline' size={70} color='black' style={{ margin: 5 }} />
@@ -206,7 +222,7 @@ const BabyDetails = ({ navigation }) => {
 
             <Modal isVisible={isModalVisible}>
 
-                <View style={{ flex: 0.50, marginTop: -40 }}>
+                <View style={{ flex: 0.90}}>
                     <FlatList
                         data={data}
                         renderItem={({ item }) =>
@@ -219,7 +235,7 @@ const BabyDetails = ({ navigation }) => {
 
                                 <View style={{ flex: 0.50 }}>
                                     <TouchableOpacity onPress={() => { setshowDate(true); setVacc(item.vaccname); setStoreKey(item.key) }} >
-                                        <Text style={{ fontSize: 14, color: 'yellow', marginTop: 10, marginLeft: '40%' }}>Date</Text>
+                                        <Text style={{ fontSize: 14, color: 'yellow', marginTop: 10, marginLeft: 20 }}>Date</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -229,11 +245,11 @@ const BabyDetails = ({ navigation }) => {
                     />
 
                 </View>
-                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => { toggleModal(); onAddMilestone() }} style={{
+                <View style={{ flex: 0.10, alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={() => { toggleModal(); onAddVacc() }} style={{
                         backgroundColor: '#C2EDCE', height: 40, width: 150,
                         alignItems: 'center', justifyContent: 'center', borderRadius: 10
-                    }}>Add Vaccnation</TouchableOpacity>
+                    }}><Text>Add Vaccnation</Text></TouchableOpacity>
                 </View>
 
             </Modal>
@@ -254,16 +270,16 @@ const BabyDetails = ({ navigation }) => {
             }}>
 
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} ></FontAwesomeIcon>
+                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Activities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 140, marginRight: 140 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
 
             </View>
