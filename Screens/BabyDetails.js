@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, CheckBox } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -10,13 +10,18 @@ import { Calendar } from "react-native-calendars";
 
 const BabyDetails = ({ navigation }) => {
 
-    const [vacc, setVacc] = useState([]);
+    const [vacc, setVacc] = useState("");
     const [showDate, setshowDate] = useState(false);
     const [date, setDate] = useState([]);
     const [data1, setData1] = useState([]);
     const [doneVacc, setdoneVacc] = useState([]);
     const [storeKey, setStoreKey] = useState([]);
     const [isSelected, setSelection] = useState(false);
+
+    const [newData, setNewData] = useState([]);
+    const [oldData, setOldData] = useState([]);
+    const [newtitle, setNewtitle] = useState("");
+
 
     let generateRandomNum = () => Math.floor(Math.random() * 1001);
 
@@ -46,17 +51,99 @@ const BabyDetails = ({ navigation }) => {
         setModalVisible(!isModalVisible);
     };
 
+    const onAddMilestone = () => {
+        var newDataObject = {
+            key: generateRandomNum(),
+            vaccname: vacc,
+            date: date
+        }
+        setNewData([...newData, newDataObject])
+        console.log(newDataObject.key);
+    }
 
-    const setSelect = () => {
+    const onDoneVaccination = () => {
+        if(item => item.vaccname==vaccname){
+            var newDataObject = {
+                key: generateRandomNum(),
+                vaccname: vacc,
+                date: date
+            }
+            setdoneVacc([...doneVacc, newDataObject])
+            console.log("in done vacc")
 
-        const yesSelected = [{ 'vaccine': vacc, 'date1': date }];
-
-        setData1(yesSelected);
-
-        console.log(data1);
+        }
+    
 
     }
- 
+
+    const onDeleteItem = (vaccname) => {
+
+        const filterData = newData.filter(item => item.vaccname !== vaccname)
+        setNewData(filterData)
+    }
+
+    const renderItemList = ({ item }) => {
+
+        return (
+            <View style={{
+                padding: 40, borderRadius: '1', backgroundColor: '#6FB3B8', height: -20, flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                elevation: 8, height: "5%", width: '100%', flexDirection: 'row'
+            }}>
+
+                <View style={{flex: 0.90, flexDirection: 'row'}}>
+                    <Text >{item.vaccname}</Text>
+                    <Text style={{ paddingLeft: '10%' }}>{item.date}</Text>
+                </View>
+
+
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>Mark as done?</Text>
+                    <TouchableOpacity onPress={()=>{setStoreKey(item.key); onDoneVaccination()}}>
+                    <CheckBox
+                        value={isSelected}
+                        onValueChange={setSelection}
+                        style={{ marginLeft: '2%' }}
+                    />
+                    </TouchableOpacity>
+                    {/* <Text style={{ marginLeft: '2%' }}>{isSelected ? onDoneVaccination : '👎'}</Text> */}
+
+                    <TouchableOpacity onPress={() => { onDeleteItem(item.vaccname) }}>
+                        <Text style={{ fontWeight: '900', fontSize: '20px', marginTop: '10%' }}> X</Text>
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+
+        )
+
+    }
+    const renderItemListDone = ({ item }) => {
+
+        return (
+            <View style={{
+                padding: 40, borderRadius: '1', backgroundColor: '#6FB3B8', height: -20, flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                elevation: 8, height: "5%", width: '100%', flexDirection: 'row'
+            }}>
+
+                <View style={{flex: 0.90, flexDirection: 'row'}}>
+                    <Text >{item.vaccname}</Text>
+                    <Text style={{ paddingLeft: '10%' }}>{item.date}</Text>
+                </View>
+
+
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={() => { onDeleteItem(item.vaccname) }}>
+                        <Text style={{ fontWeight: '900', fontSize: '20px', marginTop: '10%' }}> X</Text>
+                    </TouchableOpacity>
+
+                </View>
+            </View>
+
+        )
+
+    }
 
     return (
         <View style={styles.container}>
@@ -91,32 +178,8 @@ const BabyDetails = ({ navigation }) => {
                 }}>
                     <Text style={{ fontSize: 18, color: 'black', fontFamily: 'Tahoma', fontWeight: 'normal', marginTop: '1%', marginLeft: 20 }}>Upcoming Vaccination</Text>
                     <FlatList
-                        data={data1}
-                        keyExtractor={item => item.key}
-                        renderItem={({ item }) =>
-                        (
-
-                            <View style={{ flex: 1, flexDirection: 'row', marginLeft: 20, marginTop: '1%', flexDirection: 'row' }}>
-                                <View style={{ flex: 0.50 }}>
-                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Name: {item.vaccine}</Text>
-                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Date: {item.date1}</Text>
-                                </View>
-
-                                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Text>Mark as done?</Text>
-                                    <CheckBox
-                                        value={isSelected}
-                                        onValueChange={setSelection}
-                                        style={{ marginLeft: '2%' }}
-                                    />
-                                    <Text>{isSelected ? '👍': '👎'}</Text>
-
-                                </View>
-
-                            </View>
-
-                        )
-                        }
+                        data={newData}
+                        renderItem={renderItemList}
                     />
                 </View>
 
@@ -126,24 +189,10 @@ const BabyDetails = ({ navigation }) => {
                     shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                     elevation: 8,
                 }}>
-                    <Text style={{ fontSize: 18, color: 'black', fontFamily: 'Tahoma', fontWeight: 'normal', marginTop: '1%', marginLeft: 20 }}>Done Vaccination</Text>
+                    <Text style={{ fontSize: 18, color: 'black', fontWeight: 'normal', marginTop: '1%', marginLeft: 20 }}>Done Vaccination</Text>
                     <FlatList
                         data={doneVacc}
-                        keyExtractor={item => item.key}
-                        renderItem={({ item }) =>
-                        (
-
-                            <View style={{ flex: 1, flexDirection: 'row', marginLeft: 20, marginTop: '1%' }}>
-                                <View style={{ flex: 0.50 }}>
-
-                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Name: {item.vaccine}</Text>
-                                    <Text style={{ fontSize: 14, color: 'black', marginTop: 10 }}>Date: {item.date1}</Text>
-                                </View>
-
-                            </View>
-
-                        )
-                        }
+                        renderItem={renderItemListDone}
                     />
                 </View>
                 <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: '1%' }}>
@@ -181,7 +230,7 @@ const BabyDetails = ({ navigation }) => {
 
                 </View>
                 <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity onPress={() => { toggleModal(); setSelect() }} style={{
+                    <TouchableOpacity onPress={() => { toggleModal(); onAddMilestone() }} style={{
                         backgroundColor: '#C2EDCE', height: 40, width: 150,
                         alignItems: 'center', justifyContent: 'center', borderRadius: 10
                     }}>Add Vaccnation</TouchableOpacity>

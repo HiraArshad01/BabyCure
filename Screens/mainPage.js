@@ -11,9 +11,9 @@ const mainPage = ({ navigation }) => {
 
                     <View style={{ flex: 0.60, justifyContent: 'center' }}>
                         <Text style={styles.text}>Hello !
-                        Its great to see you her.
-                        Baby Cure is an app and website which facilitate young mothers in raising their
-                        child keep their food tracking and keep tracking of their vaccinations and much more....</Text>
+                            Its great to see you her.
+                            Baby Cure is an app and website which facilitate young mothers in raising their
+                            child keep their food tracking and keep tracking of their vaccinations and much more....</Text>
                     </View>
 
 

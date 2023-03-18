@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from "react-native";
-import { MultipleSelectList } from "react-native-dropdown-select-list";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, Alert } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SearchComp from "../component/SearchComp";
-import { SelectMultiple } from 'react-native-select-multiple'
 import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
 
 const CommonProblems = ({ navigation }) => {
-    const [isLoading, setLoading] = useState(true);
+
     const [data, setData] = useState([]);
-    const [selectedMonth, setSelectedMonth] = React.useState([]);
-    const [selectedName, setSelectedName] = React.useState([]);
+    const [newFilter, setNewFilter] = useState("");
     const [newData, setNewData] = useState([]);
     const [oldData, setOldData] = useState([]);
     const [search, setSearch] = useState('');
@@ -23,9 +19,9 @@ const CommonProblems = ({ navigation }) => {
     const [ind, setInd] = useState(0)
     const [isModalVisible, setModalVisible] = useState(false);
 
+    let generateRandomNum = () => Math.floor(Math.random() * 1001);
 
-console.log(selectedMonth);
-console.log(selectedMonth);
+
     const onSearch = (text) => {
 
         if (text == '') {
@@ -45,8 +41,74 @@ console.log(selectedMonth);
 
     };
 
+    const onAddFilter = () => {
+
+        if (newFilter == "") {
+            alert('Cant add');
+        }
+
+        else {
+            console.log("in start")
+            var newDataObject = {
+                id: generateRandomNum,
+                title: newFilter,
+                details: "demo details"
+            }
+            setNewData([...newData, newDataObject])
+            console.log("in filter")
+
+        }
+
+
+    }
+
+    console.log(newData)
+
+    const onDeleteItem = (title) => {
+
+        if (newFilter == '') {
+            setData(oldData)
+
+            const filterData = newData.filter(item => item.title !== title)
+            setNewData(filterData)
+        }
+        else {
+
+            const filterData = newData.filter(item => item.title !== title)
+            setNewData(filterData)
+        }
+
+
+    }
+
+
+
+    const renderItemList = ({ item }) => {
+
+        return (
+            <View style={{ flexDirection: 'row' }}>
+
+                <View style={{ flex: 1, flexDirection: 'row' }}>
+                    <Text style={{
+                        height: 30, width: "100px", backgroundColor: '#388087',
+                        borderRadius: 10
+                    }}>{item.title}</Text>
+                    <TouchableOpacity onPress={() => { onDeleteItem(item.title); setNewFilter('') }}>
+                        <Text style={{ fontWeight: '900', fontSize: '20px', marginTop: '10%' }}> X</Text>
+                    </TouchableOpacity>
+                </View>
+
+            </View>
+
+        )
+
+    }
+
+
+
     useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
+        // fetch('https://fakestoreapi.com/products')
+        fetch('https://jsonplaceholder.typicode.com/todos')
             .then((response) => response.json())
             .then(response => {
                 setData(response);
@@ -111,56 +173,71 @@ console.log(selectedMonth);
                 </TouchableOpacity>
             </View>
 
-            
-            <Modal 
-                  transparent={true}
-                  animationType="slide"
-            isVisible={isModalVisible}
-      
+
+            <View style={{ flex: 0.20, marginTop: 10 }}>
+                <FlatList
+                    data={newData}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={renderItemList}
+                />
+            </View>
+
+            <Modal
+                transparent={true}
+                animationType="slide"
+                isVisible={isModalVisible}
+
             >
-                <View style={{ flex: 1 , justifyContent: 'center', alignItems: 'center', backgroundColor:'rgba(0,0,0,.1)'}}>
-                    <View style={{width:'80%', height: 200, borderRadius: 10, backgroundColor:'#fff'}}>
-                        <TouchableOpacity style={{with: '100%', height: 100, borderBottomWidth: 0.5,
-                         justifyContent: 'center', paddingLeft: 20 }}
-                        onPress={()=>{
-                            let tempList= data.sort((a,b)=>
-                            a.title>b.title? 1 : -1);
-                            toggleModal();
-                            listRef.current.scrollToIndex({animated:true, index: 0})
-                            setData(tempList);
-                            setSelectedMonth("Sort By Month")
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,.1)' }}>
+                    <View style={{ width: '80%', height: 200, borderRadius: 10, backgroundColor: '#fff' }}>
+                        <TouchableOpacity style={{
+                            with: '100%', height: 100, borderBottomWidth: 0.5,
+                            justifyContent: 'center', paddingLeft: 20
                         }}
+                            onPress={() => {
+                                let tempList = data.sort((a, b) =>
+                                    a.title > b.title ? 1 : -1);
+                                setData(tempList);
+                                setNewFilter('Sort By Month')
+                                listRef.current.scrollToIndex({ animated: true, index: 0 })
+                            }}
                         >
                             <Text>Sort By Month</Text>
                         </TouchableOpacity>
-                        
-             
-                        <TouchableOpacity style={{with: '100%', height: 100, borderBottomWidth: 0.5,
-                         justifyContent: 'center', paddingLeft: 20 }}
-                        onPress={()=>{
-                            let tempList= data.sort((a,b)=>
-                            a.title>b.title? 1 : -1);
-                            toggleModal();
-                            setData(tempList);
-                            listRef.current.scrollToIndex({animated:true, index: 0})
-                            setSelectedName("Sort By Name")
+
+
+                        <TouchableOpacity style={{
+                            with: '100%', height: 100, borderBottomWidth: 0.5,
+                            justifyContent: 'center', paddingLeft: 20
                         }}
+                            onPress={() => {
+                                let tempList = data.sort((a, b) =>
+                                    a.title > b.title ? 1 : -1);
+                                setData(tempList);
+                                setNewFilter('Sort By Name')
+                                listRef.current.scrollToIndex({ animated: true, index: 0 })
+
+                            }}
                         >
                             <Text>Sort By Name</Text>
                         </TouchableOpacity>
-                        
+
                     </View>
+                </View>
+
+                <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <TouchableOpacity onPress={() => { toggleModal(); onAddFilter() }} style={{
+                        backgroundColor: '#C2EDCE', height: 40, width: 150,
+                        alignItems: 'center', justifyContent: 'center', borderRadius: 10
+                    }}>Add Filter</TouchableOpacity>
                 </View>
             </Modal>
 
-            <View style={{flex:0.10, width: '100%', height: '100%', flexDirection: 'row', margin: '2%'}}>
-                <Text style={{ height: 20, width: "20%", backgroundColor: '#388087', borderRadius: 20, marginLeft: '5%' }}>{selectedMonth}</Text>
-                <Text style={{ height: 20, width: "20%", backgroundColor: '#388087', borderRadius: 20, marginLeft: '5%' }}>{selectedName}</Text>
-               
-            </View>
 
 
-            <View style={{ flex: 0.50, marginTop: -40 }}>
+
+
+            <View style={{ flex: 0.50, marginTop: 10 }}>
                 <FlatList
                     initialScrollIndex={ind}
                     ref={listRef}

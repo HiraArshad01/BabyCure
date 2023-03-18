@@ -13,18 +13,18 @@ const DietPlanWaterIntake = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.15, flexDirection: 'row' }}>
-            <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('BabyDetails')}> 
-                    <Ionicons name='ios-medkit-outline' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('DietPlanWaterIntake')}> 
-                    <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('Milestones')}> 
-                    <Ionicons name='ios-trophy-outline' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
-                <TouchableOpacity style={{marginLeft:150, marginRight:150}} onPress={()=>navigation.navigate('DoctorConsultancy')}> 
-                    <Ionicons name='md-pulse' size={32} color='black' style={{margin: 5}} />
-                    </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('BabyDetails')}>
+                    <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                    <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('Milestones')}>
+                    <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ marginLeft: 150, marginRight: 150 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
+                    <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
+                </TouchableOpacity>
             </View>
             <View style={{ flex: 0.10, marginBottom: 30 }}>
                 <SearchComp></SearchComp>
@@ -34,7 +34,7 @@ const DietPlanWaterIntake = ({ navigation }) => {
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 20, alignItems: 'center', marginTop: 10, background: '#BADFE7', width: '80%', height: '100%',
             }} >
-                <Text style={{ fontSize: 24}}></Text>
+                <Text style={{ fontSize: 24 }}></Text>
                 <ScrollView>
                     <Text style={{ fontSize: 20, padding: 30 }}>
                         An infant needs 18 – 32 ounces of breast milk in his first 3 months.
@@ -53,15 +53,15 @@ const DietPlanWaterIntake = ({ navigation }) => {
                 </ScrollView>
 
             </View>
-            <View style={{flex: 0.10}}>
-          
-            <TouchableOpacity style={{
-                width: 400, marginTop: 10, backgroundColor: '#6FB3B8', borderRadius: 20, justifyContent: 'center',
-                alignItems: 'center', height: 50, shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8,
-            }}
-                onPress={() => navigation.navigate('customizeDietPlan')}><Text style={{ color: 'black', fontSize: 24 }}>Customize Diet Plan</Text></TouchableOpacity>
-    
+            <View style={{ flex: 0.10 }}>
+
+                <TouchableOpacity style={{
+                    width: 400, marginTop: 10, backgroundColor: '#6FB3B8', borderRadius: 20, justifyContent: 'center',
+                    alignItems: 'center', height: 50, shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8,
+                }}
+                    onPress={() => navigation.navigate('customizeDietPlan')}><Text style={{ color: 'black', fontSize: 24 }}>Customize Diet Plan</Text></TouchableOpacity>
+
 
             </View>
 
