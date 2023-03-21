@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
 
-const DIYRemandRec = ({ navigation }) => {
+const PhysicalActivitiesMain = ({ navigation }) => {
 
     const [data, setData] = useState([]);
     const [newFilter, setNewFilter] = useState("");
@@ -280,7 +280,7 @@ const DIYRemandRec = ({ navigation }) => {
     )
 }
 
-export default DIYRemandRec;
+export default PhysicalActivitiesMain;
 const styles = StyleSheet.create({
     button: {
         width: 200,

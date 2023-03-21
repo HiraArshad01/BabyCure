@@ -275,7 +275,7 @@ const BabyDetails = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
                     <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Activities')}>
+                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
                     <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>

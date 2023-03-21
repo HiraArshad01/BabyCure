@@ -37,7 +37,7 @@ const DietPlanWaterIntake = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.15, flexDirection: 'row' }}>
-            <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
@@ -86,8 +86,8 @@ const DietPlanWaterIntake = ({ navigation }) => {
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 20, alignItems: 'center', marginTop: 10, background: '#BADFE7', width: '80%', height: '100%',
             }} >
-                <ScrollView style={{margin: 30}}>
-                    <Text style={{ fontSize: 20, marginLeft: 20, marginRight: 20, marginTop: 10}}>
+                <ScrollView style={{ margin: 30 }}>
+                    <Text style={{ fontSize: 20, marginLeft: 20, marginRight: 20, marginTop: 10 }}>
                         An infant needs 18 – 32 ounces of breast milk in his first 3 months.
                         You should increase the amount gradually and very slowly so that by the end of 3 months your child is fed with 32 ounces of milk approximately.
                         You should not add any kind of cereal or starchy food item to a baby who is below 3 months of age.
@@ -122,13 +122,13 @@ const DietPlanWaterIntake = ({ navigation }) => {
                 elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
             }}>
 
-                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
+                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
                     <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Activities')}>
+                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
                     <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>

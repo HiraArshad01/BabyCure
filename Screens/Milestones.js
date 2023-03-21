@@ -165,15 +165,14 @@ const Milestones = ({ navigation }) => {
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Activities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
+                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
-
             </View>
 
         </View>

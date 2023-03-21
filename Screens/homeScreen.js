@@ -27,7 +27,7 @@ const homeScreen = ({ navigation }) => {
                     </View>
                     <View style={{ flexDirection: 'row', marginTop: 20 }}>
                         <Text style={{ fontSize: 16, fontWeight: '800' }}>2 Months</Text>
-                        <Text style={{ fontSize: 16, fontWeight: '800', marginLeft: 30}}>1 Week</Text>
+                        <Text style={{ fontSize: 16, fontWeight: '800', marginLeft: 30 }}>1 Week</Text>
                     </View>
 
 
@@ -35,37 +35,40 @@ const homeScreen = ({ navigation }) => {
 
 
             </View>
-    
-
-                    <TouchableOpacity style={{flex: 0.12,
-                        marginTop: 10, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                        elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
-                    }} onPress={() => navigation.navigate('BMICal')}>
-                        <Ionicons name='md-calculator' size={30} color='black' style={{marginLeft: 30, marginTop: 8}} />
-                        <Text style={{ fontSize: 16, fontWeight: '700', marginLeft: 20, marginTop: 8}}>BMI Calculator</Text>
-                    </TouchableOpacity>
 
 
-                    <TouchableOpacity style={{ flex: 0.12 ,
-                        marginTop: 5, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                        elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
-                    }} onPress={() => navigation.navigate('CommonProblems')}>
-                        <Ionicons name='md-bulb' size={30} color='black'  style={{marginLeft: 30, marginTop: 8}} />
-                        <Text style={{fontSize: 16, fontWeight: '700', marginLeft: 20, marginTop: 8}}>Common Problems</Text>
-                    </TouchableOpacity>
-            
-                    <TouchableOpacity style={{ flex: 0.12,
-                        marginTop: 5, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
-                        shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                        elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
-                    }} onPress={() => navigation.navigate('DIYRemandRec')}>
+            <TouchableOpacity style={{
+                flex: 0.12,
+                marginTop: 10, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
+            }} onPress={() => navigation.navigate('BMICal')}>
+                <Ionicons name='md-calculator' size={30} color='black' style={{ marginLeft: 30, marginTop: 8 }} />
+                <Text style={{ fontSize: 16, fontWeight: '700', marginLeft: 20, marginTop: 8 }}>BMI Calculator</Text>
+            </TouchableOpacity>
 
-                        <Ionicons name='md-restaurant' size={30} color='black' style={{marginLeft: 30, marginTop: 8}}/>
-                        <Text style={{ fontSize: 16, fontWeight: '700', marginLeft: 20, marginTop: 8 }}>DIY Remedies & Recipes</Text>
-                    </TouchableOpacity>
-     
+
+            <TouchableOpacity style={{
+                flex: 0.12,
+                marginTop: 5, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
+            }} onPress={() => navigation.navigate('CommonProblems')}>
+                <Ionicons name='md-bulb' size={30} color='black' style={{ marginLeft: 30, marginTop: 8 }} />
+                <Text style={{ fontSize: 16, fontWeight: '700', marginLeft: 20, marginTop: 8 }}>Common Problems</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{
+                flex: 0.12,
+                marginTop: 5, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
+            }} onPress={() => navigation.navigate('DIYRemandRec')}>
+
+                <Ionicons name='md-restaurant' size={30} color='black' style={{ marginLeft: 30, marginTop: 8 }} />
+                <Text style={{ fontSize: 16, fontWeight: '700', marginLeft: 20, marginTop: 8 }}>DIY Remedies & Recipes</Text>
+            </TouchableOpacity>
+
 
 
             <View style={{
@@ -74,17 +77,17 @@ const homeScreen = ({ navigation }) => {
                 elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
             }}>
 
-<TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
+                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Activities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
 
             </View>

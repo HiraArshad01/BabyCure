@@ -20,7 +20,11 @@ import forgetPassword from './Screens/forgetPassword';
 import customizeDietPlan from './Screens/customizeDietPlan';
 import DietPlanWaterIntake from './Screens/DietPlanWaterIntake';
 import Milestones from './Screens/Milestones';
-import DoctorConsultancy from './Screens/Milestones';
+import DoctorConsultancy from './Screens/DoctorConsultancy';
+import PhysicalActivities from './Screens/PhysicalActivities';
+import PhysicalActivitiesMain from './Screens/PhysicalActivitiesMain';
+import Mother from './Screens/Mother';
+import Quotes from './Screens/Quotes';
 
 
 
@@ -30,24 +34,18 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
+        <Stack.Screen name="Mother" component={Mother} />
+        <Stack.Screen name="PhysicalActivitiesMain" component={PhysicalActivitiesMain} />
+        <Stack.Screen name="mainPage" component={mainPage} />
+        <Stack.Screen name="PhysicalActivities" component={PhysicalActivities} />
+        <Stack.Screen name="Quotes" component={Quotes} />
 
-      <Stack.Screen name="Milestones" component={Milestones} />
-      <Stack.Screen name="DietPlanWaterIntake" component={DietPlanWaterIntake} />
-      <Stack.Screen name="BabyDetails" component={BabyDetails} />
-      <Stack.Screen name="homeScreen" component={homeScreen} />
-      <Stack.Screen name="mainPage" component={mainPage} />
-
-      <Stack.Screen name="CommonProblems" component={CommonProblems} />
-
-    
-
+        <Stack.Screen name="CommonProblems" component={CommonProblems} />
+        <Stack.Screen name="Milestones" component={Milestones} />
+        <Stack.Screen name="DietPlanWaterIntake" component={DietPlanWaterIntake} />
+        <Stack.Screen name="BabyDetails" component={BabyDetails} />
+        <Stack.Screen name="homeScreen" component={homeScreen} />
         <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
-     
-     
-
-
-
-    
         <Stack.Screen name="AddBaby" component={AddBaby} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
