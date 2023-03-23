@@ -38,11 +38,22 @@ const AddBaby = ({ navigation }) => {
             alert('Please Enter Height');
             return;
         }
+        if(height <= '42')
+        {
+            alert('Please Enter Height Correctly');
+            return;
+        }
+       
+        if(weight<'2')
+        {
+            alert('Please Enter Weight Correctly.. Weight is ttooo less');
+            return;
+        }
+       
         //Checked Successfully
         //Do whatever you want
         navigation.navigate('homeScreen')
     };
-
 
 
     const [radioButtons, setRadioButtons] = useState([
@@ -141,7 +152,7 @@ const AddBaby = ({ navigation }) => {
                         placeholder="enter Weight" label="Weight of baby"
                         leftIcon={{ type: "material", name: "weight" }}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
-                        onChangeText={text => setWeight(text)} />
+                        onChangeText={text =>setWeight(text)} />
                     <Text style={{ marginTop: '12%', fontSize: 14 }}>Kg</Text>
                 </View>
 
@@ -153,7 +164,7 @@ const AddBaby = ({ navigation }) => {
                         placeholder="enter Height" label="Height of baby"
                         leftIcon={{ type: "material", name: "height" }} size={40}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={height}
-                        onChangeText={text => setHeight(text)} />
+                        onChangeText={text=>setHeight(text)} />
                     <Text style={{ marginTop: '12%', fontSize: 14 }}>Cm</Text>
                 </View>
 
