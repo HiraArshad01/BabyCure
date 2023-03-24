@@ -25,6 +25,7 @@ import PhysicalActivities from './Screens/PhysicalActivities';
 import PhysicalActivitiesMain from './Screens/PhysicalActivitiesMain';
 import Mother from './Screens/Mother';
 import Quotes from './Screens/Quotes';
+import showImage from './Screens/showImage';
 
 
 
@@ -33,20 +34,26 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-
+     
+      <Stack.Screen name="Quotes" component={Quotes} />
+      <Stack.Screen name="showImage" component={showImage} options={{headerShown: false}} />
+      <Stack.Screen name="CommonProblems" component={CommonProblems} />
+      <Stack.Screen name="BMICal" component={BMICal} />
+      <Stack.Screen name="Milestones" component={Milestones} />
+      <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
         <Stack.Screen name="mainPage" component={mainPage} />
-        <Stack.Screen name="CommonProblems" component={CommonProblems} />
+
         <Stack.Screen name="Mother" component={Mother} />
         <Stack.Screen name="PhysicalActivitiesMain" component={PhysicalActivitiesMain} />
-        <Stack.Screen name="BMICal" component={BMICal} />
+
         <Stack.Screen name="PhysicalActivities" component={PhysicalActivities} />
-        <Stack.Screen name="Quotes" component={Quotes} />
+       
         <Stack.Screen name="AddBaby" component={AddBaby} />
-        <Stack.Screen name="Milestones" component={Milestones} />
+  
         <Stack.Screen name="DietPlanWaterIntake" component={DietPlanWaterIntake} />
         <Stack.Screen name="BabyDetails" component={BabyDetails} />
         <Stack.Screen name="homeScreen" component={homeScreen} />
-        <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
+
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="Chat" component={ChatScreen} />

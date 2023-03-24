@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, Modal } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { borderRadius } from "@mui/system";
 import { RadioGroup, FormControlLabel } from 'react-native-radio-buttons-group';
 import { Calendar } from "react-native-calendars";
-
+import {  Input } from "react-native-elements";
 const BMICal = ({ navigation }) => {
 
     const [weight, setWeight] = useState('');
@@ -49,6 +49,11 @@ const BMICal = ({ navigation }) => {
         else if (bmi >= 30) {
             setDescription("Obsese, Hit the gym");
         }
+
+        setHeight('');
+        setWeight('');
+        setDate([]);
+
     }
 
 
@@ -79,7 +84,7 @@ const BMICal = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ flex: 0.80 }}>
+            <View style={{ flex: 0.70, width: '80%',}}>
 
                 <TextInput
                     value={weight}
@@ -87,41 +92,39 @@ const BMICal = ({ navigation }) => {
                     placeholder="Weight in kgs"
                     keyboardType="numeric"
                     style={{
-                        height: 55, margin: 15, borderWidth: 1 / 2,
-                        padding: 10,
+                        height: 55, borderWidth: 1 / 2,
                         borderRadius: 5,
                         backgroundColor: '#cde0e9',
                         fontSize: 18,
-                        width: '100%'
+                        width: '100%',
+                        marginTop: 70
+
                     }}
                 />
                 <TextInput
                     value={height}
                     onChangeText={(text) => setHeight(text)}
-                    placeholder="Height in cms"
                     keyboardType="numeric"
+                    placeholder="Height in cms"
                     style={{
-                        height: 55, margin: 15, borderWidth: 1 / 2,
-                        padding: 10,
+                        height: 55, borderWidth: 1 / 2,
                         borderRadius: 5,
                         backgroundColor: '#cde0e9',
                         fontSize: 18,
-                        width: '100%'
+                        width: '100%',
+                        marginTop: 70, 
+
                     }}
                 />
 
                 <TouchableOpacity onPress={() => setshowDate(true)}>
-                    <TextInput style={{
-                        height: 55, margin: 15, borderWidth: 1 / 2,
-                        padding: 10,
-                        borderRadius: 5,
-                        backgroundColor: '#cde0e9',
-                        fontSize: 18,
-                        width: '100%'
-                    }}
-                        placeholder="Add Birth Date"
-                        value={date} />
+                    <Input style={{
+                        marginTop: 30, 
+                    }} placeholder="add Date" label="Date"
+                        leftIcon={{ type: "font-awesome", name: "calendar" }}
+                        placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
                 </TouchableOpacity>
+
 
 
                 <RadioGroup
@@ -143,9 +146,9 @@ const BMICal = ({ navigation }) => {
 
             </View>
 
-            <View style={{ flex: 0.10, margin: 15, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 30, color: '#2c6975', fontWeight: 'bold' }}>{bmi}</Text>
-                <Text style={{ fontSize: 30, color: '#909E84', fontWeight: 'bold' }}>{description}</Text>
+            <View style={{ flex: 0.20, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 20, color: '#2c6975', fontWeight: 'bold', marginTop: 70 }}>{bmi}</Text>
+                <Text style={{ fontSize: 20, color: '#909E84', fontWeight: 'bold' }}>{description}</Text>
             </View>
 
 

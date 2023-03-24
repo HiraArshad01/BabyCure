@@ -15,9 +15,17 @@ const homeScreen = ({ navigation }) => {
                     elevation: 8, borderRadius: 20, alignItems: 'center'
                 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <TouchableOpacity>
                         <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }}>Azlan</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
                         <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }}>Faizan</Text>
-                        <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }}>Mother</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                        <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }} onPress={() => navigation.navigate('Mother')}>Mother</Text>
+                        </TouchableOpacity>
+                      
+                
                     </View>
 
                     <View style={{ flexDirection: 'column', paddingLeft: 25, paddingRight: 25 }}>

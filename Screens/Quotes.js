@@ -1,13 +1,36 @@
 import React, { useState , useEffect} from "react";
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, ScrollView} from "react-native";
 import {Button, Input} from "react-native-elements";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import Images from "./Images";
 
-const Quotes = ({navigation}) => {
+
+
+let deviceHeight = Dimensions.get('window').height;
+let deviceWidth = Dimensions.get('window').width;
+
+const Quotes = (props) => {
 
     return (
+
+        <ScrollView>
         <View style = {styles.container}>
+           { 
+           
+           Images.map((image, index)=>(
+            <TouchableOpacity key={index} onPress={()=>{
+                props.navigation.navigate('showImage', {url: image.url})
+            }}>
+
+            <Image source={image.url} style={{height: deviceHeight/3, width: deviceWidth/3-11, borderRadius: 10, margin: 2}}/>
+
+            </TouchableOpacity>
+
+           ))
+            
+            }
         </View>
+
+        </ScrollView>
     )
 }
 
@@ -20,7 +43,8 @@ const styles = StyleSheet.create({
     },
     container:{
         flex: 1,
-        alignItems: 'center',
-        padding: 10
+        padding: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap'
     }
 })

@@ -52,7 +52,6 @@ const CommonProblems = ({ navigation }) => {
             var newDataObject = {
                 id: generateRandomNum,
                 title: newFilter,
-                details: "demo details"
             }
             setNewData([...newData, newDataObject])
             console.log("in filter")
@@ -88,13 +87,10 @@ const CommonProblems = ({ navigation }) => {
         return (
             <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'row' , marginTop: 60}}>
                     <Text style={{
-                        height: 30, width: "100px", backgroundColor: '#388087',
-                        borderRadius: 10
-                    }}>{item.title}</Text>
-                    <TouchableOpacity onPress={() => { onDeleteItem(item.title); setNewFilter('') }}>
-                        <Text style={{ fontWeight: '900', fontSize: '20px', marginTop: '10%' }}> X</Text>
+                        height: 20, width: 100, backgroundColor: '#388087', borderRadius: 10}}>{item.title}</Text>
+                    <TouchableOpacity onPress={() => { onDeleteItem(item.title); setNewFilter('') }}><Text style={{ fontWeight: '900', fontSize: 20 , marginTop: '10%' }}>X</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -142,15 +138,12 @@ const CommonProblems = ({ navigation }) => {
                 <TextInput
                     ref={searchRef}
                     placeholder="search item here...."
-                    style={{ width: '90%', height: '70%', borderBottomWidth: 0 }}
+                    style={{ width: '75%', borderBottomWidth: 0, height: 40, fontSize: 20, backgroundColor: '#C2EDCE' }}
                     value={search}
                     onChangeText={text => {
                         onSearch(text)
                         setSearch(text)
-                    }}
-
-                >
-                </TextInput>
+                    }}/>
                 {
                     search == '' ? null : (
                         <TouchableOpacity onPress={() => {
@@ -173,7 +166,7 @@ const CommonProblems = ({ navigation }) => {
             </View>
 
 
-            <View style={{ flex: 0.20, marginTop: 10 }}>
+            <View style={{ flex: 0.10 , marginTop: 50}}>
                 <FlatList
                     data={newData}
                     showsHorizontalScrollIndicator={false}
@@ -212,9 +205,7 @@ const CommonProblems = ({ navigation }) => {
                                 setData(tempList);
                                 setNewFilter('Sort By Name')
                                 listRef.current.scrollToIndex({ animated: true, index: 0 })
-
                             }}><Text>Sort By Name</Text></TouchableOpacity>
-
                     </View>
                 </View>
 
@@ -226,10 +217,6 @@ const CommonProblems = ({ navigation }) => {
                 </View>
             </Modal>
 
-
-
-
-
             <View style={{ flex: 0.50, marginTop: 10 }}>
                 <FlatList
                     initialScrollIndex={ind}
@@ -238,26 +225,24 @@ const CommonProblems = ({ navigation }) => {
                     renderItem={({ item }) =>
                     (
                         <View style={{
-                            padding: 40, borderWidth: 1, backgroundColor: '#6FB3B8', height: -20, borderColor: 'grey', flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                            borderWidth: 1, backgroundColor: '#6FB3B8', borderColor: 'grey', flex: 0.60,
+                             flexDirection: 'row', shadowColor: "#000",
                             shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                            elevation: 8,
+                            elevation: 8, width: '100%'
                         }}>
 
-                            <View style={{ alignItems: 'left', justifyContent: 'center' }}> <Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
+                            <View style={{justifyContent: 'center' }}><Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
                             <View>
                                 <Text style={{ fontSize: 18, color: 'black', margin: 10, fontWeight: 'bold' }}>{item.title}</Text>
                                 <Text style={{ fontSize: 14, color: 'black', margin: 10 }}>{item.description}</Text>
                                 <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }}><Text>continue Reading</Text></TouchableOpacity>
                             </View>
                         </View>
-                    )
-                    }
-                />
-
+                    )}/>
             </View>
             <View style={{
                 flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087', shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
             }}>
 
