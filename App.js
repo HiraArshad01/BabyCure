@@ -26,6 +26,7 @@ import PhysicalActivitiesMain from './Screens/PhysicalActivitiesMain';
 import Mother from './Screens/Mother';
 import Quotes from './Screens/Quotes';
 import showImage from './Screens/showImage';
+import Chat from './Screens/Chat';
 
 
 
@@ -34,10 +35,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-     
+
+      <Stack.Screen name="CommonProblems" component={CommonProblems} />
       <Stack.Screen name="Quotes" component={Quotes} />
       <Stack.Screen name="showImage" component={showImage} options={{headerShown: false}} />
-      <Stack.Screen name="CommonProblems" component={CommonProblems} />
+
+
+      <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="BMICal" component={BMICal} />
       <Stack.Screen name="Milestones" component={Milestones} />
       <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
@@ -56,7 +60,7 @@ export default function App() {
 
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="fetch" component={fetch} />
         <Stack.Screen name="customizeDietPlan" component={customizeDietPlan} />
         <Stack.Screen name="Activities" component={Activities} />
