@@ -55,10 +55,7 @@ const CommonProblems = ({ navigation }) => {
             }
             setNewData([...newData, newDataObject])
             console.log("in filter")
-
         }
-
-
     }
 
     const FilterClick = ()=> {
@@ -68,11 +65,6 @@ const CommonProblems = ({ navigation }) => {
     setNewFilter('Sort By Month')
     listRef.current.scrollToIndex({ animated: true, index: 0 })
     }
-
-
-
-
-
 
 
     useEffect(() => {

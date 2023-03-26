@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Modal, SafeAreaView, } from "react-native";
 import { Button, ButtonGroup, Input } from "react-native-elements";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, setOptions } from "firebase/auth";
+
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Calendar } from "react-native-calendars";
 import { RadioGroup, FormControlLabel } from 'react-native-radio-buttons-group';
@@ -38,13 +38,13 @@ const AddBaby = ({ navigation }) => {
             alert('Please Enter Height');
             return;
         }
-        if(height <= '42')
+        if(height < 42)
         {
             alert('Please Enter Height Correctly');
             return;
         }
        
-        if(weight<'2')
+        if(weight< 2)
         {
             alert('Please Enter Weight Correctly.. Weight is ttooo less');
             return;
@@ -52,7 +52,29 @@ const AddBaby = ({ navigation }) => {
        
         //Checked Successfully
         //Do whatever you want
+      
         navigation.navigate('homeScreen')
+        setName('');
+        setWeight('');
+        setHeight('');
+        setDate([])
+        setRadioButtons([
+            {
+                id: '1', // acts as primary key, should be unique and non-empty string
+                label: 'Male',
+                value: 'Male'
+            },
+            {
+                id: '2',
+                label: 'Female',
+                value: 'Female'
+            },
+            {
+                id: '3',
+                label: 'Other',
+                value: 'Other'
+            }
+        ])
     };
 
 
@@ -78,36 +100,7 @@ const AddBaby = ({ navigation }) => {
         setRadioButtons(radioButtonsArray);
     }
 
-    useLayoutEffect(() => {
-        navigation.setOptions({
-
-            headerLeft: () => (
-                <View>
-
-                </View>
-            ),
-
-
-            headerRight: () => (
-                <TouchableOpacity onPress={dosignOut}>
-                    <Ionicons name='md-log-out' size={32} color='black' />
-                </TouchableOpacity>
-            )
-        })
-
-    }, [])
-
-
-
-    const dosignOut = () => {
-        const auth = getAuth();
-        signOut(auth).then(() => {
-            navigation.replace('LoginScreen');
-        }).catch((error) => {
-            // An error happened.
-        });
-    }
-
+  
     return (
 
 
@@ -150,7 +143,7 @@ const AddBaby = ({ navigation }) => {
                     <Input 
                         keyboardType={"decimal-pad"}
                         placeholder="enter Weight" label="Weight of baby"
-                        leftIcon={{ type: "material", name: "weight" }}
+                        leftIcon={{ type: "font-awesome", name: "weight-scale" }} size={40}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
                         onChangeText={text =>setWeight(text)} />
                     <Text style={{ marginTop: '12%', fontSize: 14 }}>Kg</Text>
@@ -173,7 +166,7 @@ const AddBaby = ({ navigation }) => {
                 <View style={{marginTop: '6%' }}>
                     <Button title={'Add Baby'} style={{
                         alignItems: 'center', justifyContent: 'center', marginTop: '1.5%'
-                    }} onPress={checkTextInput}></Button>
+                    }} onPress={()=>{checkTextInput()}}></Button>
                 </View>
 
             </View>

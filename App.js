@@ -36,35 +36,29 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-      <Stack.Screen name="CommonProblems" component={CommonProblems} />
-      <Stack.Screen name="Quotes" component={Quotes} />
-      <Stack.Screen name="showImage" component={showImage} options={{headerShown: false}} />
-
-
-      <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="BMICal" component={BMICal} />
-      <Stack.Screen name="Milestones" component={Milestones} />
-      <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
+        <Stack.Screen name="AddBaby" component={AddBaby} />
+        <Stack.Screen name="More" component={More} />
+        <Stack.Screen name="CommonProblems" component={CommonProblems} />
+        <Stack.Screen name="Quotes" component={Quotes} />
+        <Stack.Screen name="showImage" component={showImage} options={{ headerShown: false }} />
+        <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="BMICal" component={BMICal} />
+        <Stack.Screen name="Milestones" component={Milestones} />
+        <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
         <Stack.Screen name="mainPage" component={mainPage} />
-
         <Stack.Screen name="Mother" component={Mother} />
         <Stack.Screen name="PhysicalActivitiesMain" component={PhysicalActivitiesMain} />
-
         <Stack.Screen name="PhysicalActivities" component={PhysicalActivities} />
-       
-        <Stack.Screen name="AddBaby" component={AddBaby} />
-  
+
         <Stack.Screen name="DietPlanWaterIntake" component={DietPlanWaterIntake} />
         <Stack.Screen name="BabyDetails" component={BabyDetails} />
         <Stack.Screen name="homeScreen" component={homeScreen} />
-
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="fetch" component={fetch} />
         <Stack.Screen name="customizeDietPlan" component={customizeDietPlan} />
         <Stack.Screen name="Activities" component={Activities} />
-        <Stack.Screen name="More" component={More} />
         <Stack.Screen name="DIYRemandRec" component={DIYRemandRec} />
         <Stack.Screen name="mainPageChoose" component={mainPageChoose} />
         <Stack.Screen name="forgetPassword" component={forgetPassword} />

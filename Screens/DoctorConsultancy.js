@@ -69,12 +69,7 @@ const DoctorConsultancy = ({ navigation }) => {
         listRef.current.scrollToIndex({ animated: true, index: 0 })
     }
 
-
-
-
-
-
-
+    
     useEffect(() => {
         // fetch('https://fakestoreapi.com/products')
         fetch('https://jsonplaceholder.typicode.com/todos')
