@@ -27,6 +27,8 @@ import Mother from './Screens/Mother';
 import Quotes from './Screens/Quotes';
 import showImage from './Screens/showImage';
 import Chat from './Screens/Chat';
+import profile from './Screens/profile';
+import editProfile from './Screens/editProfile';
 
 
 
@@ -35,7 +37,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-
+      <Stack.Screen name="editProfile" component={editProfile} />
+        <Stack.Screen name="profile" component={profile} />
+       
+        <Stack.Screen name="homeScreen" component={homeScreen} />
         <Stack.Screen name="AddBaby" component={AddBaby} />
         <Stack.Screen name="More" component={More} />
         <Stack.Screen name="CommonProblems" component={CommonProblems} />
@@ -52,7 +57,7 @@ export default function App() {
 
         <Stack.Screen name="DietPlanWaterIntake" component={DietPlanWaterIntake} />
         <Stack.Screen name="BabyDetails" component={BabyDetails} />
-        <Stack.Screen name="homeScreen" component={homeScreen} />
+
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
