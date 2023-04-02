@@ -37,6 +37,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+
+      <Stack.Screen name="BMICal" component={BMICal} />
       <Stack.Screen name="editProfile" component={editProfile} />
         <Stack.Screen name="profile" component={profile} />
        
@@ -47,7 +49,7 @@ export default function App() {
         <Stack.Screen name="Quotes" component={Quotes} />
         <Stack.Screen name="showImage" component={showImage} options={{ headerShown: false }} />
         <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="BMICal" component={BMICal} />
+       
         <Stack.Screen name="Milestones" component={Milestones} />
         <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
         <Stack.Screen name="mainPage" component={mainPage} />

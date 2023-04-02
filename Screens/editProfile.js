@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,29 +9,41 @@ import {
 
 } from 'react-native';
 import { Image } from 'react-native-elements';
-import {useTheme} from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import Modal from "react-native-modal";
+
 
 const editProfile = () => {
 
   const [image, setImage] = useState('https://picsum.photos/200');
-  const {colors} = useTheme();
+  const { colors } = useTheme();
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [email, setEmail] = useState("");
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+
+  };
 
   return (
     <View style={styles.container}>
-      <View style={{margin: 20}}>
-        <View style={{alignItems: 'center'}}>
-         
-          <TouchableOpacity onPress={()=>{}}>
-            <View style={{height:100, width: 100, borderRadius: 15, justifyContent:'center', alignItems:'center'}}>
-            <ImageBackground
+      <View style={{ margin: 20 }}>
+        <View style={{ alignItems: 'center' }}>
+
+          <TouchableOpacity onPress={() => {toggleModal()}}>
+            <View style={{ height: 100, width: 100, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
+              <ImageBackground
                 source={{
                   uri: image,
                 }}
-                style={{height: 100, width: 100}}
-                imageStyle={{borderRadius: 15}}>
+                style={{ height: 100, width: 100 }}
+                imageStyle={{ borderRadius: 15 }}>
                 <View
                   style={{
                     flex: 1,
@@ -55,11 +67,11 @@ const editProfile = () => {
               </ImageBackground>
             </View>
           </TouchableOpacity>
-          <Text style={{marginTop:10, fontSize: 18, fontWeight:'bold'}}>Hira Arshad</Text>
+          <Text style={{ marginTop: 10, fontSize: 18, fontWeight: 'bold' }}>Hira Arshad</Text>
         </View>
 
         <View style={styles.action}>
-        <FontAwesome name="user-o" color={colors.text} size={20} />
+          <FontAwesome name="user-o" color={colors.text} size={20} />
           <TextInput
             placeholder="First Name"
             placeholderTextColor="#666666"
@@ -70,6 +82,7 @@ const editProfile = () => {
                 color: colors.text,
               },
             ]}
+            onChangeText={text => setFirstName(text)}
           />
 
         </View>
@@ -85,6 +98,7 @@ const editProfile = () => {
                 color: colors.text,
               },
             ]}
+            onChangeText={text => setLastName(text)}
           />
         </View>
         <View style={styles.action}>
@@ -100,6 +114,7 @@ const editProfile = () => {
                 color: colors.text,
               },
             ]}
+            onChangeText={text => setPhoneNo(text)}
           />
         </View>
         <View style={styles.action}>
@@ -115,6 +130,7 @@ const editProfile = () => {
                 color: colors.text,
               },
             ]}
+            onChangeText={text => setEmail(text)}
           />
         </View>
         <View style={styles.action}>
@@ -131,27 +147,36 @@ const editProfile = () => {
             ]}
           />
         </View>
-        <View style={styles.action}>
-          <Icon name="map-marker-outline" color={colors.text} size={20} />
-          <TextInput
-            placeholder="City"
-            placeholderTextColor="#666666"
-            autoCorrect={false}
-            style={[
-              styles.textInput,
-              {
-                color: colors.text,
-              },
-            ]}
-          />
-        </View>
 
-        <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
+        <TouchableOpacity style={styles.commandButton} onPress={() => { }}>
           <Text style={styles.panelButtonTitle}>Submit</Text>
         </TouchableOpacity>
 
       </View>
- 
+
+
+      <Modal isVisible={isModalVisible}>
+
+        <View style={styles.panel}>
+          <View style={{ alignItems: 'center' }}>
+            <Text style={styles.panelTitle}>Upload Photo</Text>
+            <Text style={styles.panelSubtitle}>Choose Your Profile Picture</Text>
+          </View>
+          <TouchableOpacity style={styles.panelButton} onPress={() => { }}>
+            <Text style={styles.panelButtonTitle}>Take Photo</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.panelButton} onPress={() => { }}>
+            <Text style={styles.panelButtonTitle}>Choose From Library</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.panelButton}
+            onPress={() => { toggleModal() }}>
+            <Text style={styles.panelButtonTitle}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+
+      </Modal>
+
     </View>
   );
 };
@@ -183,7 +208,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#FFFFFF',
     shadowColor: '#333333',
-    shadowOffset: {width: -1, height: -3},
+    shadowOffset: { width: -1, height: -3 },
     shadowRadius: 2,
     shadowOpacity: 0.4,
     // elevation: 5,

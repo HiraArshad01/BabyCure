@@ -15,69 +15,81 @@ const BMICal = ({ navigation }) => {
     const [description, setDescription] = useState('');
     const [showDate, setshowDate] = useState(false);
     const [date, setDate] = useState([]);
+    const [radio, setRadio] = useState(0);
+    const [gender, setGender] = useState("");
 
 
     const calculateBmi = () => {
 
-        const bmi = [(weight / height / height)] * 10000;
+        console.log(gender)
 
-
-        setBmi(bmi.toFixed(1))
-
-        //Check for the Email TextInput
-        if (date == "") {
-            alert('Please Enter Date');
-            return;
-        }
-        if (!weight.trim()) {
-            alert('Please Enter Weight');
-            return;
-        }
-        if (!height.trim()) {
-            alert('Please Enter Height');
-            return;
-        }
-        if (bmi < 18.5) {
-            setDescription("UnderWeight, eat more");
-        }
-        else if (bmi >= 18.5 && bmi <= 24.9) {
-            setDescription("Normal, keep it up");
-        }
-        else if (bmi >= 25 && bmi <= 29.9) {
-            setDescription("Overweight, start working out");
-        }
-        else if (bmi >= 30) {
-            setDescription("Obsese, Hit the gym");
-        }
-
-        setHeight('');
-        setWeight('');
-        setDate([]);
-
-    }
-
-
-
-    const [radioButtons, setRadioButtons] = useState([
+        if(gender=="Baby")
         {
-            id: '1', // acts as primary key, should be unique and non-empty string
-            label: 'Male',
-            value: 'Male'
-        },
-        {
-            id: '2',
-            label: 'Female',
-            value: 'Female'
-        },
-        {
-            id: '3',
-            label: 'Other',
-            value: 'Other'
-        }
-    ]);
+            const newweight = weight * 2.2;
+            const newheight = height/2.54;
+            const bmi = newweight/newheight;
+            setBmi(bmi.toFixed(1))
 
-    function onPressRadioButton(radioButtonsArray) {
-        setRadioButtons(radioButtonsArray);
+            if(bmi < 5)
+            {
+                setDescription("Baby is UnderWeight");
+            }
+            else if(bmi >= 5 && bmi <= 84)
+            {
+                setDescription("Baby is Normal");
+            }
+            else if(bmi >= 85 && bmi <= 94)
+            {
+                setDescription("Baby is Over Weight");
+            }
+            else if(bmi > 95)
+            {
+                setDescription("Obese");
+            }
+            setHeight('');
+            setWeight('');
+            setDate([]);
+            setRadio(0);
+        }
+        else
+        {
+            const bmi = [(weight / height / height)] * 10000;
+
+
+            setBmi(bmi.toFixed(1))
+    
+            //Check for the Email TextInput
+            if (date == "") {
+                alert('Please Enter Date');
+                return;
+            }
+            if (!weight.trim()) {
+                alert('Please Enter Weight');
+                return;
+            }
+            if (!height.trim()) {
+                alert('Please Enter Height');
+                return;
+            }
+            if (bmi < 18.5) {
+                setDescription("UnderWeight, eat more");
+            }
+            else if (bmi >= 18.5 && bmi <= 24.9) {
+                setDescription("Normal, keep it up");
+            }
+            else if (bmi >= 25 && bmi <= 29.9) {
+                setDescription("Overweight, start working out");
+            }
+            else if (bmi >= 30) {
+                setDescription("Obsese, Hit the gym");
+            }
+    
+            setHeight('');
+            setWeight('');
+            setDate([]);
+            setRadio(0);
+        }
+
     }
 
 
@@ -125,15 +137,49 @@ const BMICal = ({ navigation }) => {
                         placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
                 </TouchableOpacity>
 
-
-
-                <RadioGroup
-                    layout='row'
-                    label="Gender"
-                    radioButtons={radioButtons}
-                    onPress={onPressRadioButton}
-                />
-
+                <View style={{flexDirection:'row'}}>
+                <View style={{alignItems: "center"}}>
+                    <TouchableOpacity onPress={()=>{setRadio(1); setGender(Male)}}>
+                        <View style={{flexDirection:'row', alignItems: 'center'}}>
+                            <View style={{height: 30 , width:30, borderColor:"black", borderWidth: 2, borderRadius: 20, margin: 10}}>
+                                {
+                                    radio===1 ?   <View style={{backgroundColor:'black', height: 22, width: 22, borderRadius:20, margin:2}}></View> : null
+                                }
+                              
+                            </View>
+                            <Text style={{fontSize: 15, }}>Male</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={{alignItems: "center"}}>
+                    <TouchableOpacity onPress={()=>{setRadio(2); setGender("Female")}}>
+                        <View style={{flexDirection:'row', alignItems: 'center'}}>
+                            <View style={{height: 30 , width:30, borderColor:"black", borderWidth: 2, borderRadius: 20, margin: 10}}>
+                                {
+                                    radio===2 ?   <View style={{backgroundColor:'black', height: 22, width: 22, borderRadius:20, margin:2}}></View> : null
+                                }
+                              
+                            </View>
+                            <Text style={{fontSize: 15, }}>Female</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={{alignItems: "center"}}>
+                    <TouchableOpacity onPress={()=>{setRadio(3);setGender("Baby")}}>
+                        <View style={{flexDirection:'row', alignItems: 'center'}}>
+                            <View style={{height: 30 , width:30, borderColor:"black", borderWidth: 2, borderRadius: 20, margin: 10}}>
+                                {
+                                    radio===3 ?   <View style={{backgroundColor:'black', height: 22, width: 22, borderRadius:20, margin:2}}></View> : null
+                                }
+                              
+                            </View>
+                            <Text style={{fontSize: 15, }}>Baby</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+              
+                </View>
+                   
                 <TouchableOpacity
                     style={{
                         height: 55, margin: 15, borderWidth: 1 / 2,
