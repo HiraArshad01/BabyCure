@@ -163,10 +163,11 @@ const AddBaby = ({ navigation }) => {
 
 
 
-                <View style={{marginTop: '6%' }}>
-                    <Button title={'Add Baby'} style={{
-                        alignItems: 'center', justifyContent: 'center', marginTop: '1.5%'
-                    }} onPress={()=>{checkTextInput()}}></Button>
+                <View style={{marginTop: '6%', alignItems: 'center' }}>
+                <TouchableOpacity style = {{backgroundColor: '#6FB3B8', width: 100, height: 40, alignItems: 'center',
+          justifyContent:'center', borderRadius: 5,shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+          elevation: 8,}} onPress={()=>{checkTextInput()}}><Text style={{fontSize: 16, fontWeight: 'bold'}}>Add Baby</Text></TouchableOpacity>
                 </View>
 
             </View>
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#F6F6F2',
+        backgroundColor: '#C2EDCE',
         alignItems: 'center',
         padding: 10,
     }

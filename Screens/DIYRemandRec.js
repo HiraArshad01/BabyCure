@@ -5,8 +5,10 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-const DIYRemandRec = ({ navigation }) => {
+const DIYRemandRec = (props) => {
 
     const [data, setData] = useState([]);
     const [newFilter, setNewFilter] = useState("");
@@ -15,6 +17,7 @@ const DIYRemandRec = ({ navigation }) => {
     const [search, setSearch] = useState('');
     const searchRef = useRef();
     const listRef = useRef();
+    const navigation = useNavigation(); 
 
     const categories = [
         'Sort By Month', 'Sort by Name'
@@ -55,10 +58,7 @@ const DIYRemandRec = ({ navigation }) => {
             }
             setNewData([...newData, newDataObject])
             console.log("in filter")
-
         }
-
-
     }
 
     const FilterClick = ()=> {
@@ -70,14 +70,9 @@ const DIYRemandRec = ({ navigation }) => {
     }
 
 
-
-
-
-
-
     useEffect(() => {
         // fetch('https://fakestoreapi.com/products')
-        fetch('https://jsonplaceholder.typicode.com/todos')
+        fetch('https://fakestoreapi.com/products')
             .then((response) => response.json())
             .then(response => {
                 setData(response);
@@ -169,7 +164,9 @@ const DIYRemandRec = ({ navigation }) => {
                             <View>
                                 <Text style={{ fontSize: 18, color: 'black', margin: 10, fontWeight: 'bold', width:'90%' }}>{item.title}</Text>
                                 <Text style={{ fontSize: 14, color: 'black', margin: 10 , width:'90%'}}>{item.description}</Text>
-                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }}><Text>continue Reading</Text></TouchableOpacity>
+                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }} key={item.id} onPress={()=>{
+                props.navigation.navigate('DIYRemandRecMain', {title: item.title, description: item.description, uri: item.image })
+            }}><Text>continue Reading</Text></TouchableOpacity>
                             </View>
                         </View>
                     )} />

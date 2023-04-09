@@ -6,10 +6,11 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Avatar, Title, Caption, Text, TouchableRipple } from "react-native-paper";
 import editProfile from "./editProfile";
+import { useNavigation } from '@react-navigation/native';
 
+const Profile = (props) => {
 
-const profile = ({ navigation }) => {
-
+    const navigation = useNavigation(); 
 
     return (
 
@@ -81,11 +82,25 @@ const profile = ({ navigation }) => {
               
             </View>
 
+            <View style={[styles.menuWrapper,{marginTop: 10, marginLeft: 10}]}>
+                <Text style={styles.title}>Relationship</Text>
+            </View>
+
+            
+            <View style={styles.menuWrapper}>
+                <TouchableRipple onPress={() => { }}>
+                    <View style={styles.menuItem}>
+                        <MaterialIcons name="baby" color="black" size={25} />
+                        <Text style={styles.menuItemText}>Mother</Text>
+                    </View>
+                </TouchableRipple>  
+            </View>
+
         </SafeAreaView>
     )
 }
 
-export default profile;
+export default Profile;
 const styles = StyleSheet.create({
     button: {
         width: 200,

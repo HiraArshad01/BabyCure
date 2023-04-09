@@ -23,7 +23,7 @@ const More = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.90 }}>
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => {}}>
+                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => {navigation.navigate('profile')}}>
                     <Ionicons name="person-circle-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
                         <Text style={{fontSize: 18, marginLeft: 20, justifyContent:'center'}}>   My Profile</Text>
                     </Ionicons>

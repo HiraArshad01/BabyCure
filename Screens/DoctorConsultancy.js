@@ -154,7 +154,7 @@ const DoctorConsultancy = ({ navigation }) => {
                     renderItem={({ item }) =>
                     (
           
-                        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Payment')}>
                             <View style={{
                                 borderWidth: 1, backgroundColor: '#6FB3B8', borderColor: 'grey',
                                 flexDirection: 'row', shadowColor: "#000",

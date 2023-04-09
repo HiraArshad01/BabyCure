@@ -8,9 +8,9 @@ const homeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            <View style={{ flex: 0.54 }}>
+            <View style={{ flex: 0.60 }}>
                 <TouchableOpacity style={{
-                    marginTop: 10, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                    marginTop: 10, backgroundColor: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
                     shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                     elevation: 8, borderRadius: 20, alignItems: 'center'
                 }} onPress={() => navigation.navigate('BabyDetails')}>
@@ -24,8 +24,6 @@ const homeScreen = ({ navigation }) => {
                         <TouchableOpacity>
                         <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }} onPress={() => navigation.navigate('Mother')}>Mother</Text>
                         </TouchableOpacity>
-                      
-                
                     </View>
 
                     <View style={{ flexDirection: 'column', paddingLeft: 25, paddingRight: 25 }}>
@@ -37,8 +35,6 @@ const homeScreen = ({ navigation }) => {
                         <Text style={{ fontSize: 16, fontWeight: '800' }}>2 Months</Text>
                         <Text style={{ fontSize: 16, fontWeight: '800', marginLeft: 30 }}>1 Week</Text>
                     </View>
-
-
                 </TouchableOpacity>
 
 
@@ -46,8 +42,8 @@ const homeScreen = ({ navigation }) => {
 
 
             <TouchableOpacity style={{
-                flex: 0.12,
-                marginTop: 10, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                flex: 0.10,
+                marginTop: 20, backgroundColor: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
             }} onPress={() => navigation.navigate('BMICal')}>
@@ -57,8 +53,8 @@ const homeScreen = ({ navigation }) => {
 
 
             <TouchableOpacity style={{
-                flex: 0.12,
-                marginTop: 5, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                flex: 0.10,
+                marginTop: 10, backgroundColor: '#BADFE7', width: '80%', height: '60%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
             }} onPress={() => navigation.navigate('CommonProblems')}>
@@ -67,8 +63,8 @@ const homeScreen = ({ navigation }) => {
             </TouchableOpacity>
 
             <TouchableOpacity style={{
-                flex: 0.12,
-                marginTop: 5, background: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                flex: 0.10,
+                marginTop: 10, backgroundColor: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
             }} onPress={() => navigation.navigate('DIYRemandRec')}>

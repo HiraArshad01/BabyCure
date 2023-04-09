@@ -27,8 +27,11 @@ import Mother from './Screens/Mother';
 import Quotes from './Screens/Quotes';
 import showImage from './Screens/showImage';
 import Chat from './Screens/Chat';
-import profile from './Screens/profile';
+import Profile from './Screens/Profile';
 import editProfile from './Screens/editProfile';
+import Payment from './Screens/Payment';
+import CommonProblemMain from './Screens/CommonProblemMain';
+import DIYRemandRecMain from './Screens/DIYRemandRecMain';
 
 
 
@@ -38,12 +41,28 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
+    
+         
+
+
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+
+      <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="homeScreen" component={homeScreen} />
+      <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+
+         <Stack.Screen name="AddBaby" component={AddBaby} />  
+     
+      <Stack.Screen name="PhysicalActivities" component={PhysicalActivities} />
+
+  
       <Stack.Screen name="BMICal" component={BMICal} />
       <Stack.Screen name="editProfile" component={editProfile} />
-        <Stack.Screen name="profile" component={profile} />
-       
-        <Stack.Screen name="homeScreen" component={homeScreen} />
-        <Stack.Screen name="AddBaby" component={AddBaby} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="CommonProblemMain" component={CommonProblemMain} />
+        <Stack.Screen name="DIYRemandRecMain" component={DIYRemandRecMain} />
+      
         <Stack.Screen name="More" component={More} />
         <Stack.Screen name="CommonProblems" component={CommonProblems} />
         <Stack.Screen name="Quotes" component={Quotes} />
@@ -51,17 +70,16 @@ export default function App() {
         <Stack.Screen name="Chat" component={Chat} />
        
         <Stack.Screen name="Milestones" component={Milestones} />
-        <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
+
         <Stack.Screen name="mainPage" component={mainPage} />
         <Stack.Screen name="Mother" component={Mother} />
         <Stack.Screen name="PhysicalActivitiesMain" component={PhysicalActivitiesMain} />
-        <Stack.Screen name="PhysicalActivities" component={PhysicalActivities} />
+     
 
         <Stack.Screen name="DietPlanWaterIntake" component={DietPlanWaterIntake} />
         <Stack.Screen name="BabyDetails" component={BabyDetails} />
 
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+ 
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="fetch" component={fetch} />
         <Stack.Screen name="customizeDietPlan" component={customizeDietPlan} />

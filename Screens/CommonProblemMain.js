@@ -5,10 +5,10 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
-import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
-const PhysicalActivities = (props) => {
+
+const CommonProblemsMain = (props) => {
 
     const [data, setData] = useState([]);
     const [newFilter, setNewFilter] = useState("");
@@ -19,30 +19,14 @@ const PhysicalActivities = (props) => {
     const listRef = useRef();
     const navigation = useNavigation(); 
 
-    const categories = [
-        'Sort By Month', 'Sort by Name'
-    ]
-
+ 
     const [ind, setInd] = useState(0)
     const [isModalVisible, setModalVisible] = useState(false);
 
     let generateRandomNum = () => Math.floor(Math.random() * 1001);
 
 
-    const onSearch = (text) => {
 
-        if (text == '') {
-            setData(oldData);
-        }
-        else {
-            let tempList = data.filter(item => {
-                return item.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
-            })
-            setData(tempList);
-
-        }
-
-    }
 
     const onAddFilter = () => {
 
@@ -72,7 +56,7 @@ const PhysicalActivities = (props) => {
 
     useEffect(() => {
         // fetch('https://fakestoreapi.com/products')
-        fetch('https://fakestoreapi.com/products')
+        fetch('https://jsonplaceholder.typicode.com/todos')
             .then((response) => response.json())
             .then(response => {
                 setData(response);
@@ -101,75 +85,20 @@ const PhysicalActivities = (props) => {
             </View>
 
 
-            <View style={{ flex: 0.10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                <Ionicons name='ios-search' size={25} color='black' style={{ margin: 5 }} />
-                <TextInput
-                    ref={searchRef}
-                    placeholder="search item here...."
-                    style={{ width: '75%', borderBottomWidth: 0, height: 40, fontSize: 20, backgroundColor: '#C2EDCE' }}
-                    value={search}
-                    onChangeText={text => {
-                        onSearch(text)
-                        setSearch(text)
-                    }} />
-                {
-                    search == '' ? null : (
-                        <TouchableOpacity onPress={() => {
-                            searchRef.current.clear()
-                            onSearch('')
-                            setSearch('')
-
-                        }}>
-                            <Ionicons name='ios-close' size={25} color='black' style={{ margin: 5 }} />
-                        </TouchableOpacity>
-                    )
-                }
-            </View>
+           
 
 
+            <View style={{ flex: 0.80, alignItems:'center'}}>
 
-                <View style={{ flex: 0.10, flexDirection: 'row' }}>
-                    {
-                        categories.map((category, index) => (
-
-                            <View key={index}>
-                                <TouchableOpacity onPress={()=>{FilterClick()}}>
-                                <Text style={{
-                                    padding: 10, borderWidth: 1,
-                                    borderColor: 'black', borderRadius: 10, fontSize: 15, margin:5
-                                }}>{category}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ))
-                    }
-
+                <View style={{flex:0.50, marginTop: 20}}>
+                <Image source={{uri: props.route.params.uri}} style={{height: 300, width: 200}}/>
                 </View>
 
-
-            <View style={{ flex: 0.60}}>
-                <FlatList
-                    initialScrollIndex={ind}
-                    ref={listRef}
-                    data={data}
-                    renderItem={({ item }) =>
-                    (
-                        <View style={{
-                            borderWidth: 1, backgroundColor: '#6FB3B8', borderColor: 'grey',
-                            flexDirection: 'row', shadowColor: "#000",
-                            shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                            elevation: 8, margin: 5
-                        }}>
-
-                            <View style={{ justifyContent: 'center' }}><Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
-                            <View>
-                                <Text style={{ fontSize: 18, color: 'black', margin: 10, fontWeight: 'bold', width:'90%' }}>{item.title}</Text>
-                                <Text style={{ fontSize: 14, color: 'black', margin: 10 , width:'90%'}}>{item.description}</Text>
-                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }} key={item.id} onPress={()=>{
-                props.navigation.navigate('PhysicalActivitiesMain', {title: item.title, description: item.description, uri: item.image })
-            }}><Text>continue Reading</Text></TouchableOpacity>
-                            </View>
-                        </View>
-                    )} />
+                <View style={{flex:0.30, marginTop: 200}}>
+                <Text style={{magrinTop: 10, fontSize: 18, fontWeight: "bold"}}>{props.route.params.title}</Text>
+               <Text style={{marginTop: 10, fontSize: 14}}>{props.route.params.description}</Text>
+                </View>
+ 
             </View>
 
 
@@ -197,7 +126,7 @@ const PhysicalActivities = (props) => {
     )
 }
 
-export default PhysicalActivities;
+export default CommonProblemsMain;
 const styles = StyleSheet.create({
     button: {
         width: 200,

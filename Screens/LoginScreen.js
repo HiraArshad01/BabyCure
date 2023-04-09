@@ -8,9 +8,12 @@ const LoginScreen = ({ navigation, props }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const SignIn = (navigation) => {
+    const SignIn = () => {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
+        .then((user) => {
+            navigation.replace('AddBaby');
+          })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -43,15 +46,15 @@ const LoginScreen = ({ navigation, props }) => {
 
             <TouchableOpacity style={{ color: 'red', fontWeight: 'light', fontStyle: 'italic', textDecorationLine: 'underline', alignItems: 'flex-end' }} onPress={() => navigation.navigate('forgetPassword')}><Text>Forget Password?</Text></TouchableOpacity>
 
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                <TouchableOpacity style={{
-                    width: 200, marginTop: 10, backgroundColor: '#F841CE', borderRadius: 20, justifyContent: 'center',
-                    alignItems: 'center', height: 50, shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8,
-                }} onPress={() => navigation.navigate('AddBaby')}><Text style={{ color: 'black', fontSize: 24 }}>Login</Text></TouchableOpacity>
-            </View>
+         <View style={{alignItems:'center'}}>
+         <TouchableOpacity style = {{backgroundColor: '#6FB3B8', width: 100, height: 40, alignItems: 'center',
+          justifyContent:'center', borderRadius: 5,shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+          elevation: 8,}} onPress={()=>{ SignIn()}}><Text style={{fontSize: 16, fontWeight: 'bold'}}>Login</Text></TouchableOpacity>
 
-            <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'center', alignItems: 'center' }}>
+         </View>
+          
+            <View style={{ flexDirection: 'row', marginTop: 20, alignItems:'center', justifyContent:'center'}}>
                 <Text style={{ fontWeight: '800' }}>Not a Member?    </Text>
                 <TouchableOpacity style={{ color: 'red', fontWeight: '800' }} onPress={() => navigation.navigate('RegisterScreen')}><Text>Signup</Text></TouchableOpacity>
             </View>
@@ -80,6 +83,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        backgroundColor: '#fce4ec'
+        backgroundColor: '#BADFE7'
     }
 })
