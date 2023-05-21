@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, TextInput } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, TextInput, Image } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Modal from "react-native-modal";
 import { Calendar } from "react-native-calendars";
-import {  Input } from "react-native-elements";
+import { Input } from "react-native-elements";
 
 
 const Milestones = ({ navigation }) => {
@@ -54,7 +54,7 @@ const Milestones = ({ navigation }) => {
             alert('Please Enter Date');
             return;
         }
-       
+
         onAddMilestone();
         toggleModal();
 
@@ -92,19 +92,19 @@ const Milestones = ({ navigation }) => {
 
         return (
             <View style={{
-                padding: 40, borderRadius: 1, backgroundColor: '#6FB3B8', flex: 0.60, flexDirection: 'row', shadowColor: "#000",
+                flex: 1, padding: 10, borderRadius: 6, backgroundColor: 'black', flexDirection: 'row', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, height: 100, width: 500, flexDirection: 'row'
+                elevation: 8, height: "5%", width: 370, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10
             }}>
 
                 <View style={{ flex: 0.90 }}>
-                    <Text>{item.title}</Text>
-                    <Text>{item.details}</Text>
-                    <Text>{item.dateis}</Text>
-               </View>
-               <View>
+                    <Text style={{ color: 'white' }}>{item.title}</Text>
+                    <Text style={{ color: 'white' }}>{item.details}</Text>
+                    <Text style={{ color: 'white' }}>{item.dateis}</Text>
+                </View>
+                <View>
                     <TouchableOpacity onPress={() => { onDeleteItem(item.title) }}>
-                        <Text style={{ fontWeight: '900', fontSize: 20, marginLeft: -50}}>X</Text>
+                        <Text style={{ fontWeight: '900', fontSize: 24, color: 'white', textAlign: 'right' }}>X</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -124,7 +124,7 @@ const Milestones = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ flex: 0.20, flexDirection: 'row' }}>
+            <View style={{ flex: 0.10, flexDirection: 'row', backgroundColor: '#daa520' }}>
                 <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
@@ -138,8 +138,16 @@ const Milestones = ({ navigation }) => {
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
-
+            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Image source={require('../assets/Logo.png')}
+                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
+                />
+                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
             <View style={{ flex: 0.70 }}>
+
+
                 <FlatList
                     data={newData}
                     renderItem={renderItemList}
@@ -148,7 +156,12 @@ const Milestones = ({ navigation }) => {
 
             <Modal isVisible={isModalVisible}>
 
-                <View style={{ flex: 1, marginTop: -40 }}>
+                <View style={{ flex: 1, marginTop: 30 }}>
+
+                    <TouchableOpacity onPress={() => { toggleModal() }}>
+                        <Text style={{ fontWeight: '900', fontSize: 24, color: 'white', textAlign: 'right' }}>X</Text>
+                    </TouchableOpacity>
+                    <Text style={{ fontWeight: '900', fontSize: 24, color: 'white', textAlign: 'center' }}>Add Milestone</Text>
 
 
                     <TextInput
@@ -159,7 +172,7 @@ const Milestones = ({ navigation }) => {
                         style={{
                             height: 55, borderWidth: 1 / 2,
                             borderRadius: 5,
-                            backgroundColor: '#cde0e9',
+                            backgroundColor: 'white',
                             fontSize: 18,
                             width: '100%',
                             marginTop: 70
@@ -177,7 +190,7 @@ const Milestones = ({ navigation }) => {
                         style={{
                             height: 55, borderWidth: 1 / 2,
                             borderRadius: 5,
-                            backgroundColor: '#cde0e9',
+                            backgroundColor: 'white',
                             fontSize: 18,
                             width: '100%',
                             marginTop: 30
@@ -186,13 +199,13 @@ const Milestones = ({ navigation }) => {
                     />
 
 
-<TouchableOpacity onPress={() => setshowDate(true)}>
-                    <Input style={{
-                        marginTop: 30, 
-                    }} placeholder="Add Milestone Achieved Date" label="Date"
-                        leftIcon={{ type: "font-awesome", name: "calendar" }}
-                        placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
-                </TouchableOpacity>
+                    <TouchableOpacity style={{
+                        marginTop: 30,
+                    }} onPress={() => setshowDate(true)}>
+                        <Input placeholder="Add Milestone Achieved Date" label="Date"
+                            leftIcon={{ type: "font-awesome", name: "calendar", color: 'white' }}
+                            placeholderTextColor="#6FB3B8" labelTextStyle={{ color: "white" }} value={date}></Input>
+                    </TouchableOpacity>
 
                 </View>
 
@@ -206,7 +219,7 @@ const Milestones = ({ navigation }) => {
 
 
             <View style={{ flex: 0.10, paddingLeft: 50 }}>
-                <TouchableOpacity style={{ marginLeft: 250, marginRight: 10 }} onPress={()=>{toggleModal(); setName(''),setDescription(''),setDate([])}}>
+                <TouchableOpacity style={{ marginLeft: 250, marginRight: 10 }} onPress={() => { toggleModal(); setName(''), setDescription(''), setDate([]) }}>
                     <Ionicons name='ios-add-circle-outline' size={50} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
@@ -222,11 +235,11 @@ const Milestones = ({ navigation }) => {
                 ></Calendar>
             </Modal>
 
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
             <View style={{
-                flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087', shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
+                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
+
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
@@ -239,8 +252,8 @@ const Milestones = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
                     <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
-            </View>
 
+            </View>
         </View>
     )
 }
@@ -257,6 +270,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#C2EDCE'
+        backgroundColor: '#dcdcdc'
     }
 })

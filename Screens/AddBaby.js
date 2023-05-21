@@ -39,21 +39,19 @@ const AddBaby = ({ navigation }) => {
             alert('Please Enter Height');
             return;
         }
-        if(height < 42)
-        {
+        if (height < 42) {
             alert('Please Enter Height Correctly');
             return;
         }
-       
-        if(weight< 2)
-        {
+
+        if (weight < 2) {
             alert('Please Enter Weight Correctly.. Weight is ttooo less');
             return;
         }
-       
+
         //Checked Successfully
         //Do whatever you want
-      
+
         navigation.navigate('homeScreen')
         setName('');
         setWeight('');
@@ -101,77 +99,79 @@ const AddBaby = ({ navigation }) => {
         setRadioButtons(radioButtonsArray);
     }
 
-  
+
     return (
 
 
         <View style={styles.container}>
-        <View style={{backgroundColor:'black', width: "100%", alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
-        <Image source={require('../assets/Logo.png')}
-                style={{height: '80%', width:'10%', resizeMode:'contain'}} 
+            <View style={{ backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Image source={require('../assets/Logo.png')}
+                    style={{ height: '80%', width: '10%', resizeMode: 'contain' }}
                 />
-            <Text style={{fontSize: 24, color:'white'}}>Baby Cure</Text></View>
-           <View style={{backgroundColor:'#daa520', width:'100%',alignItems:'center', justifyContent:'center'}}><Text style={{ fontSize: 24,color:'black'}}>Let's Add a Baby</Text></View>
-          
+                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <View style={{ backgroundColor: '#daa520', width: '100%', alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 24, color: 'black' }}>Let's Add a Baby</Text></View>
+
             <View style={{
                 flex: 0.70, width: '80%', height: '100%', marginTop: '3%',
                 shadowColor: "#000", shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30,
                 shadowRadius: 4.65, elevation: 8
             }}>
-            
-            <Input placeholder="enter name" label="Name" leftIcon={{type:"font-awesome", name:"user"}} value={name} 
-           onChangeText={text=> setName(text)}/>
-         
 
-                    <TouchableOpacity onPress={() => setshowDate(true)}>
-                        <Input style={{
-                            marginLeft: '1.5%'
-                        }} placeholder="add date" label="Date"
-                            leftIcon={{ type: "font-awesome", name: "calendar" }}
-                            placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
-                    </TouchableOpacity>
-
-             
-                    <Text style={{ marginLeft: '3%', fontSize: 16, fontWeight: 'bold', color: '#5f9ea0' }}>Gender</Text>
-                    <View style={{ flexDirection: 'row',  marginBottom: '5%' }}><RadioGroup
-                        layout='row'
-                        label="Gender"
-                        radioButtons={radioButtons}
-                        onPress={onPressRadioButton}
-                    /></View>
+                <Input placeholder="enter name" label="Name" leftIcon={{ type: "font-awesome", name: "user" }} value={name}
+                    onChangeText={text => setName(text)} />
 
 
+                <TouchableOpacity onPress={() => setshowDate(true)}>
+                    <Input style={{
+                        marginLeft: '1.5%'
+                    }} placeholder="add date" label="Date"
+                        leftIcon={{ type: "font-awesome", name: "calendar" }}
+                        placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
+                </TouchableOpacity>
 
-                <View style={{flexDirection: 'row'}}>
-                
-                    <Input 
+
+                <Text style={{ marginLeft: '3%', fontSize: 16, fontWeight: 'bold', color: '#5f9ea0' }}>Gender</Text>
+                <View style={{ flexDirection: 'row', marginBottom: '5%' }}><RadioGroup
+                    layout='row'
+                    label="Gender"
+                    radioButtons={radioButtons}
+                    onPress={onPressRadioButton}
+                /></View>
+
+
+
+                <View style={{ flexDirection: 'row' }}>
+
+                    <Input
                         keyboardType={"decimal-pad"}
                         placeholder="enter weight" label="Weight of baby"
-                        leftIcon={<Ionicons name="barbell-outline" size={25}></Ionicons> } 
+                        leftIcon={<Ionicons name="barbell-outline" size={25}></Ionicons>}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
-                        onChangeText={text =>setWeight(text)} />
+                        onChangeText={text => setWeight(text)} />
                     <Text style={{ marginTop: '12%', fontSize: 14 }}>Kg</Text>
                 </View>
 
 
-                <View style={{flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row' }}>
 
                     <Input
                         keyboardType={"decimal-pad"}
                         placeholder="enter height" label="Height of baby"
                         leftIcon={{ type: "material", name: "height" }} size={40}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={height}
-                        onChangeText={text=>setHeight(text)} />
+                        onChangeText={text => setHeight(text)} />
                     <Text style={{ marginTop: '12%', fontSize: 14 }}>Cm</Text>
                 </View>
 
 
 
                 <View style={{ alignItems: 'center' }}>
-                <TouchableOpacity style = {{backgroundColor: 'black', width: 100, height: 40, alignItems: 'center',
-          justifyContent:'center', borderRadius: 5,shadowColor: "#000",
-          shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-          elevation: 8,}} onPress={()=>{checkTextInput()}}><Text style={{fontSize: 16, fontWeight: 'bold',color:'white'}}>Add Baby</Text></TouchableOpacity>
+                    <TouchableOpacity style={{
+                        backgroundColor: 'black', width: 100, height: 40, alignItems: 'center',
+                        justifyContent: 'center', borderRadius: 5, shadowColor: "#000",
+                        shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
+                        elevation: 8,
+                    }} onPress={() => { checkTextInput() }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Add Baby</Text></TouchableOpacity>
                 </View>
 
             </View>
@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-       backgroundColor:'white',
+        backgroundColor: '#dcdcdc',
         alignItems: 'center',
-       
+
     }
 })

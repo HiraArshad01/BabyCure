@@ -9,9 +9,9 @@ const Chat = () => {
 
     return (
         <View style={styles.container}>
-          
-            <WebView source={{uri:"https://tawk.to/chat/641f0bf231ebfa0fe7f49fbd/1gsckdmg0"}}/>
-          
+
+            <WebView source={{ uri: "https://tawk.to/chat/641f0bf231ebfa0fe7f49fbd/1gsckdmg0" }} />
+
         </View>
     )
 }

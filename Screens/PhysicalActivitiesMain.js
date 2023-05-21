@@ -17,9 +17,9 @@ const PhysicalActivitiesMain = (props) => {
     const [search, setSearch] = useState('');
     const searchRef = useRef();
     const listRef = useRef();
-    const navigation = useNavigation(); 
+    const navigation = useNavigation();
 
- 
+
     const [ind, setInd] = useState(0)
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -45,12 +45,12 @@ const PhysicalActivitiesMain = (props) => {
         }
     }
 
-    const FilterClick = ()=> {
+    const FilterClick = () => {
         let tempList = data.sort((a, b) =>
-        a.title > b.title ? 1 : -1);
-    setData(tempList);
-    setNewFilter('Sort By Month')
-    listRef.current.scrollToIndex({ animated: true, index: 0 })
+            a.title > b.title ? 1 : -1);
+        setData(tempList);
+        setNewFilter('Sort By Month')
+        listRef.current.scrollToIndex({ animated: true, index: 0 })
     }
 
 
@@ -69,7 +69,7 @@ const PhysicalActivitiesMain = (props) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ flex: 0.10, flexDirection: 'row' }}>
+            <View style={{ flex: 0.10, flexDirection: 'row', backgroundColor: '#daa520' }}>
                 <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
@@ -83,29 +83,34 @@ const PhysicalActivitiesMain = (props) => {
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
+            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Image source={require('../assets/Logo.png')}
+                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
+                />
+                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
 
 
-           
 
 
-            <View style={{ flex: 0.80, alignItems:'center'}}>
+            <View style={{ flex: 0.80, alignItems: 'center' }}>
 
-                <View style={{flex:0.50, marginTop: 20}}>
-                <Image source={{uri: props.route.params.uri}} style={{height: 300, width: 200}}/>
+                <View style={{ flex: 0.50, marginTop: 10 }}>
+                    <Image source={{ uri: props.route.params.uri }} style={{ height: 300, width: 400, resizeMode: 'contain' }} />
                 </View>
 
-                <View style={{flex:0.30, marginTop: 200}}>
-                <Text style={{magrinTop: 10, fontSize: 18, fontWeight: "bold"}}>{props.route.params.title}</Text>
-               <Text style={{marginTop: 10, fontSize: 14}}>{props.route.params.description}</Text>
+                <View style={{ flex: 0.30, marginTop: 200 }}>
+                    <Text style={{ magrinTop: 10, fontSize: 18, fontWeight: "bold", marginLeft: 10 }}>{props.route.params.title}</Text>
+                    <Text style={{ marginTop: 10, fontSize: 14, marginLeft: 10 }}>{props.route.params.description}</Text>
                 </View>
- 
+
             </View>
 
 
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
             <View style={{
-                flex: 0.10, width: '100%', height: "100%", backgroundColor: '#388087', shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
+                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
 
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
@@ -122,6 +127,7 @@ const PhysicalActivitiesMain = (props) => {
                 </TouchableOpacity>
 
             </View>
+
         </View>
     )
 }
@@ -136,6 +142,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#C2EDCE'
+        backgroundColor: '#dcdcdc'
     }
 })

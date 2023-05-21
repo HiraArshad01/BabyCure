@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#C2EDCE',
+        backgroundColor: '#dcdcdc',
     },
     userInfoSection: {
         paddingHorizontal: 30,

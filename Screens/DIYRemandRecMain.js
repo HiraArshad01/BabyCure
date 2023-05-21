@@ -17,9 +17,9 @@ const DIYRemandRecMain = (props) => {
     const [search, setSearch] = useState('');
     const searchRef = useRef();
     const listRef = useRef();
-    const navigation = useNavigation(); 
+    const navigation = useNavigation();
 
- 
+
     const [ind, setInd] = useState(0)
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -45,12 +45,12 @@ const DIYRemandRecMain = (props) => {
         }
     }
 
-    const FilterClick = ()=> {
+    const FilterClick = () => {
         let tempList = data.sort((a, b) =>
-        a.title > b.title ? 1 : -1);
-    setData(tempList);
-    setNewFilter('Sort By Month')
-    listRef.current.scrollToIndex({ animated: true, index: 0 })
+            a.title > b.title ? 1 : -1);
+        setData(tempList);
+        setNewFilter('Sort By Month')
+        listRef.current.scrollToIndex({ animated: true, index: 0 })
     }
 
 
@@ -69,7 +69,7 @@ const DIYRemandRecMain = (props) => {
 
     return (
         <View style={styles.container}>
-                       <View style={{ flex: 0.10, flexDirection: 'row', backgroundColor:'#daa520'}}>
+            <View style={{ flex: 0.10, flexDirection: 'row', backgroundColor: '#daa520' }}>
                 <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
@@ -83,32 +83,32 @@ const DIYRemandRecMain = (props) => {
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
-          <View style={{flex: 0.10, backgroundColor:'black', width: "100%", alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
-        <Image source={require('../assets/Logo.png')}
-                style={{height: '70%', width:'15%', resizeMode:'contain'}} 
+            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Image source={require('../assets/Logo.png')}
+                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
                 />
-            <Text style={{fontSize: 24, color:'white'}}>Baby Cure</Text></View>
-            <View style={{flex:0.01, backgroundColor: '#daa520', height: '100%', width:'100%'}}></View>
-            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
-
-           
+                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
 
 
-            <View style={{ flex: 0.80, alignItems:'center'}}>
 
-                <View style={{flex:0.50, marginTop: 10}}>
-                <Image source={{uri: props.route.params.uri}} style={{height: 300, width: 400, resizeMode:'contain'}}/>
+
+            <View style={{ flex: 0.80, alignItems: 'center' }}>
+
+                <View style={{ flex: 0.50, marginTop: 10 }}>
+                    <Image source={{ uri: props.route.params.uri }} style={{ height: 300, width: 400, resizeMode: 'contain' }} />
                 </View>
 
-                <View style={{flex:0.30, marginTop: 200}}>
-                <Text style={{magrinTop: 10, fontSize: 18, fontWeight: "bold", marginLeft: 10}}>{props.route.params.title}</Text>
-               <Text style={{marginTop: 10, fontSize: 14, marginLeft: 10}}>{props.route.params.description}</Text>
+                <View style={{ flex: 0.30, marginTop: 200 }}>
+                    <Text style={{ magrinTop: 10, fontSize: 18, fontWeight: "bold", marginLeft: 10 }}>{props.route.params.title}</Text>
+                    <Text style={{ marginTop: 10, fontSize: 14, marginLeft: 10 }}>{props.route.params.description}</Text>
                 </View>
- 
+
             </View>
 
 
-            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%', marginTop: '2%'}}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
             <View style={{
                 flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
@@ -117,13 +117,13 @@ const DIYRemandRecMain = (props) => {
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
 
             </View>

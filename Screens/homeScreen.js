@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -8,21 +8,30 @@ const homeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
+            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Image source={require('../assets/Logo.png')}
+                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
+                />
+                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
+
             <View style={{ flex: 0.60 }}>
+
                 <TouchableOpacity style={{
-                    marginTop: 10, backgroundColor: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                    marginTop: 10, backgroundColor: '#dcdcdc', width: '80%', height: '100%', shadowColor: "#000",
                     shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                     elevation: 8, borderRadius: 20, alignItems: 'center'
                 }} onPress={() => navigation.navigate('BabyDetails')}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <TouchableOpacity>
-                        <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }}>Azlan</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('BabyDetails')}>
+                            <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }}>Azlan</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('BabyDetails')}>
+                            <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }}>Faizan</Text>
                         </TouchableOpacity>
                         <TouchableOpacity>
-                        <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }}>Faizan</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                        <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }} onPress={() => navigation.navigate('Mother')}>Mother</Text>
+                            <Text style={{ fontSize: 16, fontWeight: '600', padding: '10%' }} onPress={() => navigation.navigate('Mother')}>Mother</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -43,7 +52,7 @@ const homeScreen = ({ navigation }) => {
 
             <TouchableOpacity style={{
                 flex: 0.10,
-                marginTop: 20, backgroundColor: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                marginTop: 20, backgroundColor: '#dcdcdc', width: '80%', height: '100%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
             }} onPress={() => navigation.navigate('BMICal')}>
@@ -54,7 +63,7 @@ const homeScreen = ({ navigation }) => {
 
             <TouchableOpacity style={{
                 flex: 0.10,
-                marginTop: 10, backgroundColor: '#BADFE7', width: '80%', height: '60%', shadowColor: "#000",
+                marginTop: 10, backgroundColor: '#dcdcdc', width: '80%', height: '60%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
             }} onPress={() => navigation.navigate('CommonProblems')}>
@@ -64,7 +73,7 @@ const homeScreen = ({ navigation }) => {
 
             <TouchableOpacity style={{
                 flex: 0.10,
-                marginTop: 10, backgroundColor: '#BADFE7', width: '80%', height: '100%', shadowColor: "#000",
+                marginTop: 10, backgroundColor: '#dcdcdc', width: '80%', height: '100%', shadowColor: "#000",
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 10, flexDirection: 'row', alignItems: 'center'
             }} onPress={() => navigation.navigate('DIYRemandRec')}>
@@ -74,11 +83,9 @@ const homeScreen = ({ navigation }) => {
             </TouchableOpacity>
 
 
-
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
             <View style={{
-                flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087', shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
+                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
 
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
@@ -109,6 +116,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#6FB3B8',
+        backgroundColor: 'white',
     }
 })

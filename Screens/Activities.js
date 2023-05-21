@@ -1,12 +1,12 @@
-import React, { useState , useEffect} from "react";
-import {View, Text, StyleSheet} from "react-native";
-import {Button, Input} from "react-native-elements";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { Button, Input } from "react-native-elements";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
-const Activities = ({navigation}) => {
+const Activities = ({ navigation }) => {
 
     return (
-        <View style = {styles.container}>
+        <View style={styles.container}>
         </View>
     )
 }
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
 
     },
-    container:{
+    container: {
         flex: 1,
         alignItems: 'center',
         padding: 10

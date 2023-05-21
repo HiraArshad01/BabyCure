@@ -17,7 +17,7 @@ const DIYRemandRec = (props) => {
     const [search, setSearch] = useState('');
     const searchRef = useRef();
     const listRef = useRef();
-    const navigation = useNavigation(); 
+    const navigation = useNavigation();
 
     const categories = [
         'Sort By Month', 'Sort by Name'
@@ -61,12 +61,12 @@ const DIYRemandRec = (props) => {
         }
     }
 
-    const FilterClick = ()=> {
+    const FilterClick = () => {
         let tempList = data.sort((a, b) =>
-        a.title > b.title ? 1 : -1);
-    setData(tempList);
-    setNewFilter('Sort By Month')
-    listRef.current.scrollToIndex({ animated: true, index: 0 })
+            a.title > b.title ? 1 : -1);
+        setData(tempList);
+        setNewFilter('Sort By Month')
+        listRef.current.scrollToIndex({ animated: true, index: 0 })
     }
 
 
@@ -85,13 +85,13 @@ const DIYRemandRec = (props) => {
 
     return (
         <View style={styles.container}>
-           <View style={{flex: 0.10, backgroundColor:'black', width: "100%", alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
-        <Image source={require('../assets/Logo.png')}
-                style={{height: '70%', width:'15%', resizeMode:'contain'}} 
+            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Image source={require('../assets/Logo.png')}
+                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
                 />
-            <Text style={{fontSize: 24, color:'white'}}>Baby Cure</Text></View>
-            <View style={{flex:0.01, backgroundColor: '#daa520', height: '100%', width:'100%'}}></View>
-            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
+                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
 
 
             <View style={{ flex: 0.10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
@@ -119,26 +119,26 @@ const DIYRemandRec = (props) => {
                 }
             </View>
 
-                <View style={{ flex: 0.10, flexDirection: 'row' }}>
-                    {
-                        categories.map((category, index) => (
+            <View style={{ flex: 0.10, flexDirection: 'row' }}>
+                {
+                    categories.map((category, index) => (
 
-                            <View key={index}>
-                                <TouchableOpacity onPress={()=>{FilterClick()}}>
-                                  
+                        <View key={index}>
+                            <TouchableOpacity onPress={() => { FilterClick() }}>
+
                                 <Text style={{
                                     padding: 10, borderWidth: 1,
-                                    borderColor: 'black', borderRadius: 10, fontSize: 15, margin:5, backgroundColor:'black', color:'white'
+                                    borderColor: 'black', borderRadius: 10, fontSize: 15, margin: 5, backgroundColor: 'black', color: 'white'
                                 }}>{category}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ))
-                    }
+                            </TouchableOpacity>
+                        </View>
+                    ))
+                }
 
-                </View>
+            </View>
 
 
-            <View style={{ flex: 0.60}}>
+            <View style={{ flex: 0.60 }}>
                 <FlatList
                     initialScrollIndex={ind}
                     ref={listRef}
@@ -149,23 +149,23 @@ const DIYRemandRec = (props) => {
                             borderWidth: 1, backgroundColor: '#dcdcdc', borderColor: 'grey',
                             flexDirection: 'row', shadowColor: "#000",
                             shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                            elevation: 8, marginTop: 5, marginLeft: 5, marginRight: 5 
+                            elevation: 8, marginTop: 5, marginLeft: 5, marginRight: 5
                         }}>
 
                             <View style={{ justifyContent: 'center' }}><Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
                             <View>
-                                <Text style={{ fontSize: 16, color: 'black', margin: 10, fontWeight: 'bold', width:'90%' }}>{item.title}</Text>
-                                <Text style={{ fontSize: 14, color: 'black', margin: 10 , width:'30%'}}>{item.description}</Text>
-                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }} key={item.id} onPress={()=>{
-                props.navigation.navigate('DIYRemandRecMain', {title: item.title, description: item.description, uri: item.image })
-            }}><Text style={{color: '#b8860b'}}>continue Reading</Text></TouchableOpacity>
+                                <Text style={{ fontSize: 16, color: 'black', margin: 10, fontWeight: 'bold', width: '90%' }}>{item.title}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '30%' }}>{item.description}</Text>
+                                <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }} key={item.id} onPress={() => {
+                                    props.navigation.navigate('DIYRemandRecMain', { title: item.title, description: item.description, uri: item.image })
+                                }}><Text style={{ color: '#b8860b' }}>continue Reading</Text></TouchableOpacity>
                             </View>
                         </View>
                     )} />
             </View>
 
 
-            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%', marginTop: '2%'}}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
             <View style={{
                 flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
@@ -174,13 +174,13 @@ const DIYRemandRec = (props) => {
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
 
             </View>

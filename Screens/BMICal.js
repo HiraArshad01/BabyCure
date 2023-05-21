@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { borderRadius } from "@mui/system";
 import { RadioGroup, FormControlLabel } from 'react-native-radio-buttons-group';
 import { Calendar } from "react-native-calendars";
-import {  Input } from "react-native-elements";
+import { Input } from "react-native-elements";
 const BMICal = ({ navigation }) => {
 
     const [weight, setWeight] = useState('');
@@ -23,27 +23,22 @@ const BMICal = ({ navigation }) => {
 
         console.log(gender)
 
-        if(gender=="Baby")
-        {
+        if (gender == "Baby") {
             const newweight = weight * 2.2;
-            const newheight = height/2.54;
-            const bmi = newweight/newheight;
+            const newheight = height / 2.54;
+            const bmi = newweight / newheight;
             setBmi(bmi.toFixed(1))
 
-            if(bmi < 5)
-            {
+            if (bmi < 5) {
                 setDescription("Baby is UnderWeight");
             }
-            else if(bmi >= 5 && bmi <= 84)
-            {
+            else if (bmi >= 5 && bmi <= 84) {
                 setDescription("Baby is Normal");
             }
-            else if(bmi >= 85 && bmi <= 94)
-            {
+            else if (bmi >= 85 && bmi <= 94) {
                 setDescription("Baby is Over Weight");
             }
-            else if(bmi > 95)
-            {
+            else if (bmi > 95) {
                 setDescription("Obese");
             }
             setHeight('');
@@ -51,13 +46,12 @@ const BMICal = ({ navigation }) => {
             setDate([]);
             setRadio(0);
         }
-        else
-        {
+        else {
             const bmi = [(weight / height / height)] * 10000;
 
 
             setBmi(bmi.toFixed(1))
-    
+
             //Check for the Email TextInput
             if (date == "") {
                 alert('Please Enter Date');
@@ -83,7 +77,7 @@ const BMICal = ({ navigation }) => {
             else if (bmi >= 30) {
                 setDescription("Obsese, Hit the gym");
             }
-    
+
             setHeight('');
             setWeight('');
             setDate([]);
@@ -97,24 +91,24 @@ const BMICal = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-<View style={{flex: 0.10, backgroundColor:'black', width: "100%", alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
-        <Image source={require('../assets/Logo.png')}
-                style={{height: '70%', width:'15%', resizeMode:'contain'}} 
+            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+                <Image source={require('../assets/Logo.png')}
+                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
                 />
-            <Text style={{fontSize: 24, color:'white'}}>Baby Cure</Text></View>
-            <View style={{flex:0.01, backgroundColor: '#daa520', height: '100%', width:'100%'}}></View>
-            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
-            <View style={{flex:0.01, backgroundColor: '#daa520', height: '100%', width:'100%'}}></View>
-            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
-            <View style={{ flex: 0.60, width: '90%'}}>
-                <Text style={{fontSize: 32, fontWeight:'bold', alignSelf:'center', marginTop: 10 }}>BMI Calculator</Text>
+                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
+            <View style={{ flex: 0.60, width: '90%' }}>
+                <Text style={{ fontSize: 32, fontWeight: 'bold', alignSelf: 'center', marginTop: 10 }}>BMI Calculator</Text>
                 <TextInput
                     value={weight}
                     onChangeText={(text) => setWeight(text)}
                     placeholder="Weight in kgs"
                     keyboardType="numeric"
                     style={{
-                        height:50, borderWidth: 1,
+                        height: 50, borderWidth: 1,
                         borderRadius: 5,
                         backgroundColor: 'white',
                         fontSize: 18,
@@ -129,7 +123,7 @@ const BMICal = ({ navigation }) => {
                     keyboardType="numeric"
                     placeholder="Height in cms"
                     style={{
-                        height:50, borderWidth: 1,
+                        height: 50, borderWidth: 1,
                         borderRadius: 5,
                         backgroundColor: 'white',
                         fontSize: 18,
@@ -139,62 +133,62 @@ const BMICal = ({ navigation }) => {
                     }}
                 />
 
-         
-            <TouchableOpacity onPress={() => setshowDate(true)}>
-                        <Input style={{
-                            marginLeft: '1.5%', marginTop: 10
-                        }} placeholder="add date" label="Date"
-                            leftIcon={{ type: "font-awesome", name: "calendar" }}
-                            placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
-                    </TouchableOpacity>
 
-                <View style={{flexDirection:'row'}}>
-                <View style={{alignItems: "center"}}>
-                    <TouchableOpacity onPress={()=>{setRadio(1); setGender(Male)}}>
-                        <View style={{flexDirection:'row', alignItems: 'center'}}>
-                            <View style={{height: 30 , width:30, borderColor:"black", borderWidth: 2, borderRadius: 20, margin: 10}}>
-                                {
-                                    radio===1 ?   <View style={{backgroundColor:'black', height: 22, width: 22, borderRadius:20, margin:2}}></View> : null
-                                }
-                              
+                <TouchableOpacity onPress={() => setshowDate(true)}>
+                    <Input style={{
+                        marginLeft: '1.5%', marginTop: 10
+                    }} placeholder="add date" label="Date"
+                        leftIcon={{ type: "font-awesome", name: "calendar" }}
+                        placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
+                </TouchableOpacity>
+
+                <View style={{ flexDirection: 'row' }}>
+                    <View style={{ alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => { setRadio(1); setGender(Male) }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <View style={{ height: 30, width: 30, borderColor: "black", borderWidth: 2, borderRadius: 20, margin: 10 }}>
+                                    {
+                                        radio === 1 ? <View style={{ backgroundColor: 'black', height: 22, width: 22, borderRadius: 20, margin: 2 }}></View> : null
+                                    }
+
+                                </View>
+                                <Text style={{ fontSize: 15, }}>Male</Text>
                             </View>
-                            <Text style={{fontSize: 15, }}>Male</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-                <View style={{alignItems: "center"}}>
-                    <TouchableOpacity onPress={()=>{setRadio(2); setGender("Female")}}>
-                        <View style={{flexDirection:'row', alignItems: 'center'}}>
-                            <View style={{height: 30 , width:30, borderColor:"black", borderWidth: 2, borderRadius: 20, margin: 10}}>
-                                {
-                                    radio===2 ?   <View style={{backgroundColor:'black', height: 22, width: 22, borderRadius:20, margin:2}}></View> : null
-                                }
-                              
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => { setRadio(2); setGender("Female") }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <View style={{ height: 30, width: 30, borderColor: "black", borderWidth: 2, borderRadius: 20, margin: 10 }}>
+                                    {
+                                        radio === 2 ? <View style={{ backgroundColor: 'black', height: 22, width: 22, borderRadius: 20, margin: 2 }}></View> : null
+                                    }
+
+                                </View>
+                                <Text style={{ fontSize: 15, }}>Female</Text>
                             </View>
-                            <Text style={{fontSize: 15, }}>Female</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-                <View style={{alignItems: "center"}}>
-                    <TouchableOpacity onPress={()=>{setRadio(3);setGender("Baby")}}>
-                        <View style={{flexDirection:'row', alignItems: 'center'}}>
-                            <View style={{height: 30 , width:30, borderColor:"black", borderWidth: 2, borderRadius: 20, margin: 10}}>
-                                {
-                                    radio===3 ?   <View style={{backgroundColor:'black', height: 22, width: 22, borderRadius:20, margin:2}}></View> : null
-                                }
-                              
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ alignItems: "center" }}>
+                        <TouchableOpacity onPress={() => { setRadio(3); setGender("Baby") }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                <View style={{ height: 30, width: 30, borderColor: "black", borderWidth: 2, borderRadius: 20, margin: 10 }}>
+                                    {
+                                        radio === 3 ? <View style={{ backgroundColor: 'black', height: 22, width: 22, borderRadius: 20, margin: 2 }}></View> : null
+                                    }
+
+                                </View>
+                                <Text style={{ fontSize: 15, }}>Baby</Text>
                             </View>
-                            <Text style={{fontSize: 15, }}>Baby</Text>
-                        </View>
-                    </TouchableOpacity>
+                        </TouchableOpacity>
+                    </View>
+
                 </View>
-              
-                </View>
-                   
+
                 <TouchableOpacity
                     style={{
                         height: 50, borderWidth: 1, marginTop: 20, width: 150,
-                        borderRadius: 5, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center', alignSelf:'center'
+                        borderRadius: 5, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center', alignSelf: 'center'
                     }}
                     onPress={calculateBmi}
                 >
@@ -218,7 +212,7 @@ const BMICal = ({ navigation }) => {
                 //   hideArrows={true}
                 ></Calendar>
             </Modal>
-            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
             <View style={{
                 flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
@@ -227,13 +221,13 @@ const BMICal = ({ navigation }) => {
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
 
             </View>
@@ -251,6 +245,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor:'#dcdcdc'
+        backgroundColor: '#dcdcdc'
     }
 })

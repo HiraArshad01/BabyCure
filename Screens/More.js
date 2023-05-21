@@ -23,61 +23,59 @@ const More = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.90 }}>
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => {navigation.navigate('profile')}}>
-                    <Ionicons name="person-circle-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20, justifyContent:'center'}}>   My Profile</Text>
+                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => { navigation.navigate('Profile') }}>
+                    <Ionicons name="person-circle-outline" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20, justifyContent: 'center' }}>   My Profile</Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => {}}>
-                    <Ionicons name="bookmark-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20, justifyContent:'center'}}>   Saved</Text>
+                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => { }}>
+                    <Ionicons name="bookmark-outline" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20, justifyContent: 'center' }}>   Saved</Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => {}}>
-                    <Ionicons name="star-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20, justifyContent:'center'}}>   Rate Us</Text>
+                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => { }}>
+                    <Ionicons name="star-outline" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20, justifyContent: 'center' }}>   Rate Us</Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => {}}>
-                    <Ionicons name="help-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20, justifyContent:'center'}}>   QnA</Text>
+                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => { }}>
+                    <Ionicons name="help-outline" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20, justifyContent: 'center' }}>   QnA</Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column', justifyContent:'center' }} onPress={() => {}}>
-                <Ionicons name="alert-circle-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20}}>   About Us</Text>
+                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center' }} onPress={() => { }}>
+                    <Ionicons name="alert-circle-outline" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20 }}>   About Us</Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column', justifyContent:'center' }} onPress={() => {}}>
-                <Ionicons name="settings-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20}}>   Setting</Text>
+                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center' }} onPress={() => { }}>
+                    <Ionicons name="settings-outline" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20 }}>   Setting</Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column', justifyContent:'center' }} onPress={() => {}}>
-                <Ionicons name="construct-outline" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20}}>   Serives</Text>
+                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center' }} onPress={() => { }}>
+                    <Ionicons name="construct-outline" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20 }}>   Serives</Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column', justifyContent:'center' }} onPress={() => {}}>
-                <Ionicons >
-                        <Text style={{fontSize: 18, marginLeft: 20}}>  </Text>
+                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center' }} onPress={() => { }}>
+                    <Ionicons >
+                        <Text style={{ fontSize: 18, marginLeft: 20 }}>  </Text>
                     </Ionicons>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flexDirection: 'column', justifyContent:'center' }} onPress={() => {dosignOut()}}>
-                <Ionicons name="md-log-out" size={35} style={{marginTop: 20, marginLeft: 20}}>
-                        <Text style={{fontSize: 18, marginLeft: 20}}>   Logout</Text>
+                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center' }} onPress={() => { dosignOut() }}>
+                    <Ionicons name="md-log-out" size={35} style={{ marginTop: 20, marginLeft: 20 }}>
+                        <Text style={{ fontSize: 18, marginLeft: 20 }}>   Logout</Text>
                     </Ionicons>
                 </TouchableOpacity>
-        
+
             </View>
 
-            <View
+            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
+            <View style={{
+                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
+            }}>
 
-                style={{
-                    flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087', shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                    elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
-                }}>
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
@@ -90,8 +88,8 @@ const More = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
                     <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
-            </View>
 
+            </View>
         </View>
     )
 }
@@ -105,6 +103,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#C2EDCE',
+        backgroundColor: '#dcdcdc',
     }
 })

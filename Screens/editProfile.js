@@ -36,7 +36,7 @@ const editProfile = () => {
       <View style={{ margin: 20 }}>
         <View style={{ alignItems: 'center' }}>
 
-          <TouchableOpacity onPress={() => {toggleModal()}}>
+          <TouchableOpacity onPress={() => { toggleModal() }}>
             <View style={{ height: 100, width: 100, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}>
               <ImageBackground
                 source={{
@@ -186,17 +186,20 @@ export default editProfile;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#dcdcdc'
   },
   commandButton: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: '#388087',
+    backgroundColor: 'black',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 40,
+    width: 150,
+    alignSelf: 'center'
   },
   panel: {
     padding: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#daa520',
     paddingTop: 20,
     // borderTopLeftRadius: 20,
     // borderTopRightRadius: 20,
@@ -206,7 +209,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.4,
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#daa520',
     shadowColor: '#333333',
     shadowOffset: { width: -1, height: -3 },
     shadowRadius: 2,
@@ -232,14 +235,14 @@ const styles = StyleSheet.create({
   },
   panelSubtitle: {
     fontSize: 14,
-    color: 'gray',
+    color: 'black',
     height: 30,
     marginBottom: 10,
   },
   panelButton: {
     padding: 13,
     borderRadius: 10,
-    backgroundColor: '#FF6347',
+    backgroundColor: 'black',
     alignItems: 'center',
     marginVertical: 7,
   },

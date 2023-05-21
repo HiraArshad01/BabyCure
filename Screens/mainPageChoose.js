@@ -20,7 +20,7 @@ const mainPageChoose = ({ navigation }) => {
                     <View style={{ flex: 0.15, justifyContent: 'center', flexDirection: 'row' }}>
                         <TouchableOpacity style={{ backgroundColor: 'black', width: 200, height: 50, borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}
                             onPress={() => navigation.navigate('LoginScreen')}>
-                                <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Login as user</Text></TouchableOpacity>
+                            <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Login as user</Text></TouchableOpacity>
 
                     </View>
                     <View style={{ flex: 0.15, justifyContent: 'center', flexDirection: 'row' }}>
