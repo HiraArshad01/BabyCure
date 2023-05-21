@@ -10,3 +10,9 @@ dark turquiose '#388087'
 '#909E84' 
 '#75654C'
 '#E3D477'
+
+
+
+#b8860b mustard
+#daa520 light gold
+#dcdcdc grey

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Modal } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Modal, Image } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -96,20 +96,30 @@ const BMICal = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ flex: 0.70, width: '80%',}}>
 
+<View style={{flex: 0.10, backgroundColor:'black', width: "100%", alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
+        <Image source={require('../assets/Logo.png')}
+                style={{height: '70%', width:'15%', resizeMode:'contain'}} 
+                />
+            <Text style={{fontSize: 24, color:'white'}}>Baby Cure</Text></View>
+            <View style={{flex:0.01, backgroundColor: '#daa520', height: '100%', width:'100%'}}></View>
+            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
+            <View style={{flex:0.01, backgroundColor: '#daa520', height: '100%', width:'100%'}}></View>
+            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
+            <View style={{ flex: 0.60, width: '90%'}}>
+                <Text style={{fontSize: 32, fontWeight:'bold', alignSelf:'center', marginTop: 10 }}>BMI Calculator</Text>
                 <TextInput
                     value={weight}
                     onChangeText={(text) => setWeight(text)}
                     placeholder="Weight in kgs"
                     keyboardType="numeric"
                     style={{
-                        height: 55, borderWidth: 1 / 2,
+                        height:50, borderWidth: 1,
                         borderRadius: 5,
-                        backgroundColor: '#cde0e9',
+                        backgroundColor: 'white',
                         fontSize: 18,
                         width: '100%',
-                        marginTop: 70
+                        marginTop: 10
 
                     }}
                 />
@@ -119,23 +129,24 @@ const BMICal = ({ navigation }) => {
                     keyboardType="numeric"
                     placeholder="Height in cms"
                     style={{
-                        height: 55, borderWidth: 1 / 2,
+                        height:50, borderWidth: 1,
                         borderRadius: 5,
-                        backgroundColor: '#cde0e9',
+                        backgroundColor: 'white',
                         fontSize: 18,
                         width: '100%',
-                        marginTop: 70, 
+                        marginTop: 20
 
                     }}
                 />
 
-                <TouchableOpacity onPress={() => setshowDate(true)}>
-                    <Input style={{
-                        marginTop: 30, 
-                    }} placeholder="add Date" label="Date"
-                        leftIcon={{ type: "font-awesome", name: "calendar" }}
-                        placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
-                </TouchableOpacity>
+         
+            <TouchableOpacity onPress={() => setshowDate(true)}>
+                        <Input style={{
+                            marginLeft: '1.5%', marginTop: 10
+                        }} placeholder="add date" label="Date"
+                            leftIcon={{ type: "font-awesome", name: "calendar" }}
+                            placeholderTextColor="#6FB3B8" labelColor="black" value={date}></Input>
+                    </TouchableOpacity>
 
                 <View style={{flexDirection:'row'}}>
                 <View style={{alignItems: "center"}}>
@@ -182,17 +193,17 @@ const BMICal = ({ navigation }) => {
                    
                 <TouchableOpacity
                     style={{
-                        height: 55, margin: 15, borderWidth: 1 / 2,
-                        borderRadius: 5, backgroundColor: '#68B2A0', justifyContent: 'center', alignItems: 'center', width: '100%'
+                        height: 50, borderWidth: 1, marginTop: 20, width: 150,
+                        borderRadius: 5, backgroundColor: 'black', justifyContent: 'center', alignItems: 'center', alignSelf:'center'
                     }}
                     onPress={calculateBmi}
                 >
-                    <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>Calculate BMI</Text>
+                    <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>Calculate BMI</Text>
                 </TouchableOpacity>
 
             </View>
 
-            <View style={{ flex: 0.20, marginTop: 100, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 0.20, marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
                 <Text style={{ fontSize: 20, color: '#2c6975', fontWeight: 'bold', marginTop: 70 }}>{bmi}</Text>
                 <Text style={{ fontSize: 20, color: '#909E84', fontWeight: 'bold' }}>{description}</Text>
             </View>
@@ -207,25 +218,22 @@ const BMICal = ({ navigation }) => {
                 //   hideArrows={true}
                 ></Calendar>
             </Modal>
+            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
             <View style={{
-                flex: 0.10, width: '100%', height: 100, backgroundColor: '#388087', shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
+                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
-
-
 
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
 
             </View>
@@ -243,5 +251,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
+        backgroundColor:'#dcdcdc'
     }
 })

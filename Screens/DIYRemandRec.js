@@ -85,28 +85,21 @@ const DIYRemandRec = (props) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ flex: 0.10, flexDirection: 'row' }}>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
-                    <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
-                    <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones')}>
-                    <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
-                    <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
-                </TouchableOpacity>
-            </View>
+           <View style={{flex: 0.10, backgroundColor:'black', width: "100%", alignItems:'center', justifyContent:'center', flexDirection:'row'}}>
+        <Image source={require('../assets/Logo.png')}
+                style={{height: '70%', width:'15%', resizeMode:'contain'}} 
+                />
+            <Text style={{fontSize: 24, color:'white'}}>Baby Cure</Text></View>
+            <View style={{flex:0.01, backgroundColor: '#daa520', height: '100%', width:'100%'}}></View>
+            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%'}}></View>
 
 
             <View style={{ flex: 0.10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                <Ionicons name='ios-search' size={25} color='black' style={{ margin: 5 }} />
+                <Ionicons name='ios-search' size={20} color='black' style={{ margin: 5 }} />
                 <TextInput
                     ref={searchRef}
                     placeholder="search item here...."
-                    style={{ width: '75%', borderBottomWidth: 0, height: 40, fontSize: 20, backgroundColor: '#C2EDCE' }}
+                    style={{ width: '70%', borderBottomWidth: 0, height: 30, fontSize: 20, backgroundColor: 'white' }}
                     value={search}
                     onChangeText={text => {
                         onSearch(text)
@@ -120,13 +113,11 @@ const DIYRemandRec = (props) => {
                             setSearch('')
 
                         }}>
-                            <Ionicons name='ios-close' size={25} color='black' style={{ margin: 5 }} />
+                            <Ionicons name='ios-close' size={20} color='black' style={{ margin: 5 }} />
                         </TouchableOpacity>
                     )
                 }
             </View>
-
-
 
                 <View style={{ flex: 0.10, flexDirection: 'row' }}>
                     {
@@ -134,9 +125,10 @@ const DIYRemandRec = (props) => {
 
                             <View key={index}>
                                 <TouchableOpacity onPress={()=>{FilterClick()}}>
+                                  
                                 <Text style={{
                                     padding: 10, borderWidth: 1,
-                                    borderColor: 'black', borderRadius: 10, fontSize: 15, margin:5
+                                    borderColor: 'black', borderRadius: 10, fontSize: 15, margin:5, backgroundColor:'black', color:'white'
                                 }}>{category}</Text>
                                 </TouchableOpacity>
                             </View>
@@ -154,45 +146,45 @@ const DIYRemandRec = (props) => {
                     renderItem={({ item }) =>
                     (
                         <View style={{
-                            borderWidth: 1, backgroundColor: '#6FB3B8', borderColor: 'grey',
+                            borderWidth: 1, backgroundColor: '#dcdcdc', borderColor: 'grey',
                             flexDirection: 'row', shadowColor: "#000",
                             shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                            elevation: 8, margin: 5
+                            elevation: 8, marginTop: 5, marginLeft: 5, marginRight: 5 
                         }}>
 
                             <View style={{ justifyContent: 'center' }}><Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
                             <View>
-                                <Text style={{ fontSize: 18, color: 'black', margin: 10, fontWeight: 'bold', width:'90%' }}>{item.title}</Text>
-                                <Text style={{ fontSize: 14, color: 'black', margin: 10 , width:'90%'}}>{item.description}</Text>
+                                <Text style={{ fontSize: 16, color: 'black', margin: 10, fontWeight: 'bold', width:'90%' }}>{item.title}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10 , width:'30%'}}>{item.description}</Text>
                                 <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }} key={item.id} onPress={()=>{
                 props.navigation.navigate('DIYRemandRecMain', {title: item.title, description: item.description, uri: item.image })
-            }}><Text>continue Reading</Text></TouchableOpacity>
+            }}><Text style={{color: '#b8860b'}}>continue Reading</Text></TouchableOpacity>
                             </View>
                         </View>
                     )} />
             </View>
 
 
+            <View style={{flex:0.01, backgroundColor: 'black', height: '100%', width:'100%', marginTop: '2%'}}></View>
             <View style={{
-                flex: 0.10, width: '100%', height: "100%", backgroundColor: '#388087', shadowColor: "#000",
-                shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65,
-                elevation: 8, flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center'
+                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
             }}>
 
                 <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
                     <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
+                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10,marginLeft: 40, marginRight: 40 }} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
+                    <MaterialIcons name="more" size={30} style={{ padding: 10,marginLeft: 39, marginRight: 39 }} />
                 </TouchableOpacity>
 
             </View>
+
         </View>
     )
 }
@@ -207,6 +199,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#C2EDCE'
+        backgroundColor: 'white'
     }
 })

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Button, Input } from "react-native-elements";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
-const forgetPassword = ({ navigation }) => {
+
+const ForgetPassword = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
@@ -11,7 +11,7 @@ const forgetPassword = ({ navigation }) => {
     )
 }
 
-export default forgetPassword;
+export default ForgetPassword;
 const styles = StyleSheet.create({
     button: {
         width: 200,
