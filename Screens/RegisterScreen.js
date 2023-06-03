@@ -4,6 +4,7 @@ import { Button, Input } from "react-native-elements";
 import { auth } from "../firebase";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
+import { AdvanceLB } from "../component/AdvanceLB";
 
 const RegisterScreen = (props) => {
   const [email, setEmail] = useState('');
@@ -50,7 +51,7 @@ const RegisterScreen = (props) => {
   return (
     <View style={styles.container}>
 
-
+      <AdvanceLB/>
       <View style={{flex:0.70}}>
 
       </View>

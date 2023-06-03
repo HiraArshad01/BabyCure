@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable, TouchableOpacity, Image } from "react-native";
 import { Button, Input } from "react-native-elements";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { AdvanceLB } from "../component/AdvanceLB";
 
 
 const LoginScreen = ({ navigation, props }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isSecureEntry, setIsSecureEntry] = useState(true);
 
     const SignIn = () => {
         const auth = getAuth();
@@ -21,6 +23,7 @@ const LoginScreen = ({ navigation, props }) => {
             });
 
     }
+
 
     /* useEffect(()=>{
          const auth = getAuth();
@@ -40,20 +43,14 @@ const LoginScreen = ({ navigation, props }) => {
     return (
         <View style={styles.container}>
 
-            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                <Image source={require('../assets/Logo.png')}
-                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
-                />
-                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
-            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
-            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
+            <AdvanceLB/>
             <View style={{ flex: 0.86, marginTop: 40 }}>
                 <Input placeholder="enter email" label="email" leftIcon={{ type: "material", name: "email" }} value={email}
                     onChangeText={text => setEmail(text)} />
-                <Input placeholder="enter Password" label="Password" leftIcon={{ type: "material", name: "lock" }} value={password}
-                    onChangeText={text => setPassword(text)} secureTextEntry />
+                <Input placeholder="enter Password" label="Password" leftIcon={{ type: "material", name: "lock" }} 
+                rightIcon={<TouchableOpacity onPress={()=>{setIsSecureEntry((prev) => !prev)}}><Text>{isSecureEntry?"Show":"Hide"}</Text></TouchableOpacity>}
+                value={password}
+                    onChangeText={text => setPassword(text)} secureTextEntry={isSecureEntry} />
 
                 <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}><Text style={{ color: 'red', fontWeight: 'light', fontStyle: 'italic', textDecorationLine: 'underline', textAlign: "right" }}>Forget Password?</Text></TouchableOpacity>
 

@@ -7,6 +7,8 @@ import { borderRadius } from "@mui/system";
 import { RadioGroup, FormControlLabel } from 'react-native-radio-buttons-group';
 import { Calendar } from "react-native-calendars";
 import { Input } from "react-native-elements";
+import { AdvanceLB } from "../component/AdvanceLB";
+import { BottomNavBar } from "../component/BottomNavBar";
 const BMICal = ({ navigation }) => {
 
     const [weight, setWeight] = useState('');
@@ -90,16 +92,7 @@ const BMICal = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-
-            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                <Image source={require('../assets/Logo.png')}
-                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
-                />
-                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
-            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
-            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
+         <AdvanceLB/>
             <View style={{ flex: 0.60, width: '90%' }}>
                 <Text style={{ fontSize: 32, fontWeight: 'bold', alignSelf: 'center', marginTop: 10 }}>BMI Calculator</Text>
                 <TextInput
@@ -212,26 +205,8 @@ const BMICal = ({ navigation }) => {
                 //   hideArrows={true}
                 ></Calendar>
             </Modal>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
-        </View>
+      <BottomNavBar/>
+    </View>
     )
 }
 

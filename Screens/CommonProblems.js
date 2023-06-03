@@ -7,6 +7,8 @@ import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
+import { LogoBar } from "../component/LogoBar";
+import { BottomNavBar } from "../component/BottomNavBar";
 
 const CommonProblems = (props) => {
 
@@ -86,14 +88,7 @@ const CommonProblems = (props) => {
     return (
         <View style={styles.container}>
 
-            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                <Image source={require('../assets/Logo.png')}
-                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
-                />
-                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
-            <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
-
+        <LogoBar/>
 
             <View style={{ flex: 0.10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
                 <Ionicons name='ios-search' size={20} color='black' style={{ margin: 5 }} />
@@ -164,27 +159,7 @@ const CommonProblems = (props) => {
                         </View>
                     )} />
             </View>
-
-
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
+           <BottomNavBar/>
 
         </View>
     )

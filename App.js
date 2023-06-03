@@ -40,13 +40,18 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="Milestones" component={Milestones} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="BMICal" component={BMICal} />
+      <Stack.Screen name="BabyDetails" component={BabyDetails} />
+      <Stack.Screen name="homeScreen" component={homeScreen} />
+
       <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
       <Stack.Screen name="PhysicalActivities" component={PhysicalActivities} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Mother" component={Mother} />
-      <Stack.Screen name="Milestones" component={Milestones} />
-      <Stack.Screen name="LoginScreen" component={LoginScreen} />
-      <Stack.Screen name="homeScreen" component={homeScreen} />
+
+
       <Stack.Screen name="editProfile" component={editProfile} />
       <Stack.Screen name="DoctorConsultancy" component={DoctorConsultancy} />
       <Stack.Screen name="DIYRemandRec" component={DIYRemandRec} />
@@ -55,8 +60,8 @@ export default function App() {
       <Stack.Screen name="customizeDietPlan" component={customizeDietPlan} />
       <Stack.Screen name="CommonProblems" component={CommonProblems} />
       <Stack.Screen name="CommonProblemMain" component={CommonProblemMain} />
-      <Stack.Screen name="BMICal" component={BMICal} />
-      <Stack.Screen name="BabyDetails" component={BabyDetails} />
+
+
       <Stack.Screen name="AddBaby" component={AddBaby} />  
       <Stack.Screen name="Chat" component={Chat} />
       <Stack.Screen name="Payment" component={Payment} />
