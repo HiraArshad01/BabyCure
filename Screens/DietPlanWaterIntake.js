@@ -7,8 +7,20 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SearchComp from "../component/SearchComp";
 import { ScrollView } from "react-native-gesture-handler";
+import { useRoute } from "@react-navigation/native";
+import axios from "axios";
+import { BottomNavBar } from "../component/BottomNavBar";
+import ipAddress from "../ipconfig";
 
 const DietPlanWaterIntake = ({ navigation }) => {
+
+    const route = useRoute();
+    const {babyId} = route.params;
+    const {babyAge}=route.params;
+
+    useEffect(()=>{
+        console.log("Baby Age at Diet Plan:",babyAge)
+    })
 
     const [data, setData] = useState([]);
     const [newFilter, setNewFilter] = useState("");
@@ -18,35 +30,44 @@ const DietPlanWaterIntake = ({ navigation }) => {
     const searchRef = useRef();
 
 
-    const onSearch = (text) => {
+    useEffect(() => {
+        axios
+          .get(`http://${ipAddress}:3000/getDietPlan?babyAge=${babyAge}`)
+          .then((response) => {
+            console.log("Response data:", response.data);
+            setData(response.data);
+            setOldData(response.data);
+          })
+          .catch((error) => console.error(error));
+      }, [babyAge]);
+      
 
-        if (text == '') {
-            setData(oldData);
+
+      const onSearch = (text) => {
+        if (text === '') {
+          setData(oldData);
+        } else {
+          let tempList = oldData.filter((item) => {
+            return item.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
+          });
+          setData(tempList);
         }
-        else {
-            let tempList = data.filter(item => {
-                return item.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
-            })
-            setData(tempList);
-
-        }
-
-    }
+      };
 
 
     return (
         <View style={styles.container}>
             <View style={{ flex: 0.10, flexDirection: 'row', backgroundColor: '#daa520' }}>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
@@ -87,22 +108,19 @@ const DietPlanWaterIntake = ({ navigation }) => {
                 shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                 elevation: 8, borderRadius: 20, alignItems: 'center', backgroundColor: '#dcdcdc', width: '80%', height: '100%',
             }} >
-                <ScrollView style={{ margin: 30 }}>
-                    <Text style={{ fontSize: 14, marginLeft: 2, marginRight: 2, marginTop: 2 }}>
-                        An infant needs 18 – 32 ounces of breast milk in his first 3 months.
-                        You should increase the amount gradually and very slowly so that by the end of 3 months your child is fed with 32 ounces of milk approximately.
-                        You should not add any kind of cereal or starchy food item to a baby who is below 3 months of age.
-                        If your baby is younger than 12 months of age, no. Breast milk is comprised 87% of water and water is optional before one year of age.
-                        An infant needs 18 – 32 ounces of breast milk in his first 3 months.
-                        You should increase the amount gradually and very slowly so that by the end of 3 months your child is fed with 32 ounces of milk approximately.
-                        You should not add any kind of cereal or starchy food item to a baby who is below 3 months of age.
-                        If your baby is younger than 12 months of age, no. Breast milk is comprised 87% of water and water is optional before one year of age.
-                        An infant needs 18 – 32 ounces of breast milk in his first 3 months.
-                        You should increase the amount gradually and very slowly so that by the end of 3 months your child is fed with 32 ounces of milk approximately.
-                        You should not add any kind of cereal or starchy food item to a baby who is below 3 months of age.
-                        If your baby is younger than 12 months of age, no. Breast milk is comprised 87% of water and water is optional before one year of age.
-                    </Text>
-                </ScrollView>
+               <ScrollView style={{ margin: 30 }}>
+                    {data && Array.isArray(data) && data.map(item => (
+                        <View key={item.id}>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 4 }}>
+                            {item.title}
+                        </Text>
+                        <Text style={{ fontSize: 14, marginLeft: 2, marginRight: 2, marginTop: 2 }}>
+                            {item.description}
+                        </Text>
+                        </View>
+                    ))}
+                    </ScrollView>
+
             </View>
 
             <View style={{ flex: 0.10 }}>
@@ -117,25 +135,7 @@ const DietPlanWaterIntake = ({ navigation }) => {
 
             </View>
 
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
+            <BottomNavBar/>
 
         </View>
     )

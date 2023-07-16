@@ -7,8 +7,43 @@ import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Avatar, Title, Caption, Text, TouchableRipple } from "react-native-paper";
 import editProfile from "./editProfile";
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from "../AuthContexts/AuthContext";
+import { useContext } from "react";
+import { BottomNavBar } from "../component/BottomNavBar";
+import ipAddress from "../ipconfig";
+
+
+
+
+
 
 const Profile = (props) => {
+
+    const { user } = useContext(AuthContext);
+    const [babyNames,setBabyNames] = useState();
+
+    useEffect(() => {
+        fetchBabyNames();
+      }, []);
+
+
+    const fetchBabyNames = async () => {
+        try {
+          const response = await axios.get(`http://${ipAddress}:3000/getBabies`, {
+            params: {
+              userID: user.id
+            }
+          });
+          const filteredBabyNames = response.data.filter(baby => baby.userID === user.id);
+          setBabyNames(filteredBabyNames);
+          console.log(filteredBabyNames);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+    const userName = user.name;
+    const email = user.email
 
     const navigation = useNavigation(); 
 
@@ -21,7 +56,7 @@ const Profile = (props) => {
                         size={80}
                     />
                     <View style={{ marginLeft: 20 }}>
-                        <Text style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>Hira Arshad</Text>
+                        <Text style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>{userName}</Text>
                         <Text style={styles.caption}>captions here</Text>
                     </View>
                     <View>
@@ -44,7 +79,7 @@ const Profile = (props) => {
                 </View>
                 <View style={styles.row}>
                     <MaterialIcons name="email" color="black" size={20} />
-                    <Text style={{ color: "black", marginLeft: 20 }}>dollhira90@gmail.com</Text>
+                    <Text style={{ color: "black", marginLeft: 20 }}>{email}</Text>
                 </View>
             </View>
 
@@ -70,7 +105,7 @@ const Profile = (props) => {
                 <TouchableRipple onPress={() => { }}>
                     <View style={styles.menuItem}>
                         <MaterialIcons name="baby" color="black" size={25} />
-                        <Text style={styles.menuItemText}>Azlan</Text>
+                        <Text style={styles.menuItemText}>{babyNames}</Text>
                     </View>
                 </TouchableRipple>
                 <TouchableRipple onPress={() => { }}>

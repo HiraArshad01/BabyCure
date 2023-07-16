@@ -8,6 +8,7 @@ import Modal from "react-native-modal";
 import { useNavigation } from '@react-navigation/native';
 
 
+
 const PhysicalActivitiesMain = (props) => {
 
     const [data, setData] = useState([]);

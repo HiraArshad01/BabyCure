@@ -7,6 +7,9 @@ import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
+import { BottomNavBar } from "../component/BottomNavBar";
+import ipAddress from "../ipconfig";
+import LogoBar from "../component/LogoBar";
 
 const DIYRemandRec = (props) => {
 
@@ -18,9 +21,10 @@ const DIYRemandRec = (props) => {
     const searchRef = useRef();
     const listRef = useRef();
     const navigation = useNavigation();
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     const categories = [
-        'Sort By Month', 'Sort by Name'
+        'Sort By Month', 'Sort by Solid','sort by liquid'
     ]
 
     const [ind, setInd] = useState(0)
@@ -61,18 +65,45 @@ const DIYRemandRec = (props) => {
         }
     }
 
-    const FilterClick = () => {
-        let tempList = data.sort((a, b) =>
-            a.title > b.title ? 1 : -1);
-        setData(tempList);
-        setNewFilter('Sort By Month')
-        listRef.current.scrollToIndex({ animated: true, index: 0 })
-    }
+
+    const filterDataByCategory = (category) => {
+        if (category === "Sort By Month") {
+            setData(oldData);
+            setSelectedCategory(category);
+        } else if (category === "Sort By Solid") {
+            const solidData = oldData.filter(item => item.title.toLowerCase().includes("solid"));
+            setData(solidData);
+            setSelectedCategory(category);
+        } else if (category === "Sort By Liquid") {
+            const liquidData = oldData.filter(item => item.title.toLowerCase().includes("liquid"));
+            setData(liquidData);
+            setSelectedCategory(category);
+        } else {
+            const filteredData = oldData.filter(item => {
+                const title = item.title.toLowerCase();
+                if (title.includes(category.split(' ')[2].toLowerCase())) {
+                    return true;
+                } else if (category.startsWith('Sort By')) {
+                    const numericValue = parseInt(category.split(' ')[2]);
+                    return title.includes(numericValue.toString().toLowerCase() + ' month');
+                }
+                return false;
+            });
+            setData(filteredData);
+            setSelectedCategory(category);
+        }
+    };
+
+    const FilterClick = (category) => {
+        filterDataByCategory(category);
+        listRef.current.scrollToIndex({ animated: true, index: 0 });
+    };
+
 
 
     useEffect(() => {
         // fetch('https://fakestoreapi.com/products')
-        fetch('https://fakestoreapi.com/products')
+        fetch(`http://${ipAddress}:3000/getDiyRemediesRecipies`)
             .then((response) => response.json())
             .then(response => {
                 setData(response);
@@ -83,13 +114,14 @@ const DIYRemandRec = (props) => {
     }, []);
 
 
+    const truncateDescription = (description) => {
+        const maxLength = 30; // Adjust the length as per your requirement
+        return description.length > maxLength ? `${description.substring(0, maxLength)}...` : description;
+    };
+
     return (
         <View style={styles.container}>
-            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                <Image source={require('../assets/Logo.png')}
-                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
-                />
-                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            <LogoBar/>
             <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
             <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
 
@@ -120,21 +152,16 @@ const DIYRemandRec = (props) => {
             </View>
 
             <View style={{ flex: 0.10, flexDirection: 'row' }}>
-                {
-                    categories.map((category, index) => (
-
-                        <View key={index}>
-                            <TouchableOpacity onPress={() => { FilterClick() }}>
-
-                                <Text style={{
-                                    padding: 10, borderWidth: 1,
-                                    borderColor: 'black', borderRadius: 10, fontSize: 15, margin: 5, backgroundColor: 'black', color: 'white'
-                                }}>{category}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    ))
-                }
-
+                {categories.map((category, index) => (
+                    <View key={index}>
+                        <TouchableOpacity onPress={() => FilterClick(category)}>
+                            <Text style={{
+                                padding: 10, borderWidth: 1,
+                                borderColor: 'black', borderRadius: 10, fontSize: 15, margin: 5, backgroundColor: selectedCategory === category ? 'black' : 'white', color: selectedCategory === category ? 'white' : 'black'
+                            }}>{category}</Text>
+                        </TouchableOpacity>
+                    </View>
+                ))}
             </View>
 
 
@@ -152,12 +179,12 @@ const DIYRemandRec = (props) => {
                             elevation: 8, marginTop: 5, marginLeft: 5, marginRight: 5
                         }}>
 
-                            <View style={{ justifyContent: 'center' }}><Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
+                            <View style={{ justifyContent: 'center' }}><Image source={{ uri: item.imageUrl }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
                             <View>
                                 <Text style={{ fontSize: 16, color: 'black', margin: 10, fontWeight: 'bold', width: '90%' }}>{item.title}</Text>
-                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '30%' }}>{item.description}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '85%' }}>{truncateDescription(item.description)}</Text>
                                 <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10 }} key={item.id} onPress={() => {
-                                    props.navigation.navigate('DIYRemandRecMain', { title: item.title, description: item.description, uri: item.image })
+                                    props.navigation.navigate('DIYRemandRecMain', { title: item.title, description: item.description, uri: item.imageUrl })
                                 }}><Text style={{ color: '#b8860b' }}>continue Reading</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -165,25 +192,7 @@ const DIYRemandRec = (props) => {
             </View>
 
 
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
+            <BottomNavBar/>
 
         </View>
     )

@@ -1,7 +1,7 @@
-// Import the functions you need from the SDKs you need
+/*// Import the functions you need from the SDKs you need/
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
-import { getAuth, createUserWithEmailAndPassword , connectAuthEmulator} from "firebase/auth";
+//import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+//import { getAuth, createUserWithEmailAndPassword , connectAuthEmulator} from "firebase/auth";
 import { View } from 'react-native-web';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -40,4 +40,4 @@ getDocs(colRef)
 
 
 export{auth, db, app, students};
-// Get a list of cities from your database
+// Get a list of cities from your database*/

@@ -12,7 +12,7 @@ import ipAddress from "../ipconfig";
 import LogoBar from "../component/LogoBar";
 
 
-const customizeDietPlan = ({ navigation }) => {
+const MotherCustomizeDietPlan = ({ navigation }) => {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [weight, setWeight] = useState('');
@@ -44,7 +44,7 @@ const customizeDietPlan = ({ navigation }) => {
   
         toggleModal();
 
-        axios.post(`http://${ipAddress}:3000/postReqCustomizeDietPlan`, {
+        axios.post(`http://${ipAddress}:3000/postMotherReqCustomizeDietPlan`, {
             name,
             age,
             weight,
@@ -63,7 +63,8 @@ const customizeDietPlan = ({ navigation }) => {
         <>
             <View style={styles.container}>
 
-               <LogoBar/>
+            <LogoBar/>
+    
                 <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
                 <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
 
@@ -76,7 +77,7 @@ const customizeDietPlan = ({ navigation }) => {
 
                     <Input
                         keyboardType={"decimal-pad"}
-                        placeholder="enter Age" label="Age of baby"
+                        placeholder="enter Age" label="Age of Mother"
                         leftIcon={{ type: "material", name: "height" }} size={40}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={age}
                         onChangeText={setAge} />
@@ -88,7 +89,7 @@ const customizeDietPlan = ({ navigation }) => {
 
                         <Input
                             keyboardType={"decimal-pad"}
-                            placeholder="enter weight" label="Weight of baby"
+                            placeholder="enter weight" label="Weight of Mother"
                             leftIcon={<Ionicons name="barbell-outline" size={25}></Ionicons>}
                             placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
                             onChangeText={setWeight} />
@@ -122,7 +123,7 @@ const customizeDietPlan = ({ navigation }) => {
     )
 }
 
-export default customizeDietPlan;
+export default MotherCustomizeDietPlan;
 
 const styles = StyleSheet.create({
     button: {

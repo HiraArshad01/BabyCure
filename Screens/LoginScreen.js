@@ -1,26 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, Pressable, TouchableOpacity, Image } from "react-native";
 import { Button, Input } from "react-native-elements";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../AuthContexts/AuthContext";
+import ipAddress from "../ipconfig";
+
+//import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 
-const LoginScreen = ({ navigation, props }) => {
+const LoginScreen = ({  props }) => {
+
+    const { login } = useContext(AuthContext);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isSecureEntry, setIsSecureEntry] = useState(true);
 
-    const SignIn = () => {
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-            .then((user) => {
-                navigation.replace('AddBaby');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
-            });
+   const SignIn = () => {
+    const data = {
+      email: email,
+      password: password,
+    };
 
-    }
+    axios
+      .post(`http://${ipAddress}:3000/login`, data)
+      .then((response) => {
+        // Authentication successful, call the login function from the context
+        login(response.data.user);
+        navigation.replace('AddBaby');
+      })
+      .catch((error) => {
+        // Authentication failed, display error message
+        const errorMessage = error.response.data.msg;
+        alert(errorMessage);
+      });
+  };
+        
+      
+      
+    const navigation = useNavigation();
 
     /* useEffect(()=>{
          const auth = getAuth();
@@ -52,9 +72,10 @@ const LoginScreen = ({ navigation, props }) => {
             <View style={{ flex: 0.86, marginTop: 40 }}>
                 <Input placeholder="enter email" label="email" leftIcon={{ type: "material", name: "email" }} value={email}
                     onChangeText={text => setEmail(text)} />
-                <Input placeholder="enter Password" label="Password" leftIcon={{ type: "material", name: "lock" }} value={password}
-                    onChangeText={text => setPassword(text)} secureTextEntry />
-
+                <Input placeholder="enter Password" label="Password" leftIcon={{ type: "material", name: "lock" }} 
+                rightIcon={<TouchableOpacity onPress={()=>{setIsSecureEntry((prev) => !prev)}}><Text>{isSecureEntry?"Show":"Hide"}</Text></TouchableOpacity>}
+                value={password}
+                    onChangeText={text => setPassword(text)} secureTextEntry={isSecureEntry} />
                 <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}><Text style={{ color: 'red', fontWeight: 'light', fontStyle: 'italic', textDecorationLine: 'underline', textAlign: "right" }}>Forget Password?</Text></TouchableOpacity>
 
                 <View style={{ alignItems: 'center', marginTop: 10 }}>
@@ -69,7 +90,10 @@ const LoginScreen = ({ navigation, props }) => {
 
                 <View style={{ flexDirection: 'row', marginTop: 30, alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ fontWeight: '800' }}>Not a Member?    </Text>
-                    <TouchableOpacity style={{ color: 'red', fontWeight: '800' }} onPress={() => navigation.navigate('RegisterScreen')}><Text>Signup</Text></TouchableOpacity>
+                    <TouchableOpacity style={{ color: 'red', fontWeight: '800' }} onPress={() => navigation.navigate('RegisterScreen')}>
+  <Text>Signup</Text>
+</TouchableOpacity>
+
                 </View>
 
 

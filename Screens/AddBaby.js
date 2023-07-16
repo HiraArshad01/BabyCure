@@ -5,11 +5,19 @@ import { Button, ButtonGroup, Input, Icon } from "react-native-elements";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Calendar } from "react-native-calendars";
 import { RadioGroup, FormControlLabel } from 'react-native-radio-buttons-group';
+import axios from "axios";
+//import { useRoute } from '@react-navigation/native';
+import { useContext } from "react";
+import { AuthContext } from "../AuthContexts/AuthContext";
+
+import ipAddress from "../ipconfig";
 
 
 
 
 const AddBaby = ({ navigation }) => {
+
+    const {user} = useContext(AuthContext)
 
     const [name, setName] = useState('');
     const [weight, setWeight] = useState('');
@@ -17,6 +25,8 @@ const AddBaby = ({ navigation }) => {
 
     const [showDate, setshowDate] = useState(false);
     const [date, setDate] = useState([]);
+    const [selectedGender, setSelectedGender] = useState('Male'); // Default value for gender
+
 
     console.log(date);
 
@@ -52,29 +62,29 @@ const AddBaby = ({ navigation }) => {
         //Checked Successfully
         //Do whatever you want
 
-        navigation.navigate('homeScreen')
-        setName('');
-        setWeight('');
-        setHeight('');
-        setDate([])
-        setRadioButtons([
-            {
-                id: '1', // acts as primary key, should be unique and non-empty string
-                label: 'Male',
-                value: 'Male'
-            },
-            {
-                id: '2',
-                label: 'Female',
-                value: 'Female'
-            },
-            {
-                id: '3',
-                label: 'Other',
-                value: 'Other'
-            }
-        ])
+        //navigation.navigate('homeScreen', { userID:userID });
+        navigation.navigate('homeScreen');
+
+        axios.post(`http://${ipAddress}:3000/Babies`, {
+
+            userID:user.id,
+            name,
+            date,
+            value:selectedGender,
+            weight,
+            height
+            },[])
     };
+
+    /*useEffect(()=>{
+        
+        console.log("Here is the user ID",userID);
+        
+    })*/
+
+    useEffect(()=>{
+        console.log("user id at addbaby:",user.id)
+    },[])
 
 
     const [radioButtons, setRadioButtons] = useState([
@@ -95,9 +105,15 @@ const AddBaby = ({ navigation }) => {
         }
     ]);
 
-    function onPressRadioButton(radioButtonsArray) {
+    const onPressRadioButton = (radioButtonsArray) => {
         setRadioButtons(radioButtonsArray);
-    }
+        const selectedValue = radioButtonsArray.find((button) => button.selected === true).value;
+        setSelectedGender(selectedValue);
+    };
+
+    const handleSkipForNow = () => {
+        navigation.navigate('homeScreen');
+      };
 
 
     return (
@@ -118,7 +134,7 @@ const AddBaby = ({ navigation }) => {
             }}>
 
                 <Input placeholder="enter name" label="Name" leftIcon={{ type: "font-awesome", name: "user" }} value={name}
-                    onChangeText={text => setName(text)} />
+                    onChangeText={setName} />
 
 
                 <TouchableOpacity onPress={() => setshowDate(true)}>
@@ -147,7 +163,7 @@ const AddBaby = ({ navigation }) => {
                         placeholder="enter weight" label="Weight of baby"
                         leftIcon={<Ionicons name="barbell-outline" size={25}></Ionicons>}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={weight}
-                        onChangeText={text => setWeight(text)} />
+                        onChangeText={setWeight} />
                     <Text style={{ marginTop: '12%', fontSize: 14 }}>Kg</Text>
                 </View>
 
@@ -159,20 +175,27 @@ const AddBaby = ({ navigation }) => {
                         placeholder="enter height" label="Height of baby"
                         leftIcon={{ type: "material", name: "height" }} size={40}
                         placeholderTextColor="#6FB3B8" labelColor="black" value={height}
-                        onChangeText={text => setHeight(text)} />
+                        onChangeText={setHeight} />
                     <Text style={{ marginTop: '12%', fontSize: 14 }}>Cm</Text>
                 </View>
 
 
 
-                <View style={{ alignItems: 'center' }}>
+                <View style={{ alignItems: 'center',flexDirection:"row" }}>
                     <TouchableOpacity style={{
                         backgroundColor: 'black', width: 100, height: 40, alignItems: 'center',
-                        justifyContent: 'center', borderRadius: 5, shadowColor: "#000",
+                        justifyContent: 'center', borderRadius: 5, shadowColor: "#000",marginLeft:"35%",
                         shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65,
                         elevation: 8,
                     }} onPress={() => { checkTextInput() }}><Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>Add Baby</Text></TouchableOpacity>
+                
+                <TouchableOpacity style={{marginLeft:"20%"}} onPress={handleSkipForNow}>
+                    <Text style={{color:"red",fontStyle:"italic",textDecorationLine:"underline"}}>Skip for Now</Text>
+                    </TouchableOpacity>
+                
+                
                 </View>
+                
 
             </View>
 
@@ -203,4 +226,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     }
+  
 })
