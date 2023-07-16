@@ -1,12 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef ,useMemo} from "react";
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, ScrollView } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { TextInput } from "react-native-paper";
 import Modal from "react-native-modal";
+import { useRoute } from "@react-navigation/native";
+import { BottomNavBar } from "../component/BottomNavBar";
+import ipAddress from "../ipconfig";
+
+
 
 const DoctorConsultancy = ({ navigation }) => {
+
+    const route = useRoute();
+    const {babyId} = route.params;
+    const {babyAge}=route.params;
 
     const [data, setData] = useState([]);
     const [newFilter, setNewFilter] = useState("");
@@ -16,12 +25,28 @@ const DoctorConsultancy = ({ navigation }) => {
     const searchRef = useRef();
     const listRef = useRef();
 
+  const [sortByPrice, setSortByPrice] = useState(false);
+  const [sortByReviews, setSortByReviews] = useState(false);
+
+  const toggleSortByPrice = () => {
+    setSortByPrice(!sortByPrice);
+    setSortByReviews(false); // Reset the reviews sorting
+  };
+
+  const toggleSortByReviews = () => {
+    setSortByReviews(!sortByReviews);
+    setSortByPrice(false); // Reset the price sorting
+  };
+
+    
+
     const categories = [
-        'Sort By Price', 'Sort by Name'
+        'Sort By Price', 'Sort by Reviews'
     ]
 
     const [ind, setInd] = useState(0)
     const [isModalVisible, setModalVisible] = useState(false);
+    
 
     let generateRandomNum = () => Math.floor(Math.random() * 1001);
 
@@ -33,7 +58,7 @@ const DoctorConsultancy = ({ navigation }) => {
         }
         else {
             let tempList = data.filter(item => {
-                return item.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
+                return item.name.toLowerCase().indexOf(text.toLowerCase()) > -1;
             })
             setData(tempList);
 
@@ -41,38 +66,22 @@ const DoctorConsultancy = ({ navigation }) => {
 
     }
 
-    const onAddFilter = () => {
+   
 
-        if (newFilter == "") {
-            alert('Cant add');
+    
+
+    const renderStars = (count) => {
+        const stars = [];
+        for (let i = 0; i < count; i++) {
+          stars.push(<FontAwesomeIcon key={i} name="star" size={14} color="gold" />);
         }
-
-        else {
-            console.log("in start")
-            var newDataObject = {
-                id: generateRandomNum,
-                title: newFilter,
-            }
-            setNewData([...newData, newDataObject])
-            console.log("in filter")
-
-        }
-
-
-    }
-
-    const FilterClick = () => {
-        let tempList = data.sort((a, b) =>
-            a.title > b.title ? 1 : -1);
-        setData(tempList);
-        setNewFilter('Sort By Month')
-        listRef.current.scrollToIndex({ animated: true, index: 0 })
-    }
+        return stars;
+      };
 
 
     useEffect(() => {
         // fetch('https://fakestoreapi.com/products')
-        fetch('https://jsonplaceholder.typicode.com/todos')
+        fetch(`http://${ipAddress}:3000/getDoctorInfo`)
             .then((response) => response.json())
             .then(response => {
                 setData(response);
@@ -82,21 +91,34 @@ const DoctorConsultancy = ({ navigation }) => {
             .finally(() => setLoading(false));
     }, []);
 
+    const sortedData = useMemo(() => {
+        let sortedData = [...data];
+    
+        if (sortByPrice) {
+          sortedData.sort((a, b) => a.charges - b.charges);
+        }
+    
+        if (sortByReviews) {
+          sortedData.sort((a, b) => b.review - a.review);
+        }
+    
+        return sortedData;
+      }, [data, sortByPrice, sortByReviews]);
 
     return (
         <View style={styles.container}>
 
             <View style={{ flex: 0.10, flexDirection: 'row', backgroundColor: '#daa520' }}>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
@@ -135,21 +157,42 @@ const DoctorConsultancy = ({ navigation }) => {
             </View>
 
             <View style={{ flex: 0.10, flexDirection: 'row' }}>
-                {
-                    categories.map((category, index) => (
-
-                        <View key={index}>
-                            <TouchableOpacity onPress={() => { FilterClick() }}>
-
-                                <Text style={{
-                                    padding: 10, borderWidth: 1,
-                                    borderColor: 'black', borderRadius: 10, fontSize: 15, margin: 5, backgroundColor: 'black', color: 'white'
-                                }}>{category}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    ))
-                }
-
+                <View>
+                <TouchableOpacity onPress={toggleSortByPrice}>
+                    <Text
+                    style={{
+                        padding: 10,
+                        borderWidth: 1,
+                        borderColor: sortByPrice ? 'white' : 'black',
+                        borderRadius: 10,
+                        fontSize: 15,
+                        margin: 5,
+                        backgroundColor: sortByPrice ? 'black' : 'white',
+                        color: sortByPrice ? 'white' : 'black',
+                    }}
+                    >
+                    Sort By Price
+                    </Text>
+                </TouchableOpacity>
+                </View>
+                <View>
+                <TouchableOpacity onPress={toggleSortByReviews}>
+                    <Text
+                    style={{
+                        padding: 10,
+                        borderWidth: 1,
+                        borderColor: sortByReviews ? 'white' : 'black',
+                        borderRadius: 10,
+                        fontSize: 15,
+                        margin: 5,
+                        backgroundColor: sortByReviews ? 'black' : 'white',
+                        color: sortByReviews ? 'white' : 'black',
+                    }}
+                    >
+                    Sort by Reviews
+                    </Text>
+                </TouchableOpacity>
+                </View>
             </View>
 
 
@@ -157,7 +200,7 @@ const DoctorConsultancy = ({ navigation }) => {
                 <FlatList
                     initialScrollIndex={ind}
                     ref={listRef}
-                    data={data}
+                    data={sortedData}
                     renderItem={({ item }) =>
                     (
                         <View style={{
@@ -167,12 +210,23 @@ const DoctorConsultancy = ({ navigation }) => {
                             elevation: 8, marginTop: 5, marginLeft: 5, marginRight: 5
                         }}>
 
-                            <View style={{ justifyContent: 'center' }}><Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8, }}></Image></View>
+                            <View style={{ justifyContent: 'center' }}>{item.image ? (
+                                    <Image source={{ uri: item.image }} style={{ width: 120, height: 160, margin: 8 }} />
+                                ) : (
+                                    <MaterialIcons name="person" size={120} style={{ margin: 8 }} />
+                                )}</View>
                             <View>
-                                <Text style={{ fontSize: 16, color: 'black', margin: 10, fontWeight: 'bold', width: '90%' }}>{item.title}</Text>
-                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '30%' }}>{item.description}</Text>
+                                <Text style={{ fontSize: 16, color: 'black', margin: 10, fontWeight: 'bold', width: '90%' }}>{item.name}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '30%' }}>{item.qualification}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '80%' }}>{item.specialization}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '80%' }}>{item.contactNo}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '80%' }}>{renderStars(item.review)}</Text>
+                                <Text style={{ fontSize: 14, color: 'black', margin: 10, width: '80%' }}>{item.charges}</Text>
                                 <TouchableOpacity style={{ fontSize: 14, color: 'blue', margin: 10, backgroundColor: 'black', width: 150, height: 40, alignItems: 'center', justifyContent: 'center', borderRadius: 10 }}
-                                    onPress={() => { navigation.navigate('Payment') }}
+                                   onPress={() => {
+                                    navigation.navigate('Payment');
+
+                                    }}
                                 ><Text style={{ color: '#b8860b' }}>Pay now</Text></TouchableOpacity>
                             </View>
                         </View>
@@ -180,25 +234,8 @@ const DoctorConsultancy = ({ navigation }) => {
             </View>
 
 
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
+            
+            <BottomNavBar/>
 
         </View>
     )

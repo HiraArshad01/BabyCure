@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -7,8 +7,36 @@ import Modal from "react-native-modal";
 import { Calendar } from "react-native-calendars";
 // import CheckBox from '@react-native-community/checkbox';
 import CheckBox from 'expo-checkbox';
+import axios from "axios";
+import { useRoute } from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
+import { BottomNavBar } from "../component/BottomNavBar";
+import LogoBar from "../component/LogoBar";
+import ipAddress from "../ipconfig";
+
+
+
+// ...
+
+
 
 const BabyDetails = ({ navigation }) => {
+
+    const route = useRoute();
+    const {babyId} = route.params;
+    const {babyAge} = route.params;
+
+    
+
+    useEffect(()=>{
+        console.log("baby id at baby details:",babyId)
+    },[babyId])
+    useEffect(()=>{
+        console.log("baby id at baby Age:",babyAge)
+    },[babyAge])
+
+  
 
     const [vacc, setVacc] = useState("");
     const [showDate, setshowDate] = useState(false);
@@ -18,10 +46,35 @@ const BabyDetails = ({ navigation }) => {
     const [storeKey, setStoreKey] = useState([]);
     const [isSelected, setSelection] = useState(false);
 
-    const [newData, setNewData] = useState([]);
     const [type, setType] = useState([]);
     const [oldData, setOldData] = useState([]);
     const [newtitle, setNewtitle] = useState("");
+    const [selectedItems, setSelectedItems] = useState([]);
+    const [vaccinations, setVaccinations] = useState([]);
+    const [newData,setNewData] = useState([])
+    
+
+
+    useEffect(() => {
+        axios
+          .get(`http://${ipAddress}:3000/getVaccinations?babyId=${babyId}`)
+          .then(response => {
+            console.log("Response data:", response.data); // Check if data is coming
+            setNewData(response.data);
+          })
+          .catch(error => console.error(error));
+      }, [babyId]);
+
+    useEffect(() => {
+        axios
+          .get(`http://${ipAddress}:3000/getDoneVaccinations?babyId=${babyId}`)
+          .then(response => {
+            console.log("Done Vaccination Response data:", response.data); // Check if data is coming
+            setdoneVacc(response.data);
+          })
+          .catch(error => console.error(error));
+      }, [babyId]);
+    
 
 
     let generateRandomNum = () => Math.floor(Math.random() * 1001);
@@ -52,58 +105,111 @@ const BabyDetails = ({ navigation }) => {
         setModalVisible(!isModalVisible);
     };
 
+    
+      
     const onAddVacc = () => {
-
-        if (vacc == "") {
-            alert("cant add")
+        if (vacc === "") {
+          alert("Can't add");
+        } else if (type === "") {
+          alert("Please select Done or upcoming");
+        } else {
+          const routeUrl = type === "Upcoming" ? "/vaccinations" : "/doneVaccinations";
+          axios
+            .post(`http://${ipAddress}:3000${routeUrl}`, {
+              babyId: babyId,
+              key: generateRandomNum(),
+              vaccname: vacc,
+              date: date,
+            })
+            .then(response => {
+              // Handle the response if needed
+            })
+            .catch(error => {
+              // Handle the error if needed
+            });
+      
+          const newDataObject = {
+            key: generateRandomNum(),
+            vaccname: vacc,
+            date: date,
+            type: type,
+          };
+          
+          if (type === "Upcoming") {
+            setNewData([...newData, newDataObject]);
+          } else if (type === "Done") {
+            setdoneVacc(doneVacc => [...doneVacc, newDataObject]);
+          }
+      
+          setType("");
         }
-        else if (type == "") {
-            alert('please select Done or upcoming')
-        }
-        else if (type == "Upcoming") {
-            var newDataObject = {
-                key: generateRandomNum(),
-                vaccname: vacc,
-                date: date,
-                type: type,
-            }
-            setNewData([...newData, newDataObject])
-            setType("")
-        }
-        else {
-            onDoneVaccination();
-        }
+      };
+      
+      
+      
 
-    }
+      const onDoneVaccination = () => {
+        const newDataObject = {
+          key: item.key,
+          vaccname: item.vaccname,
+          date: item.date
+        };
+        setNewData(newData => newData.filter(newItem => newItem.key !== item.key));
+        setdoneVacc(doneVacc => [...doneVacc, newDataObject]);
+      };
+      
 
-    const onDoneVaccination = () => {
-        if (item => item.vaccname == vaccname) {
-            var newDataObject = {
-                key: generateRandomNum(),
-                vaccname: vacc,
-                date: date,
-                type: type
-            }
-            setdoneVacc([...doneVacc, newDataObject])
-            setType("")
-
-        }
-
-
-    }
-
-    const onDeleteItem = (vaccname) => {
-
-        const filterData = newData.filter(item => item.vaccname !== vaccname)
-        setNewData(filterData)
-    }
-    const onDeleteItemDone = (vaccname) => {
-
-        const filterData = doneVacc.filter(item => item.vaccname !== vaccname)
-        setdoneVacc(filterData)
-    }
+      const onDeleteItem = (id) => {
+        console.log("Deleteing Upcoming Vaccination ID:",id)
+        axios
+          .delete(`http://${ipAddress}:3000/deleteVaccination/${id}`)
+          .then((response) => {
+            // Check if the delete request was successful
+            console.log("Response after delete:", response.data);
+            // Filter the newData array to remove the deleted milestone
+            setNewData((prevData) => prevData.filter((item) => item._id !== id));
+          })
+          .catch((error) => {
+            console.error(error);
+            // Display an error message if the delete request fails
+            Alert.alert("Error", "Failed to delete milestone");
+          });
+      };
+      
+      const onDeleteItemDone = (id) => {
+        console.log("Deleteing Done Vaccination ID:",id)
+        axios
+          .delete(`http://${ipAddress}:3000/deleteDoneVaccination/${id}`)
+          .then((response) => {
+            // Check if the delete request was successful
+            console.log("Response after delete:", response.data);
+            // Filter the newData array to remove the deleted milestone
+            setdoneVacc((prevData) => prevData.filter((item) => item._id !== id));
+          })
+          .catch((error) => {
+            console.error(error);
+            // Display an error message if the delete request fails
+            Alert.alert("Error", "Failed to delete milestone");
+          });
+      };
+      
 
     const renderItemList = ({ item }) => {
+        <FlatList
+                data={newData}
+                renderItem={renderItemList}
+                />
+
+
+        const onDoneVaccination = () => {
+            const newDataObject = {
+              key: item.key,
+              vaccname: item.vaccname,
+              date: item.date
+            };
+            setNewData(newData => newData.filter(newItem => newItem.key !== item.key));
+            setdoneVacc(doneVacc => [...doneVacc, newDataObject]);
+          };
 
         return (
             <View style={{
@@ -114,18 +220,25 @@ const BabyDetails = ({ navigation }) => {
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={{ marginLeft: 2, color: 'white' }}>{item.vaccname}</Text>
-                    <Text style={{ paddingLeft: '10%', color: 'white' }}>{item.date}</Text>
+                    <Text style={{ paddingLeft: '10%', color: 'white' }}>{moment(item.date).format('MMMM Do, YYYY')}</Text>
+
 
                     <TouchableOpacity onPress={() => { setStoreKey(item.key); onDoneVaccination() }}>
                         <CheckBox
-                            value={isSelected}
-                            onValueChange={setSelection}
-                            style={{ marginLeft: 5 }}
+                            value={selectedItems.includes(item)}
+                            onValueChange={newValue => {
+                                if (selectedItems.includes(item)) {
+                                    setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== item));
+                                } else {
+                                    setSelectedItems([...selectedItems, item]);
+                                }
+                                onDoneVaccination(); // Call the function here
+                                }}
                         />
                     </TouchableOpacity>
 
                     <Text style={{ marginLeft: 10, color: 'white' }}>Mark as done?</Text>
-                    <TouchableOpacity onPress={() => { onDeleteItem(item.vaccname) }}>
+                    <TouchableOpacity onPress={() => { onDeleteItem(item._id) }}>
                         <Text style={{ fontWeight: '900', fontSize: 20, textAlign: 'right', color: 'white' }}> X</Text>
                     </TouchableOpacity>
                 </View>
@@ -146,6 +259,17 @@ const BabyDetails = ({ navigation }) => {
     }
     const renderItemListDone = ({ item }) => {
 
+        
+
+        const onDoneVaccination = () => {
+            const newDataObject = {
+              key: item.key,
+              vaccname: item.vaccname,
+              date: item.date
+            };
+            setNewData(newData => newData.filter(newItem => newItem.key !== item.key));
+            setdoneVacc(doneVacc => [...doneVacc, newDataObject]);
+          };
         return (
             <View style={{
                 flex: 1, padding: 10, borderRadius: 6, backgroundColor: 'black', flexDirection: 'row', shadowColor: "#000",
@@ -155,10 +279,11 @@ const BabyDetails = ({ navigation }) => {
 
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={{ color: 'white' }}>{item.vaccname}</Text>
-                    <Text style={{ paddingLeft: '10%', color: 'white' }}>{item.date}</Text>
+                    <Text style={{ paddingLeft: '10%', color: 'white' }}>{moment(item.date).format('MMMM Do, YYYY')}</Text>
+
                 </View>
 
-                <TouchableOpacity onPress={() => { onDeleteItemDone(item.vaccname) }}>
+                <TouchableOpacity onPress={() => { onDeleteItemDone(item._id) }}>
                     <Text style={{ fontWeight: '900', fontSize: 20, textAlign: 'right', color: 'white' }}> X</Text>
                 </TouchableOpacity>
 
@@ -169,25 +294,24 @@ const BabyDetails = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
+        
             <View style={{ flex: 0.10, flexDirection: 'row', backgroundColor: '#daa520' }}>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('BabyDetails',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-medkit-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DietPlanWaterIntake',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-nutrition-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('Milestones',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='ios-trophy-outline' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy')}>
+                <TouchableOpacity style={{ marginLeft: 40, marginRight: 40 }} onPress={() => navigation.navigate('DoctorConsultancy',{babyId:babyId,babyAge:babyAge})}>
                     <Ionicons name='md-pulse' size={32} color='black' style={{ margin: 5 }} />
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 0.10, backgroundColor: 'black', width: "100%", alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-                <Image source={require('../assets/Logo.png')}
-                    style={{ height: '70%', width: '15%', resizeMode: 'contain' }}
-                />
-                <Text style={{ fontSize: 24, color: 'white' }}>Baby Cure</Text></View>
+            
+            <LogoBar/>
+
             <View style={{ flex: 0.01, backgroundColor: '#daa520', height: '100%', width: '100%' }}></View>
             <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
             <View style={{
@@ -291,25 +415,7 @@ const BabyDetails = ({ navigation }) => {
                 //   hideArrows={true}
                 ></Calendar>
             </Modal>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
+           <BottomNavBar/>
 
         </View>
     )

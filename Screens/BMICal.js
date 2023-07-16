@@ -7,11 +7,15 @@ import { borderRadius } from "@mui/system";
 import { RadioGroup, FormControlLabel } from 'react-native-radio-buttons-group';
 import { Calendar } from "react-native-calendars";
 import { Input } from "react-native-elements";
+import axios from "axios";
+import { BottomNavBar } from "../component/BottomNavBar";
+import ipAddress from "../ipconfig";
+
 const BMICal = ({ navigation }) => {
 
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
-    const [bmi, setBmi] = useState('');
+    const [bmiResult, setBmi] = useState('');
     const [description, setDescription] = useState('');
     const [showDate, setshowDate] = useState(false);
     const [date, setDate] = useState([]);
@@ -26,19 +30,19 @@ const BMICal = ({ navigation }) => {
         if (gender == "Baby") {
             const newweight = weight * 2.2;
             const newheight = height / 2.54;
-            const bmi = newweight / newheight;
-            setBmi(bmi.toFixed(1))
+            const bmiResult = newweight / newheight;
+            setBmi(bmiResult.toFixed(1))
 
-            if (bmi < 5) {
+            if (bmiResult < 5) {
                 setDescription("Baby is UnderWeight");
             }
-            else if (bmi >= 5 && bmi <= 84) {
+            else if (bmiResult >= 5 && bmiResult <= 84) {
                 setDescription("Baby is Normal");
             }
-            else if (bmi >= 85 && bmi <= 94) {
+            else if (bmiResult >= 85 && bmiResult <= 94) {
                 setDescription("Baby is Over Weight");
             }
-            else if (bmi > 95) {
+            else if (bmiResult > 95) {
                 setDescription("Obese");
             }
             setHeight('');
@@ -47,10 +51,10 @@ const BMICal = ({ navigation }) => {
             setRadio(0);
         }
         else {
-            const bmi = [(weight / height / height)] * 10000;
+            const bmiResult = [(weight / height / height)] * 10000;
 
 
-            setBmi(bmi.toFixed(1))
+            setBmi(bmiResult.toFixed(1))
 
             //Check for the Email TextInput
             if (date == "") {
@@ -65,16 +69,16 @@ const BMICal = ({ navigation }) => {
                 alert('Please Enter Height');
                 return;
             }
-            if (bmi < 18.5) {
+            if (bmiResult < 18.5) {
                 setDescription("UnderWeight, eat more");
             }
-            else if (bmi >= 18.5 && bmi <= 24.9) {
+            else if (bmiResult >= 18.5 && bmiResult <= 24.9) {
                 setDescription("Normal, keep it up");
             }
-            else if (bmi >= 25 && bmi <= 29.9) {
+            else if (bmiResult >= 25 && bmiResult <= 29.9) {
                 setDescription("Overweight, start working out");
             }
-            else if (bmi >= 30) {
+            else if (bmiResult >= 30) {
                 setDescription("Obsese, Hit the gym");
             }
 
@@ -83,6 +87,11 @@ const BMICal = ({ navigation }) => {
             setDate([]);
             setRadio(0);
         }
+
+        axios.post(`http://${ipAddress}:3000/bmiCal`, {
+            bmiResult,
+            
+            },[])
 
     }
 
@@ -198,7 +207,7 @@ const BMICal = ({ navigation }) => {
             </View>
 
             <View style={{ flex: 0.20, marginTop: 10, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20, color: '#2c6975', fontWeight: 'bold', marginTop: 70 }}>{bmi}</Text>
+                <Text style={{ fontSize: 20, color: '#2c6975', fontWeight: 'bold', marginTop: 70 }}>{bmiResult}</Text>
                 <Text style={{ fontSize: 20, color: '#909E84', fontWeight: 'bold' }}>{description}</Text>
             </View>
 
@@ -212,25 +221,8 @@ const BMICal = ({ navigation }) => {
                 //   hideArrows={true}
                 ></Calendar>
             </Modal>
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
+            
+            <BottomNavBar/>
         </View>
     )
 }

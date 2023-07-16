@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
 import { Button, Input } from "react-native-elements";
-import { auth } from "../firebase";
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+//import { auth } from "../firebase";
+//import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
+import ipAddress from "../ipconfig";
 
 const RegisterScreen = (props) => {
   const [email, setEmail] = useState('');
@@ -13,8 +14,41 @@ const RegisterScreen = (props) => {
   const [relation, setRelation] = useState('');
   const [imageURL, setImageURL] = useState('');
   const navigation = useNavigation();
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
+  const [isSecureEntryConfirm, setIsSecureEntryConfirm] = useState(true);
+  
 
   const register = () => {
+    const userData = {
+      name: name,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    };
+  
+    // Make a POST request to your registration route on the backend
+    fetch(`http://${ipAddress}:3000/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response data (token and user) as needed
+        console.log(data);
+        navigation.navigate('LoginScreen');
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle the error
+      });
+  };
+  
+  
+  
+  /*const register = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -39,13 +73,15 @@ const RegisterScreen = (props) => {
         // ..
       });
 
-  }
+  }*/
 
   const passCheck = () => {
-    if (password != confirmPassword) {
-      alert("password and confirm password doesn't match")
+    if (password !== confirmPassword) {
+      alert("Password and confirm password don't match");
+    } else {
+      register();
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -58,10 +94,14 @@ const RegisterScreen = (props) => {
         onChangeText={text => setEmail(text)} />
       <Input placeholder="enter name" label="Name" leftIcon={{ type: "material", name: "badge" }} value={name}
         onChangeText={text => setName(text)} />
-      <Input placeholder="enter Password" label="Password" leftIcon={{ type: "material", name: "lock" }} value={password}
-        onChangeText={text => setPassword(text)} secureTextEntry />
-      <Input placeholder="confirm Password" label="Confirm Password" leftIcon={{ type: "material", name: "lock" }} value={confirmPassword}
-        onChangeText={text => setConfirmPassword(text)} secureTextEntry />
+                     <Input placeholder="enter Password" label="Password" leftIcon={{ type: "material", name: "lock" }} 
+                rightIcon={<TouchableOpacity onPress={()=>{setIsSecureEntry((prev) => !prev)}}><Text>{isSecureEntry?"Show":"Hide"}</Text></TouchableOpacity>}
+                value={password}
+                    onChangeText={text => setPassword(text)} secureTextEntry={isSecureEntry} />
+                     <Input placeholder="enter Confirm Password" label="Confirm Password" leftIcon={{ type: "material", name: "lock" }} 
+                rightIcon={<TouchableOpacity onPress={()=>{setIsSecureEntryConfirm((prev) => !prev)}}><Text>{isSecureEntryConfirm?"Show":"Hide"}</Text></TouchableOpacity>}
+                value={confirmPassword}
+                    onChangeText={text => setConfirmPassword(text)} secureTextEntry={isSecureEntryConfirm} />
       <Input placeholder="Enter Relationship with Child" label="Relationship" leftIcon={{ type: "material", name: "face" }} value={relation}
         onChangeText={text => setRelation(text)} />
       {/*   <Input placeholder="Enter Your Image URL" label="Profile Picture" 

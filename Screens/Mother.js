@@ -8,6 +8,8 @@ import { Calendar } from "react-native-calendars";
 import { ScrollView } from "react-native-gesture-handler";
 // import CheckBox from '@react-native-community/checkbox';
 import CheckBox from 'expo-checkbox';
+import { BottomNavBar } from "../component/BottomNavBar";
+import ipAddress from "../ipconfig";
 
 const Mother = ({ navigation }) => {
 
@@ -25,6 +27,8 @@ const Mother = ({ navigation }) => {
     const [oldData, setOldData] = useState([]);
     const [newtitle, setNewtitle] = useState("");
 
+    const [data,setData] = useState([]);
+
 
     let generateRandomNum = () => Math.floor(Math.random() * 1001);
 
@@ -33,6 +37,23 @@ const Mother = ({ navigation }) => {
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
+
+
+    const fetchCustomizeDietPlan = async () => {
+        try {
+          const response = await fetch(`http://${ipAddress}:3000/getMotherDietPlan`);
+          const data = await response.json();
+          setData(data);
+          
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      useEffect(() => {
+        fetchCustomizeDietPlan();
+      }, []);
+      
+      
 
 
     return (
@@ -67,20 +88,14 @@ const Mother = ({ navigation }) => {
                 marginTop: 20, alignSelf: 'center'
             }} >
                 <ScrollView style={{ margin: 30 }}>
-                    <Text style={{ fontSize: 14, marginLeft: 2, marginRight: 2, marginTop: 2 }}>
-                        An infant needs 18 – 32 ounces of breast milk in his first 3 months.
-                        You should increase the amount gradually and very slowly so that by the end of 3 months your child is fed with 32 ounces of milk approximately.
-                        You should not add any kind of cereal or starchy food item to a baby who is below 3 months of age.
-                        If your baby is younger than 12 months of age, no. Breast milk is comprised 87% of water and water is optional before one year of age.
-                        An infant needs 18 – 32 ounces of breast milk in his first 3 months.
-                        You should increase the amount gradually and very slowly so that by the end of 3 months your child is fed with 32 ounces of milk approximately.
-                        You should not add any kind of cereal or starchy food item to a baby who is below 3 months of age.
-                        If your baby is younger than 12 months of age, no. Breast milk is comprised 87% of water and water is optional before one year of age.
-                        An infant needs 18 – 32 ounces of breast milk in his first 3 months.
-                        You should increase the amount gradually and very slowly so that by the end of 3 months your child is fed with 32 ounces of milk approximately.
-                        You should not add any kind of cereal or starchy food item to a baby who is below 3 months of age.
-                        If your baby is younger than 12 months of age, no. Breast milk is comprised 87% of water and water is optional before one year of age.
-                    </Text>
+                   {data.map((item, index) => (
+                        <View key={index}>
+                        <Text style={{ fontSize: 24, fontWeight: "bold" }}>{item.title}</Text>
+                        <Text style={{ fontSize: 14, marginLeft: 2, marginRight: 2, marginTop: 2 }}>
+                            {item.description}
+                        </Text>
+                        </View>
+                    ))}
                 </ScrollView>
             </View>
 
@@ -91,7 +106,7 @@ const Mother = ({ navigation }) => {
                     alignItems: 'center', height: 50, shadowColor: "#000",
                     shadowOffset: { width: 0, height: 4, }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8, alignSelf:'center'
                 }}
-                    onPress={() => navigation.navigate('customizeDietPlan')}><Text style={{ color: 'white', fontSize: 20 }}>Customize Diet Plan</Text></TouchableOpacity>
+                    onPress={() => navigation.navigate('MotherCustomizeDP')}><Text style={{ color: 'white', fontSize: 20 }}>Customize Diet Plan</Text></TouchableOpacity>
 
 
             </View>
@@ -108,25 +123,7 @@ const Mother = ({ navigation }) => {
                 ></Calendar>
             </Modal>
 
-            <View style={{ flex: 0.01, backgroundColor: 'black', height: '100%', width: '100%', marginTop: '2%' }}></View>
-            <View style={{
-                flex: 0.10, width: '100%', backgroundColor: '#daa520', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-            }}>
-
-                <TouchableOpacity style={{ flexDirection: 'column' }} onPress={() => navigation.navigate('homeScreen')}>
-                    <FontAwesomeIcon name="home" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} ></FontAwesomeIcon>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('AddBaby')}>
-                    <FontAwesomeIcon name="plus" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('PhysicalActivities')}>
-                    <FontAwesomeIcon name="clipboard" size={30} style={{ padding: 10, marginLeft: 40, marginRight: 40 }} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('More')}>
-                    <MaterialIcons name="more" size={30} style={{ padding: 10, marginLeft: 39, marginRight: 39 }} />
-                </TouchableOpacity>
-
-            </View>
+            <BottomNavBar/>
         </View>
     )
 }
@@ -140,6 +137,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#C2EDCE'
+        backgroundColor: '#dcdcdc'
     }
 })
